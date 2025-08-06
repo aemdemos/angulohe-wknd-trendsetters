@@ -1794,8 +1794,6 @@
   box-shadow: none;
   max-width: 100%;
 }
-
-/* LEFT COLUMN: Group label and tags vertically, visually distinguish tags as pills */
 .columns.columns30 > div > div:nth-child(1),
 .columns.columns30 > div > div:nth-child(2) {
   grid-column: 1 / 2;
@@ -1838,8 +1836,6 @@
   box-shadow: none;
   width: fit-content;
 }
-
-/* RIGHT COLUMN: Stack heading and paragraphs as a single unit */
 .columns.columns30 > div > div:nth-child(3),
 .columns.columns30 > div > div:nth-child(4) {
   grid-column: 2 / 3;
@@ -1878,8 +1874,6 @@
   text-align: left;
   max-width: 650px;
 }
-
-/* Responsive: stack columns and adjust spacing */
 @media (max-width: 900px) {
   .columns.columns30 > div {
     grid-template-columns: 1fr;
@@ -1902,4 +1896,141 @@
   .columns.columns30 > div > div:nth-child(4) p {
     max-width: 100%;
   }
+}
+
+
+.columns.columns35 {
+  background: #fff;
+  border-bottom: 2px solid #111;
+  /* Ensure block takes up enough vertical space for centering */
+  min-height: 290px;
+  display: block; /* Reset any flex from previous tries */
+}
+
+/* Use CSS Grid for perfect vertical centering of both columns */
+.columns.columns35 > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center; /* Vertically center both columns as a row */
+  justify-content: space-between;
+  gap: 4vw;
+  width: 100%;
+  min-height: 290px;
+  padding: 0 4vw;
+  box-sizing: border-box;
+}
+
+/* Responsive stacking on mobile */
+@media (max-width: 700px) {
+  .columns.columns35 > div {
+    grid-template-columns: 1fr;
+    gap: 2vw;
+    padding: 7vw 4vw;
+    min-height: unset;
+  }
+}
+
+/* Left column: stack and center the text group vertically */
+.columns.columns35 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;         /* Vertical center in its cell */
+  align-items: flex-start;
+  gap: 1.1rem;
+  min-width: 0;
+  min-height: 0;
+}
+
+@media (max-width: 700px) {
+  .columns.columns35 > div > div:first-child {
+    justify-content: flex-start;
+  }
+}
+
+/* Right column: center the button vertically and horizontally in its cell */
+.columns.columns35 > div > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+@media (max-width: 700px) {
+  .columns.columns35 > div > div:last-child {
+    justify-content: flex-start;
+    margin-top: 2.5vw;
+  }
+}
+
+/* Headline style */
+.columns.columns35 h2 {
+  font-family: var(--heading-font-family);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: #111;
+  margin: 0 0 0.4rem 0;
+  letter-spacing: 0.01em;
+  line-height: 1.13;
+  text-align: left;
+}
+
+@media (max-width:700px) {
+  .columns.columns35 h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* Subheadline style */
+.columns.columns35 h2 + p {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* Button container: center button */
+.columns.columns35 .button-container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button appearance */
+.columns.columns35 .button-container .button {
+  display: inline-block;
+  min-width: 350px;
+  padding: 0.8rem 0;
+  border: 2px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 1rem;
+  font-weight: 400;
+  box-shadow: 0 2px 0 #ecec7d;
+  text-align: center;
+  line-height: 1;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+  text-decoration: none;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .columns.columns35 .button-container .button {
+    min-width: 170px;
+    font-size: 1rem;
+    padding: 0.7rem 0;
+  }
+}
+
+.columns.columns35 .button-container .button:hover,
+.columns.columns35 .button-container .button:focus {
+  box-shadow: 0 4px 0 #ecec7d;
+  background: #f7f7f7;
+  color: #111;
 }

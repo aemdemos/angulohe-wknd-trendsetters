@@ -1399,8 +1399,6 @@
     margin: 24px 0;
   }
 }
-
-/* Main two-column grid layout */
 .columns.columns18 > div {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -1420,8 +1418,6 @@
   max-width: 550px;
   align-items: flex-start;
 }
-
-/* Typography for headings */
 .columns.columns18 h2 {
   font-size: 14px;
   font-family: var(--body-font-family);
@@ -1446,10 +1442,6 @@
   margin: 0 0 44px 0;
   line-height: 1.6;
 }
-
-/* --- CONTACT AREA LAYOUT --- */
-
-/* Reset spacing for contact block headings */
 .columns.columns18 > div > div:first-child > h4 {
   margin-top: 22px;
   margin-bottom: 7px;
@@ -1463,8 +1455,6 @@
 .columns.columns18 > div > div:first-child > h4:first-of-type {
   margin-top: 0;
 }
-
-/* Contact row: horizontal layout, icon and text side by side */
 .columns.columns18 > div > div:first-child > ul {
   display: flex;
   flex-direction: row;
@@ -1475,8 +1465,6 @@
   list-style: none;
   padding: 0;
 }
-
-/* Show only the first picture/img in each li as the icon, but also allow for icons in second li if not present as first */
 .columns.columns18 > div > div:first-child > ul > li {
   display: flex;
   align-items: flex-start;
@@ -1513,25 +1501,18 @@
   flex-direction: column;
   gap: 3px;
 }
-
-/* Only show the icon in the row ONCE and only if the li contains ONLY a picture or img */
 .columns.columns18 > div > div:first-child > ul > li {
-  /* hide unnecessary icons if found in non-icon-only li */
 }
 .columns.columns18 > div > div:first-child > ul > li:has(picture, img):not(:only-child) ~ li picture,
 .columns.columns18 > div > div:first-child > ul > li:has(picture, img):not(:only-child) ~ li img {
   display: none;
 }
-
-/* Email/phone/address detail text: normal weight, smaller size, reduce emphasis */
 .columns.columns18 > div > div:first-child > ul > li:not(:has(picture, img)) {
   font-size: 1.08rem;
   color: #232323;
   font-weight: 400;
   line-height: 1.35;
 }
-
-/* Email/phone/address clickable links styling */
 .columns.columns18 > div > div:first-child > ul > li:not(:has(picture, img)) a {
   color: var(--link-color);
   text-decoration: underline;
@@ -1542,13 +1523,9 @@
 .columns.columns18 > div > div:first-child > ul > li:not(:has(picture, img)) a:hover {
   color: var(--link-hover-color);
 }
-
-/* Reduce vertical space between ul's for tight grouping */
 .columns.columns18 > div > div:first-child > ul:not(:last-of-type) {
   margin-bottom: 8px;
 }
-
-/* --- Right column (image) styling --- */
 .columns.columns18 .columns-img-col {
   display: flex;
   align-items: flex-start;
@@ -1575,9 +1552,220 @@
     gap: 32px;
   }
 }
-
-/* Remove list marker styling if any default leaks in */
 .columns.columns18 > div > div:first-child > ul {
   list-style: none;
   padding-left: 0;
+}
+
+
+.columns.columns26 {
+  background: #f8f9f6;
+  padding: 0;
+}
+
+.columns.columns26 > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  column-gap: 3vw;
+  padding: 3.5rem 4vw 2.5rem 4vw;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .columns.columns26 > div {
+    grid-template-columns: 1fr;
+    padding: 2rem 3vw 2rem 3vw;
+    row-gap: 2.5rem;
+  }
+}
+
+.columns.columns26 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+/* Headline styles */
+.columns.columns26 > div > div:first-child > p:first-child {
+  font-family: 'Syncopate', var(--heading-font-family), sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #222422;
+  line-height: 1.1;
+  margin: 0 0 1.8rem 0;
+  padding: 0 0 1.5rem 0;
+  border-bottom: 1px solid #e8e9e6;
+  width: 100%;
+  display: block;
+}
+
+/* --- PROFILE AND LOGO ROW --- */
+/* Target the group of avatar/name/subtitle and logo as a single flex row */
+.columns.columns26 > div > div:first-child .columns26-profile-logo-row,
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin: 2.2rem 0 0.4rem 0;
+  width: 100%;
+}
+
+/* Profile left (avatar, name, subtitle) */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
+  flex: 1 1 auto;
+  gap: 1.1rem;
+  margin-right: 2.5rem;
+  min-width: 0;
+}
+
+/* Avatar image */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) picture img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Name and subtitle next to avatar */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) + p,
+.columns.columns26 > div > div:first-child > p:nth-of-type(3) + p {
+  display: block;
+}
+
+/* Name */
+.columns.columns26 > div > div:first-child > p:nth-of-type(3) {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222422;
+  margin: 0 0 0.12rem 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* Subtitle */
+.columns.columns26 > div > div:first-child > p:nth-of-type(4) {
+  font-size: 0.98rem;
+  color: #575756;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* Stack name/subtitle vertically and align with avatar */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
+  align-items: center;
+}
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) > *:not(:first-child) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Logo right-aligned in row, aligned with avatar/profile */
+.columns.columns26 > div > div:first-child > p:last-child {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 0;
+  /* This ensures logo is on the right of the profile row */
+}
+
+/* Increase logo image size slightly */
+.columns.columns26 > div > div:first-child > p:last-child picture img {
+  height: 30px;
+  width: auto;
+  vertical-align: middle;
+  display: block;
+}
+
+/* Re-order so name/subtitle follow avatar, then logo on the right (simulate a single row) */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
+  order: 2;
+}
+.columns.columns26 > div > div:first-child > p:nth-of-type(3) {
+  order: 3;
+  margin-left: 0;
+}
+.columns.columns26 > div > div:first-child > p:nth-of-type(4) {
+  order: 4;
+  margin-left: 0;
+}
+.columns.columns26 > div > div:first-child > p:last-child {
+  order: 5;
+}
+
+/* Reduce gap between headline and profile/logo row */
+.columns.columns26 > div > div:first-child > p:first-child {
+  margin-bottom: 0.3rem;
+  padding-bottom: 1.1rem;
+}
+
+/* Hide any extra margin for last element */
+.columns.columns26 > div > div:first-child > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Testimonial column */
+.columns.columns26 > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  max-width: 95%;
+  margin-top: 0;
+}
+
+.columns.columns26 > div > div:last-child > p {
+  font-size: 1.06rem;
+  color: #222422;
+  font-family: var(--body-font-family);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .columns.columns26 > div > div:last-child {
+    max-width: 100%;
+  }
+}
+
+.columns.columns26 img {
+  max-width: 100%;
+  height: auto;
+}
+.columns.columns26 picture img[alt*="headshot"],
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.columns.columns26 picture img[alt=""] {
+  height: 30px;
+  width: auto;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+/* Responsive: stack columns on mobile */
+@media (max-width: 700px) {
+  .columns.columns26 > div {
+    grid-template-columns: 1fr;
+    padding: 1.2rem 2vw 1.2rem 2vw;
+  }
+  .columns.columns26 > div > div {
+    max-width: 100%;
+  }
 }

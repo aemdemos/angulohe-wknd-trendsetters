@@ -1,8 +1,6 @@
 .accordion details {
   border: 1px solid #dadada;
 }
-
-/* stylelint-disable-next-line no-descending-specificity */
 .accordion details + details {
   margin-top: 24px;
 }
@@ -58,4 +56,133 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+
+.accordion.accordion13 {
+  background: #fff;
+  padding: 0;
+}
+
+/* --- Layout: use flex for details' children, force both columns visible --- */
+.accordion.accordion13 details.accordion-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  padding: 20px 0 20px 0;
+  margin: 0;
+  background: #fff;
+  min-height: 48px;
+  box-shadow: none;
+  /* Prevent overflow issues if body is long */
+  overflow: visible;
+}
+
+/* --- Remove border for last row --- */
+.accordion.accordion13 details.accordion-item:last-child {
+  border-bottom: none;
+}
+
+/* --- Question (left column) --- */
+.accordion.accordion13 summary.accordion-item-label {
+  flex: 0 0 45%;
+  max-width: 45%;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  font-family: 'Orbitron', 'Syncopate', 'Eurostile', Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #757575;
+  letter-spacing: 0.07em;
+  text-transform: lowercase;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
+  outline: none;
+  user-select: text;
+  cursor: default;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+.accordion.accordion13 summary.accordion-item-label::-webkit-details-marker,
+.accordion.accordion13 summary.accordion-item-label::marker {
+  display: none;
+}
+
+.accordion.accordion13 summary.accordion-item-label:after {
+  display: none;
+}
+
+.accordion.accordion13 summary.accordion-item-label p {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Answer (right column) --- */
+.accordion.accordion13 .accordion-item-body {
+  flex: 1 1 55%;
+  max-width: 55%;
+  min-width: 120px;
+  margin: 0;
+  align-self: center;
+  font-family: "Instrument Sans", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #232323;
+  line-height: 1.55;
+  background: none;
+  box-sizing: border-box;
+  /* Key: make sure answer is rendered and spaced */
+  display: block;
+  opacity: 1;
+  height: auto;
+  visibility: visible;
+  padding: 0 0 0 36px;
+}
+
+.accordion.accordion13 .accordion-item-body p {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Remove all unwanted hiding/collapsing/spacing from details body --- */
+.accordion.accordion13 details[open] .accordion-item-body,
+.accordion.accordion13 details .accordion-item-body {
+  display: block;
+  opacity: 1;
+  height: auto;
+  visibility: visible;
+  background: none;
+  border: none;
+}
+
+/* --- Remove margin between items from legacy styles --- */
+.accordion.accordion13 details.accordion-item + details.accordion-item {
+  margin-top: 0;
+}
+
+/* --- Responsive: stack columns on mobile --- */
+@media (max-width: 700px) {
+  .accordion.accordion13 details.accordion-item {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 0 14px 0;
+    min-height: unset;
+  }
+  .accordion.accordion13 summary.accordion-item-label,
+  .accordion.accordion13 .accordion-item-body {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-left: 0;
+  }
+  .accordion.accordion13 .accordion-item-body {
+    margin-top: 12px;
+  }
 }

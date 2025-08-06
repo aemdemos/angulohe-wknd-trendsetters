@@ -750,21 +750,15 @@
   min-width: 140px;
   flex: 1 1 0;
 }
-
-/* Special sizing for the first column to allow more width for logo and icons */
 .columns.columns9 > div > div:first-child {
   min-width: 200px;
 }
-
-/* Logo and brand name side by side */
 .columns.columns9 > div > div:first-child > p {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 0 0 0.5em 0;
 }
-
-/* Brand name: Remove button look, make it uppercase bold text */
 .columns-container > .columns-wrapper > .block.columns.columns9 .button,
 .columns.columns9 .button-container .button {
   padding: 0;
@@ -782,8 +776,6 @@
   font-family: var(--body-font-family), sans-serif;
   line-height: 1.2;
 }
-
-/* Social icons row - only show icons (hide text labels), align as row */
 .columns.columns9 > div > div:first-child > ul {
   display: flex;
   flex-direction: row;
@@ -807,8 +799,6 @@
   display: block;
   filter: brightness(0) invert(1);
 }
-
-/* Remove all bullets in lists */
 .columns.columns9 ul {
   list-style: none;
   margin: 0;
@@ -829,8 +819,6 @@
   margin: 0 0 18px 0;
   line-height: 1.25;
 }
-
-/* Links: white, no underline, hover to lighter gray */
 .columns.columns9 a {
   color: #fff;
   font-size: 1rem;
@@ -843,15 +831,11 @@
 .columns.columns9 a:hover {
   color: #ccc;
 }
-
-/* Prevent images from stretching */
 .columns.columns9 img {
   max-width: 100%;
   height: auto;
   display: inline-block;
 }
-
-/* Responsive Adjustments */
 @media (max-width: 600px) {
   .columns.columns9 {
     padding: 32px 0 18px 0;
@@ -862,4 +846,233 @@
   .columns.columns9 > div > div {
     min-width: 0;
   }
+}
+
+
+.columns.columns11 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 16px 40px 16px;
+  background: var(--background-color);
+}
+
+@media (max-width: 899px) {
+  .columns.columns11 > div {
+    flex-direction: column;
+    gap: 40px;
+    padding: 32px 0;
+  }
+}
+
+/* === LEFT COLUMN: HEADLINE + META === */
+.columns.columns11 > div > div:first-child {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 48%;
+}
+
+/* "Trend alert" */
+.columns.columns11 > div > div:first-child > p:first-child {
+  font-size: var(--body-font-size-xs);
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Headline */
+.columns.columns11 > div > div:first-child > h1 {
+  font-family: var(--heading-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 24px 0;
+  color: #111;
+  letter-spacing: -0.01em;
+}
+
+/* Description */
+.columns.columns11 > div > div:first-child > p:nth-of-type(2) {
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 28px;
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+/* Hide the large portrait image in the left column */
+.columns.columns11 > div > div:first-child > p:nth-of-type(3) {
+  display: none;
+}
+
+/* === INLINE META + BUTTON ROW === */
+/* Gather meta and button (p:nth-of-type(4)-p:nth-of-type(7) and .button-container) into a flex row */
+.columns.columns11 > div > div:first-child > .meta-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  margin: 18px 0 0 0;
+  padding: 0;
+}
+
+/* If meta-flex-row isn't present, simulate it by targeting the sequence */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4),
+.columns.columns11 > div > div:first-child > p:nth-of-type(5),
+.columns.columns11 > div > div:first-child > p:nth-of-type(6),
+.columns.columns11 > div > div:first-child > p:nth-of-type(7),
+.columns.columns11 > div > div:first-child > p.button-container {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Wrap the sequence in a flex row using a parent selector for robustness */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4) {
+  margin-left: 0;
+}
+
+/* Byline avatar style */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4) picture img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Author name */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4) {
+  font-weight: 600;
+  color: #111;
+  font-size: 15px;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+/* Meta text and separator */
+.columns.columns11 > div > div:first-child > p:nth-of-type(5),
+.columns.columns11 > div > div:first-child > p:nth-of-type(6),
+.columns.columns11 > div > div:first-child > p:nth-of-type(7) {
+  font-size: 15px;
+  color: #666;
+  font-weight: 400;
+  margin: 0 0 0 0;
+  padding: 0 4px 0 0;
+}
+
+.columns.columns11 > div > div:first-child > p:nth-of-type(6) {
+  font-size: 18px;
+  font-weight: 700;
+  color: #999;
+  margin-left: 1px;
+  margin-right: 6px;
+  padding: 0;
+}
+
+/* Reduce gap before the button */
+.columns.columns11 > div > div:first-child > p.button-container {
+  margin-left: 12px;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/* Style button */
+.columns-container > .columns-wrapper > .columns.columns11 .button {
+  border: 1.5px solid #111;
+  color: #111;
+  background: #fff;
+  border-radius: 28px;
+  font-size: 16px;
+  padding: 8px 26px;
+  font-weight: 500;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s;
+  margin: 0;
+  vertical-align: middle;
+}
+.columns-container > .columns-wrapper > .columns.columns11 .button:hover,
+.columns-container > .columns-wrapper > .columns.columns11 .button:focus {
+  background: #111;
+  color: #fff;
+}
+
+/* Remove extra spacing below meta/button */
+.columns.columns11 > div > div:first-child > p:nth-of-type(8),
+.columns.columns11 > div > div:first-child > p.button-container {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* === RIGHT COLUMN: IMAGES SIDE BY SIDE, LARGE === */
+.columns.columns11 > div > .columns-img-col {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-width: 52%;
+}
+
+.columns.columns11 > div > .columns-img-col > p {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+@media (max-width: 899px) {
+  .columns.columns11 > div > .columns-img-col {
+    max-width: 100%;
+  }
+  .columns.columns11 > div > .columns-img-col > p {
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+}
+
+.columns.columns11 > div > .columns-img-col picture {
+  flex: 1 1 0;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 370px;
+  display: block;
+}
+.columns.columns11 > div > .columns-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+/* Remove unwanted gaps/margins/padding */
+.columns.columns11 > div > div:first-child,
+.columns.columns11 > div > .columns-img-col {
+  margin: 0;
+  padding: 0;
 }

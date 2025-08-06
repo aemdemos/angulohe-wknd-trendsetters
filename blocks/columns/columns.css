@@ -1049,15 +1049,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start; /* top-align main columns */
-  gap: 20px; /* slightly reduced gap for even closer match */
+  align-items: flex-start;
+  gap: 20px;
   background: #fff;
   padding: 0;
   min-height: 0;
   width: 100%;
 }
-
-/* Responsive: stack columns on mobile/tablet */
 @media (max-width: 900px) {
   .columns.columns14 {
     flex-direction: column;
@@ -1066,8 +1064,6 @@
     padding: 20px 0;
   }
 }
-
-/* Inner row: holder for the two columns */
 .columns.columns14 > div {
   display: flex;
   flex-direction: row;
@@ -1086,8 +1082,6 @@
     gap: 20px;
   }
 }
-
-/* Left (heading) column */
 .columns.columns14 > div > div:first-child {
   flex: 1 1 0;
   display: flex;
@@ -1095,8 +1089,6 @@
   justify-content: flex-start;
   min-width: 0;
 }
-
-/* Heading font style */
 .columns.columns14 > div > div:first-child h2 {
   font-family: 'Syncopate', 'Syncopate Fallback', 'sans-serif';
   font-size: 48px;
@@ -1107,21 +1099,17 @@
   letter-spacing: 0.02em;
   word-break: break-word;
 }
-
-/* Right (text+button) column */
 .columns.columns14 > div > div:last-child {
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* top-align content */
+  justify-content: flex-start;
   align-items: flex-start;
-  min-width: 300px; /* slightly wider for natural wrapping */
+  min-width: 300px;
   max-width: 450px;
   gap: 14px;
   height: auto;
 }
-
-/* Paragraph text styling (excluding the button container) */
 .columns.columns14 > div > div:last-child p:not(.button-container) {
   font-size: 13px;
   color: #000;
@@ -1131,13 +1119,9 @@
   font-weight: 400;
   max-width: 100%;
 }
-
-/* Button container for proper vertical spacing */
 .columns.columns14 .button-container {
   margin: 0;
 }
-
-/* Highly specific button override for correct outline and glow */
 .columns-container > .columns-wrapper > .columns.columns14 .button-container .button {
   display: inline-block;
   padding: 7px 28px;
@@ -1161,4 +1145,179 @@
   border-color: #232323;
   background: #fff;
   color: #000;
+}
+
+
+.columns.columns15 {
+  background: #f6f6f3;
+  margin-top: 0;
+  padding: 0;
+}
+
+/* Main row: balance columns for more even layout and add right padding to prevent image from touching edge */
+.columns.columns15 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 56px;
+  padding: 88px 48px 88px 48px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  .columns.columns15 > div {
+    gap: 36px;
+    padding: 64px 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    padding: 36px 4vw;
+  }
+}
+
+/* Text column: wider for better headline/paragraph line length */
+.columns.columns15 > div > div:first-child {
+  flex: 1 1 0;
+  max-width: 600px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 > div > div:first-child {
+    max-width: 100%;
+  }
+}
+
+/* Headline: maintain 3-line wrap typical of original */
+.columns.columns15 h1 {
+  font-family: var(--heading-font-family);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #191919;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin: 0 0 36px 0;
+  max-width: 95%;
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* Supporting Paragraph: more readable line length */
+.columns.columns15 p:not(.button-container) {
+  color: #707070;
+  font-size: 1.07rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+  max-width: 38em;
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 p:not(.button-container) {
+    margin-bottom: 16px;
+  }
+}
+
+/* Button container: left-aligned, keep horizontal layout */
+.columns.columns15 .button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns15 .button-container .button {
+  background: #fff;
+  color: #191919;
+  border: 1.5px solid #191919;
+  border-radius: 32px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+  margin: 0;
+  box-shadow: none;
+}
+
+.columns.columns15 .button-container .button:hover {
+  background: #f6f6f3;
+}
+
+/* Responsive: stack buttons vertically */
+@media (max-width: 600px) {
+  .columns.columns15 .button-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .columns.columns15 .button-container .button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Image column: share space evenly, prevent flush-to-edge on right with padding */
+.columns.columns15 > div > .columns-img-col {
+  flex: 1 1 0;
+  max-width: 600px;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 > div > .columns-img-col {
+    justify-content: center;
+    margin-top: 16px;
+    max-width: 100%;
+    padding-right: 0;
+  }
+}
+
+/* Image: slightly smaller and more balanced */
+.columns.columns15 .columns-img-col picture,
+.columns.columns15 .columns-img-col img {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 16/9;
+  border-radius: 24px;
+  display: block;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  background: #fff;
+  margin: 0;
+  object-fit: cover;
+}
+
+@media (max-width: 1200px) {
+  .columns.columns15 .columns-img-col picture,
+  .columns.columns15 .columns-img-col img {
+    max-width: 400px;
+    aspect-ratio: 16/10;
+  }
+}
+
+@media (max-width: 900px) {
+  .columns.columns15 .columns-img-col picture,
+  .columns.columns15 .columns-img-col img {
+    max-width: 100%;
+    aspect-ratio: 16/10;
+  }
 }

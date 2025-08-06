@@ -56,3 +56,197 @@
 .tabs .tabs-panel[aria-hidden='true'] {
   display: none;
 }
+
+
+.tabs {
+  background: #000;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
+/* Center content including tabs */
+.tabs .tabs-list,
+.tabs .tabs-panel > div {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tab row - big horizontal space, compact below, baseline fix */
+.tabs .tabs-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 84px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 0 2px 0; /* tighter to headline */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tab button: remove bold, get baseline, no background */
+.tabs .tabs-list .tabs-tab {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #8a8a8a;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.13rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 0;
+  margin: 0;
+  min-width: 56px;
+  line-height: 1.16;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s;
+  background-color: transparent;
+}
+
+/* Tab label styling with spacing for underline */
+.tabs .tabs-list .tabs-tab p {
+  margin: 0;
+  padding: 0 0 6px 0; /* space for underline */
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  position: relative;
+  display: inline-block;
+  border-bottom: none;
+}
+
+/* Active tab: white, lighter, underline */
+.tabs .tabs-list .tabs-tab[aria-selected="true"] {
+  color: #fff;
+  font-weight: 400;
+}
+
+/* Underline: thin, short, with gap below text */
+.tabs .tabs-list .tabs-tab[aria-selected="true"] p {
+  border-bottom: 1px solid #fff;
+  border-radius: 1px;
+  width: auto;
+  min-width: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+/* Remove any background on selected/inactive tab */
+.tabs .tabs-list .tabs-tab[aria-selected="true"],
+.tabs .tabs-list .tabs-tab[aria-selected="false"] {
+  background: none;
+}
+
+/* Responsive: tabs gap/size */
+@media (max-width: 700px) {
+  .tabs .tabs-list {
+    gap: 34px;
+    margin-bottom: 4px;
+  }
+  .tabs .tabs-list .tabs-tab {
+    font-size: 1rem;
+    min-width: 42px;
+  }
+}
+
+/* Panel container resets */
+.tabs .tabs-panel {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: none;
+  box-sizing: border-box;
+}
+.tabs .tabs-panel[aria-hidden="false"] {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+}
+
+/* Stack headline/image vertically, center all, smaller gap */
+.tabs .tabs-panel > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  gap: 8px;
+  padding: 0;
+}
+
+/* Headline: lighter, less letter spacing, compact gap */
+.tabs .tabs-panel h3 {
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.10em;
+  text-align: center;
+  line-height: 1.08;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Responsive headline tuning */
+@media (max-width: 900px) {
+  .tabs .tabs-panel > div {
+    max-width: 97vw;
+    gap: 6px;
+  }
+  .tabs .tabs-panel h3 {
+    font-size: 1.09rem;
+    letter-spacing: 0.08em;
+  }
+  .tabs {
+    padding-top: 22px;
+    padding-bottom: 14px;
+  }
+}
+
+/* Image styling: full-width, rounded, centered */
+.tabs .tabs-panel picture,
+.tabs .tabs-panel img {
+  display: block;
+  width: 100%;
+  max-width: 980px;
+  border-radius: 24px;
+  box-shadow: 0 3px 24px 0 rgba(0,0,0,0.10);
+  margin: 0 auto;
+  background: #222;
+  object-fit: cover;
+}
+
+/* Center image in the panel */
+.tabs .tabs-panel p {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Remove extra margin between headline and image */
+.tabs .tabs-panel h3 + p {
+  margin-top: 0;
+}

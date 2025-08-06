@@ -63,8 +63,6 @@
   background: #fff;
   padding: 0;
 }
-
-/* --- Layout: use flex for details' children, force both columns visible --- */
 .accordion.accordion13 details.accordion-item {
   display: flex;
   flex-direction: row;
@@ -76,16 +74,11 @@
   background: #fff;
   min-height: 48px;
   box-shadow: none;
-  /* Prevent overflow issues if body is long */
   overflow: visible;
 }
-
-/* --- Remove border for last row --- */
 .accordion.accordion13 details.accordion-item:last-child {
   border-bottom: none;
 }
-
-/* --- Question (left column) --- */
 .accordion.accordion13 summary.accordion-item-label {
   flex: 0 0 45%;
   max-width: 45%;
@@ -122,8 +115,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* --- Answer (right column) --- */
 .accordion.accordion13 .accordion-item-body {
   flex: 1 1 55%;
   max-width: 55%;
@@ -137,7 +128,6 @@
   line-height: 1.55;
   background: none;
   box-sizing: border-box;
-  /* Key: make sure answer is rendered and spaced */
   display: block;
   opacity: 1;
   height: auto;
@@ -149,8 +139,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* --- Remove all unwanted hiding/collapsing/spacing from details body --- */
 .accordion.accordion13 details[open] .accordion-item-body,
 .accordion.accordion13 details .accordion-item-body {
   display: block;
@@ -160,13 +148,9 @@
   background: none;
   border: none;
 }
-
-/* --- Remove margin between items from legacy styles --- */
 .accordion.accordion13 details.accordion-item + details.accordion-item {
   margin-top: 0;
 }
-
-/* --- Responsive: stack columns on mobile --- */
 @media (max-width: 700px) {
   .accordion.accordion13 details.accordion-item {
     flex-direction: column;
@@ -185,4 +169,108 @@
   .accordion.accordion13 .accordion-item-body {
     margin-top: 12px;
   }
+}
+
+
+.accordion.accordion34 {
+  background: #f7f7f3;
+  padding: 0;
+}
+
+/* Accordion item rows */
+.accordion.accordion34 > details {
+  border: none;
+  border-bottom: 1px solid #e0e0dc;
+  margin: 0;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.accordion.accordion34 > details:last-child {
+  border-bottom: none;
+}
+
+/* Row: flex align text and chevron, match original row height and spacing */
+.accordion.accordion34 > details > summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 18px;
+  padding-top: 0;
+  padding-bottom: 0;
+  cursor: pointer;
+  background: transparent;
+  font-size: 15px;
+  color: #222222;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0;
+  outline: none;
+  gap: 0;
+}
+
+/* Hide default marker */
+.accordion.accordion34 > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron: smaller, lighter, closer to right edge and vertically centered */
+.accordion.accordion34 > details > summary::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  margin-right: -4px;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23686868" stroke-width="1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+  position: relative;
+  top: 0;
+  content: "";
+  pointer-events: none;
+}
+
+/* Rotate chevron when open */
+.accordion.accordion34 > details[open] > summary::after {
+  transform: rotate(-180deg);
+}
+
+/* Prevent highlight/hover BG */
+.accordion.accordion34 > details > summary:focus,
+.accordion.accordion34 > details > summary:hover,
+.accordion.accordion34 > details[open] > summary {
+  background: transparent;
+}
+
+/* Text inside summary, align and fit */
+.accordion.accordion34 > details > summary > p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  color: #222222;
+  font-weight: 400;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Accordion body */
+.accordion.accordion34 .accordion-item-body {
+  padding: 12px 10px;
+  color: #222222;
+  font-size: 15px;
+  background: transparent;
+  box-sizing: border-box;
 }

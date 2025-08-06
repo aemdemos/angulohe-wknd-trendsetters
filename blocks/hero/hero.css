@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -59,6 +60,7 @@
   box-sizing: border-box;
   background: none;
 }
+
 .hero.hero6 > div:first-child {
   position: absolute;
   inset: 0;
@@ -76,6 +78,7 @@
   object-fit: cover;
   display: block;
 }
+
 .hero.hero6 > div:first-child::after {
   position: absolute;
   inset: 0;
@@ -85,6 +88,7 @@
   content: "";
   pointer-events: none;
 }
+
 .hero.hero6 > div:last-child {
   position: relative;
   z-index: 3;
@@ -96,6 +100,7 @@
   pointer-events: none;
   padding-bottom: 7vh;
 }
+
 .hero.hero6 > div:last-child > div {
   background: rgb(35 39 47 / 60%);
   border: 2px solid #fff;
@@ -113,7 +118,7 @@
 }
 
 .hero.hero6 h1 {
-  font-family: Syncopate, 'Syncopate Fallback', Arial, sans-serif;
+  font-family: Syncopate, Arial, sans-serif;
   font-size: 4rem;
   font-weight: 400;
   line-height: 1.22;
@@ -131,6 +136,7 @@
   margin: 0 0 2.2rem;
   text-align: left;
 }
+
 .hero.hero6 .button-container {
   display: flex;
   gap: 20px;
@@ -154,6 +160,7 @@
   text-align: center;
   white-space: nowrap;
 }
+
 @media (width <= 1200px) {
   .hero.hero6 > div:last-child > div {
     max-width: 97vw;
@@ -211,18 +218,16 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: 0 8px 32px 0 rgba(60,60,60,0.16);
+  box-shadow: 0 8px 32px 0 rgb(60 60 60 / 16%);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
 
-/* Hide the image used as background */
 .hero.hero12 > div:first-child {
   display: none;
 }
 
-/* Overlay layout */
 .hero.hero12 > div:last-child {
   position: absolute;
   top: 52px;
@@ -236,29 +241,28 @@
   pointer-events: none;
 }
 
-/* Overlay card: left image, right vertical stack */
 .hero.hero12 > div:last-child > div {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 2rem;
-  background: rgba(32,32,32,0.28);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgb(32 32 32 / 28%);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 24px;
   padding: 2.1rem 2.2rem 2.1rem 2rem;
   min-width: 410px;
   max-width: 530px;
-  box-shadow: 0 2px 14px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 14px 0 rgb(0 0 0 / 9%);
   pointer-events: auto;
   backdrop-filter: blur(7px);
 }
 
-/* Side image: left, square, flush */
 .hero.hero12 > div:last-child > div > p:first-child {
   margin: 0;
   margin-right: 0.5rem;
   flex: none;
 }
+
 .hero.hero12 > div:last-child > div > p:first-child picture,
 .hero.hero12 > div:last-child > div > p:first-child img {
   display: block;
@@ -266,10 +270,9 @@
   height: 124px;
   object-fit: cover;
   border-radius: 16px;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.11);
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 11%);
 }
 
-/* Content area: right of image, vertical stack */
 .hero.hero12 > div:last-child > div > *:not(:first-child) {
   display: flex;
   flex-direction: column;
@@ -279,23 +282,20 @@
   min-width: 0;
 }
 
-/* Headline: prominent and at top of stack */
 .hero.hero12 h2 {
   font-family: var(--heading-font-family);
   font-size: 2.1rem;
   font-weight: 700;
   color: #232323;
-  margin: 0 0 1.15rem 0;
+  margin: 0 0 1.15rem;
   letter-spacing: 0.03em;
   line-height: 1.08;
   text-transform: uppercase;
-  text-shadow: 0 1px 8px rgba(255,255,255,0.08);
+  text-shadow: 0 1px 8px rgb(255 255 255 / 8%);
   align-self: flex-start;
   width: 100%;
-  /* Ensure not overlapped by the image */
 }
 
-/* Body text styling: vertical stack, no columns */
 .hero.hero12 > div:last-child > div > *:not(:first-child) > p {
   font-size: 1.09rem;
   color: #f3f3f3;
@@ -304,13 +304,10 @@
   letter-spacing: 0.01em;
   align-self: flex-start;
   width: 100%;
-  /* Remove any grid/columns: force vertical stack */
   display: block;
 }
 
-/* Remove accidental row/column layouts from paragraphs */
 .hero.hero12 > div:last-child > div > *:not(:first-child) {
-  /* Make sure this is not grid or row */
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
@@ -321,7 +318,6 @@
   margin-bottom: 0;
 }
 
-/* Button: inside overlay, left-aligned, no overlap */
 .hero.hero12 .button-container .button {
   display: inline-block;
   padding: 0.6em 2.15em;
@@ -331,7 +327,7 @@
   border: 1.5px solid #232323;
   background: #fff;
   color: #232323;
-  box-shadow: 0 0.5px 2px 0 rgba(0,0,0,0.04);
+  box-shadow: 0 0.5px 2px 0 rgb(0 0 0 / 4%);
   min-width: 135px;
   min-height: 44px;
   transition: background 0.2s, color 0.2s;
@@ -345,14 +341,14 @@
   color: #fff;
 }
 
-/* Responsive: stack overlay, shrink image, adjust font for small screens */
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .hero.hero12 {
     min-height: 320px;
     padding: 0;
     border-radius: 0;
     max-width: 100vw;
   }
+
   .hero.hero12 > div:last-child {
     position: static;
     padding: 0;
@@ -362,6 +358,7 @@
     top: unset;
     left: unset;
   }
+
   .hero.hero12 > div:last-child > div {
     flex-direction: column;
     align-items: center;
@@ -371,13 +368,106 @@
     max-width: 97vw;
     box-sizing: border-box;
   }
+
   .hero.hero12 > div:last-child > div > p:first-child picture,
   .hero.hero12 > div:last-child > div > p:first-child img {
     width: 82px;
     height: 82px;
     margin-bottom: 0.8rem;
   }
+
   .hero.hero12 h2 {
     font-size: 1.18rem;
+  }
+}
+
+
+.hero.hero28 {
+  position: relative;
+  min-height: 80vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero.hero28 > div:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+}
+
+.hero.hero28 > div:first-child picture,
+.hero.hero28 > div:first-child img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hero.hero28 > div:last-child {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Remove padding/margin if inherited from elsewhere */
+  padding: 0;
+  margin: 0;
+}
+
+.hero.hero28 > div:last-child > div {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.hero.hero28 h1 {
+  color: #fff;
+  font-family: Syncopate, sans-serif;
+  font-size: clamp(2rem, 7.5vw, 6.2rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  line-height: 1.08;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100vw;
+  text-align: center;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 25%);
+  white-space: normal;
+  word-break: keep-all;
+  hyphens: none;
+  display: inline-block;
+  padding: 0;
+}
+
+@media (width <= 900px) {
+  .hero.hero28 {
+    min-height: 48vh;
+  }
+
+  .hero.hero28 h1 {
+    font-size: clamp(1.3rem, 7vw, 3rem);
+    max-width: 98vw;
+  }
+
+  .hero.hero28 > div:last-child > div {
+    max-width: 98vw;
   }
 }

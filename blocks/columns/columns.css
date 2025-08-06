@@ -1654,8 +1654,6 @@
     row-gap: 2.5rem;
   }
 }
-
-/* Headline styles */
 .columns.columns26 > div > div:first-child > p:first-child {
   font-family: 'Syncopate', var(--heading-font-family), sans-serif;
   font-size: 2.7rem;
@@ -1670,16 +1668,12 @@
   width: 100%;
   display: block;
 }
-
-/* --- Bottom row: Profile block + logo in a flex row --- */
 .columns.columns26 > div > div:first-child {
   display: flex;
   flex-direction: column;
   min-width: 0;
   max-width: 100%;
 }
-
-/* Simulate bottom row using the two p's: avatar/name/role block and logo p */
 .columns.columns26 > div > div:first-child .columns26-bottom-row,
 .columns.columns26 > div > div:first-child > .profile-row {
   display: flex;
@@ -1690,8 +1684,6 @@
   margin-top: 0.85rem;
   width: 100%;
 }
-
-/* If wrapper not present, target the two p's directly */
 .columns.columns26 > div > div:first-child > p:nth-of-type(2),
 .columns.columns26 > div > div:first-child > p:last-child {
   display: flex;
@@ -1700,16 +1692,12 @@
   margin-top: 0.85rem;
   margin-bottom: 0;
 }
-
-/* Avatar + text block (left side of row) */
 .columns.columns26 > div > div:first-child > p:nth-of-type(2) {
   flex: 1 1 0;
   gap: 1.1rem;
   align-items: flex-start;
   margin-right: 0;
 }
-
-/* Avatar image */
 .columns.columns26 > div > div:first-child > p:nth-of-type(2) picture img {
   width: 40px;
   height: 40px;
@@ -1719,16 +1707,12 @@
   flex-shrink: 0;
   margin-top: 0;
 }
-
-/* Name/role vertical stack next to avatar (simulate with next two p's) */
 .columns.columns26 > div > div:first-child > p:nth-of-type(2) > *:not(picture) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.08em;
 }
-
-/* Name/Role styles */
 .columns.columns26 > div > div:first-child > p:nth-of-type(3) {
   font-size: 1.05rem;
   font-weight: 600;
@@ -1745,8 +1729,6 @@
   padding: 0;
   line-height: 1.2;
 }
-
-/* Logo (right) */
 .columns.columns26 > div > div:first-child > p:last-child {
   flex: 0 0 auto;
   display: flex;
@@ -1764,8 +1746,6 @@
   vertical-align: top;
   display: inline-block;
 }
-
-/* Responsive: Stack bottom row on mobile */
 @media (max-width: 700px) {
   .columns.columns26 > div > div:first-child > p:nth-of-type(2),
   .columns.columns26 > div > div:first-child > p:last-child {
@@ -1781,8 +1761,6 @@
     justify-content: flex-start;
   }
 }
-
-/* Quote/Right column styles */
 .columns.columns26 > div > div:last-child {
   display: flex;
   flex-direction: column;
@@ -1800,9 +1778,128 @@
   margin: 0;
   padding: 0;
 }
-
-/* Ensure block images scale cleanly */
 .columns.columns26 img {
   max-width: 100%;
   height: auto;
+}
+
+
+.columns.columns30 > div {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 3.5vw;
+  align-items: start;
+  padding: 4vw 0 0 0;
+  background: none;
+  box-shadow: none;
+  max-width: 100%;
+}
+
+/* LEFT COLUMN: Group label and tags vertically, visually distinguish tags as pills */
+.columns.columns30 > div > div:nth-child(1),
+.columns.columns30 > div > div:nth-child(2) {
+  grid-column: 1 / 2;
+  width: 100%;
+}
+
+.columns.columns30 > div > div:nth-child(1) {
+  margin-bottom: 0.6rem;
+}
+.columns.columns30 > div > div:nth-child(1) p {
+  color: #888;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 0 0.7rem 0;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.columns.columns30 > div > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.columns.columns30 > div > div:nth-child(2) p {
+  display: inline-block;
+  background: #ededed;
+  color: #888;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 16px;
+  padding: 4px 16px;
+  margin: 0;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  text-align: left;
+  border: none;
+  box-shadow: none;
+  width: fit-content;
+}
+
+/* RIGHT COLUMN: Stack heading and paragraphs as a single unit */
+.columns.columns30 > div > div:nth-child(3),
+.columns.columns30 > div > div:nth-child(4) {
+  grid-column: 2 / 3;
+  width: 100%;
+  max-width: 800px;
+  display: block;
+}
+
+.columns.columns30 > div > div:nth-child(3) {
+  margin-bottom: 2.3rem;
+}
+
+.columns.columns30 > div > div:nth-child(3) h2 {
+  font-family: var(--heading-font-family);
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 400;
+  color: #131313;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-align: left;
+  max-width: 700px;
+  word-break: break-word;
+}
+
+.columns.columns30 > div > div:nth-child(4) {
+  margin-top: 0;
+}
+.columns.columns30 > div > div:nth-child(4) p {
+  font-family: var(--body-font-family);
+  font-size: 17px;
+  color: #222;
+  line-height: 1.5;
+  margin: 0 0 1.2rem 0;
+  letter-spacing: 0;
+  text-align: left;
+  max-width: 650px;
+}
+
+/* Responsive: stack columns and adjust spacing */
+@media (max-width: 900px) {
+  .columns.columns30 > div {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2vw 0 0 0;
+  }
+  .columns.columns30 > div > div:nth-child(1),
+  .columns.columns30 > div > div:nth-child(2),
+  .columns.columns30 > div > div:nth-child(3),
+  .columns.columns30 > div > div:nth-child(4) {
+    grid-column: 1 / 2;
+    max-width: 100%;
+    width: 100%;
+  }
+  .columns.columns30 > div > div:nth-child(2) {
+    flex-direction: row;
+    gap: 0.7rem;
+  }
+  .columns.columns30 > div > div:nth-child(3) h2,
+  .columns.columns30 > div > div:nth-child(4) p {
+    max-width: 100%;
+  }
 }

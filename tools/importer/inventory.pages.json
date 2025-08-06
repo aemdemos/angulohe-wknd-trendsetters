@@ -1,0 +1,108 @@
+{
+  "templates": [
+    {
+      "name": "'Content Hub'",
+      "cluster": 1,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
+          "uuid": "be00f351b0490d8b536bf724216d6530c30d5684"
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
+          "uuid": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959"
+        }
+      ]
+    },
+    {
+      "name": "Gallery Showcase",
+      "cluster": 2,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
+          "uuid": "f5e200536a2c91b06effaf661df0675e13f262b6"
+        }
+      ]
+    },
+    {
+      "name": "'Portfolio Showcase'",
+      "cluster": 3,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults",
+          "uuid": "d2dd722de7842a6232ce56b1307d383ff72c9358"
+        }
+      ]
+    },
+    {
+      "name": "'Dashboard'",
+      "cluster": 4,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/faq",
+          "uuid": "429d6f000c5a6e38a121160bf56d01b17365cffe"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard Overview",
+      "cluster": 5,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults-casual-sport",
+          "uuid": "1a14744466075b2d00884f27fb69e2633b6fcb84"
+        }
+      ]
+    },
+    {
+      "name": "'Portfolio Showcase'",
+      "cluster": 6,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
+          "uuid": "971148fccf483ccd07f6ef722bc01c7fb46f61d5"
+        }
+      ]
+    },
+    {
+      "name": "Gallery Grid Page",
+      "cluster": 7,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
+          "uuid": "1cfeb2756419a8f56a89a355f5557c3321845adb"
+        }
+      ]
+    },
+    {
+      "name": "'Portfolio Showcase'",
+      "cluster": 8,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/",
+          "uuid": "1b9ba84f36ee3a519917302a79dfd970725bae31"
+        }
+      ]
+    },
+    {
+      "name": "'Portfolio Showcase'",
+      "cluster": 9,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
+          "uuid": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf"
+        }
+      ]
+    },
+    {
+      "name": "Gallery Showcase",
+      "cluster": 10,
+      "pages": [
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-insights",
+          "uuid": "67430c465ff7767e6ae98a0cffa44cd32754a351"
+        }
+      ]
+    }
+  ]
+}

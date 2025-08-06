@@ -1,6 +1,3 @@
-/* Disable no-descending-specificity rule globally */
-/* stylelint-disable no-descending-specificity */
-
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -495,8 +492,6 @@
   box-sizing: border-box;
   width: 100%;
 }
-
-/* Use flex to center all columns horizontally */
 .columns.columns4 > div {
   display: flex;
   flex-direction: row;
@@ -507,15 +502,11 @@
   box-sizing: border-box;
   gap: 0;
 }
-
-/* Hide only image-related elements; preserve all columns for potential text */
 .columns.columns4 picture,
 .columns.columns4 img,
 .columns.columns4 source {
   display: none;
 }
-
-/* Ensure all direct column children are visible and center their content */
 .columns.columns4 > div > div {
   display: flex;
   align-items: center;
@@ -525,8 +516,6 @@
   padding: 0;
   margin: 0;
 }
-
-/* If there is text, center it in the available space */
 .columns.columns4 > div > div > * {
   text-align: center;
   color: #222;
@@ -538,8 +527,6 @@
   padding: 0;
   width: 100%;
 }
-
-/* Remove heading default styles if any headings are used */
 .columns.columns4 > div > div h1,
 .columns.columns4 > div > div h2,
 .columns.columns4 > div > div h3,
@@ -553,11 +540,135 @@
   text-align: center;
   color: #222;
 }
-
-/* Remove margins from text elements */
 .columns.columns4 > div > div p,
 .columns.columns4 > div > div span {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+
+.columns.columns5 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+  background: #fff;
+}
+
+.columns.columns5 > div {
+  display: contents;
+}
+
+.columns.columns5 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  padding: 0 4vw 0 6vw;
+  max-width: 500px;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0;
+}
+
+.columns.columns5 h2 {
+  color: #232323;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.2rem;
+  margin-top: 0;
+  line-height: 1.08;
+}
+
+.columns.columns5 p {
+  color: #555;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  max-width: 480px;
+}
+
+.columns.columns5 .button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.columns-container > .columns-wrapper > .block.columns .button,
+.columns.columns5 .button-container .button {
+  padding: 0.7em 2em;
+  border: 1px solid #232323;
+  background: transparent;
+  color: #232323;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+  margin: 0;
+}
+
+.columns-container > .columns-wrapper > .block.columns .button:hover,
+.columns-container > .columns-wrapper > .block.columns .button:focus,
+.columns.columns5 .button-container .button:hover,
+.columns.columns5 .button-container .button:focus {
+  background: #232323;
+  color: #fff;
+  text-decoration: none;
+}
+
+.columns.columns5 > div > .columns-img-col {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  background: none;
+}
+
+.columns.columns5 .columns-img-col picture,
+.columns.columns5 .columns-img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  background: none;
+}
+
+@media (max-width: 900px) {
+  .columns.columns5 {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .columns.columns5 > div > div:first-child,
+  .columns.columns5 > div > .columns-img-col {
+    height: auto;
+    min-height: 240px;
+    padding: 32px 5vw;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0;
+    max-width: 100%;
+  }
+
+  .columns.columns5 .columns-img-col picture,
+  .columns.columns5 .columns-img-col img {
+    height: 260px;
+    min-height: 180px;
+    object-fit: cover;
+  }
 }

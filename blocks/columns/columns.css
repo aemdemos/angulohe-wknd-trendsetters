@@ -868,8 +868,6 @@
     padding: 32px 0;
   }
 }
-
-/* === LEFT COLUMN: HEADLINE + META === */
 .columns.columns11 > div > div:first-child {
   flex: 1 1 0;
   min-width: 0;
@@ -881,8 +879,6 @@
   margin: 0;
   max-width: 48%;
 }
-
-/* "Trend alert" */
 .columns.columns11 > div > div:first-child > p:first-child {
   font-size: var(--body-font-size-xs);
   color: #888;
@@ -891,8 +887,6 @@
   margin-top: 0;
   margin-bottom: 12px;
 }
-
-/* Headline */
 .columns.columns11 > div > div:first-child > h1 {
   font-family: var(--heading-font-family);
   font-size: 64px;
@@ -902,8 +896,6 @@
   color: #111;
   letter-spacing: -0.01em;
 }
-
-/* Description */
 .columns.columns11 > div > div:first-child > p:nth-of-type(2) {
   font-size: 16px;
   color: #222;
@@ -911,14 +903,9 @@
   line-height: 1.5;
   max-width: 440px;
 }
-
-/* Hide the large portrait image in the left column */
 .columns.columns11 > div > div:first-child > p:nth-of-type(3) {
   display: none;
 }
-
-/* === INLINE META + BUTTON ROW === */
-/* Gather meta and button (p:nth-of-type(4)-p:nth-of-type(7) and .button-container) into a flex row */
 .columns.columns11 > div > div:first-child > .meta-flex-row {
   display: flex;
   flex-direction: row;
@@ -927,8 +914,6 @@
   margin: 18px 0 0 0;
   padding: 0;
 }
-
-/* If meta-flex-row isn't present, simulate it by targeting the sequence */
 .columns.columns11 > div > div:first-child > p:nth-of-type(4),
 .columns.columns11 > div > div:first-child > p:nth-of-type(5),
 .columns.columns11 > div > div:first-child > p:nth-of-type(6),
@@ -940,13 +925,9 @@
   padding: 0;
   vertical-align: middle;
 }
-
-/* Wrap the sequence in a flex row using a parent selector for robustness */
 .columns.columns11 > div > div:first-child > p:nth-of-type(4) {
   margin-left: 0;
 }
-
-/* Byline avatar style */
 .columns.columns11 > div > div:first-child > p:nth-of-type(4) picture img {
   width: 32px;
   height: 32px;
@@ -955,8 +936,6 @@
   margin-right: 10px;
   vertical-align: middle;
 }
-
-/* Author name */
 .columns.columns11 > div > div:first-child > p:nth-of-type(4) {
   font-weight: 600;
   color: #111;
@@ -964,8 +943,6 @@
   margin-right: 0;
   padding-right: 0;
 }
-
-/* Meta text and separator */
 .columns.columns11 > div > div:first-child > p:nth-of-type(5),
 .columns.columns11 > div > div:first-child > p:nth-of-type(6),
 .columns.columns11 > div > div:first-child > p:nth-of-type(7) {
@@ -984,15 +961,11 @@
   margin-right: 6px;
   padding: 0;
 }
-
-/* Reduce gap before the button */
 .columns.columns11 > div > div:first-child > p.button-container {
   margin-left: 12px;
   margin-bottom: 0;
   padding: 0;
 }
-
-/* Style button */
 .columns-container > .columns-wrapper > .columns.columns11 .button {
   border: 1.5px solid #111;
   color: #111;
@@ -1011,15 +984,11 @@
   background: #111;
   color: #fff;
 }
-
-/* Remove extra spacing below meta/button */
 .columns.columns11 > div > div:first-child > p:nth-of-type(8),
 .columns.columns11 > div > div:first-child > p.button-container {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-
-/* === RIGHT COLUMN: IMAGES SIDE BY SIDE, LARGE === */
 .columns.columns11 > div > .columns-img-col {
   flex: 1 1 0;
   min-width: 0;
@@ -1069,10 +1038,127 @@
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
-
-/* Remove unwanted gaps/margins/padding */
 .columns.columns11 > div > div:first-child,
 .columns.columns11 > div > .columns-img-col {
   margin: 0;
   padding: 0;
+}
+
+
+.columns.columns14 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start; /* top-align main columns */
+  gap: 20px; /* slightly reduced gap for even closer match */
+  background: #fff;
+  padding: 0;
+  min-height: 0;
+  width: 100%;
+}
+
+/* Responsive: stack columns on mobile/tablet */
+@media (max-width: 900px) {
+  .columns.columns14 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px 0;
+  }
+}
+
+/* Inner row: holder for the two columns */
+.columns.columns14 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .columns.columns14 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+}
+
+/* Left (heading) column */
+.columns.columns14 > div > div:first-child {
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+/* Heading font style */
+.columns.columns14 > div > div:first-child h2 {
+  font-family: 'Syncopate', 'Syncopate Fallback', 'sans-serif';
+  font-size: 48px;
+  font-weight: 300;
+  color: #000;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+
+/* Right (text+button) column */
+.columns.columns14 > div > div:last-child {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* top-align content */
+  align-items: flex-start;
+  min-width: 300px; /* slightly wider for natural wrapping */
+  max-width: 450px;
+  gap: 14px;
+  height: auto;
+}
+
+/* Paragraph text styling (excluding the button container) */
+.columns.columns14 > div > div:last-child p:not(.button-container) {
+  font-size: 13px;
+  color: #000;
+  margin: 0;
+  font-family: 'Instrument Sans', 'Instrument Sans Fallback', sans-serif;
+  line-height: 1.3;
+  font-weight: 400;
+  max-width: 100%;
+}
+
+/* Button container for proper vertical spacing */
+.columns.columns14 .button-container {
+  margin: 0;
+}
+
+/* Highly specific button override for correct outline and glow */
+.columns-container > .columns-wrapper > .columns.columns14 .button-container .button {
+  display: inline-block;
+  padding: 7px 28px;
+  border: 1.5px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 13px;
+  font-family: 'Instrument Sans', 'Instrument Sans Fallback', sans-serif;
+  font-weight: 400;
+  box-shadow: 0 0 0 2px #fafbcd;
+  text-align: center;
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.columns-container > .columns-wrapper > .columns.columns14 .button-container .button:hover,
+.columns-container > .columns-wrapper > .columns.columns14 .button-container .button:focus {
+  box-shadow: 0 0 0 4px #f7f89d;
+  border-color: #232323;
+  background: #fff;
+  color: #000;
 }

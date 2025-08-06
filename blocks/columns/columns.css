@@ -1280,187 +1280,6 @@
 }
 
 
-.columns.columns26 {
-  background: #f8f9f6;
-  padding: 0;
-}
-
-.columns.columns26 > div {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-  column-gap: 3vw;
-  padding: 3.5rem 4vw 2.5rem 4vw;
-  box-sizing: border-box;
-}
-
-@media (max-width: 900px) {
-  .columns.columns26 > div {
-    grid-template-columns: 1fr;
-    padding: 2rem 3vw 2rem 3vw;
-    row-gap: 2.5rem;
-  }
-}
-
-.columns.columns26 > div > div:first-child {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-width: 0;
-  max-width: 100%;
-  height: 100%;
-}
-.columns.columns26 > div > div:first-child > p:first-child {
-  font-family: 'Syncopate', var(--heading-font-family), sans-serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: #222422;
-  line-height: 1.1;
-  margin: 0 0 1.8rem 0;
-  padding: 0 0 1.5rem 0;
-  border-bottom: 1px solid #e8e9e6;
-  width: 100%;
-  display: block;
-}
-.columns.columns26 > div > div:first-child .columns26-profile-logo-row,
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2.5rem;
-  margin: 2.2rem 0 0.4rem 0;
-  width: 100%;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
-  flex: 1 1 auto;
-  gap: 1.1rem;
-  margin-right: 2.5rem;
-  min-width: 0;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) picture img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  flex-shrink: 0;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) + p,
-.columns.columns26 > div > div:first-child > p:nth-of-type(3) + p {
-  display: block;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(3) {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #222422;
-  margin: 0 0 0.12rem 0;
-  padding: 0;
-  line-height: 1.2;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(4) {
-  font-size: 0.98rem;
-  color: #575756;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  line-height: 1.2;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
-  align-items: center;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) > *:not(:first-child) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.columns.columns26 > div > div:first-child > p:last-child {
-  display: flex;
-  align-items: center;
-  margin: 0 0 0 0;
-}
-.columns.columns26 > div > div:first-child > p:last-child picture img {
-  height: 30px;
-  width: auto;
-  vertical-align: middle;
-  display: block;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
-  order: 2;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(3) {
-  order: 3;
-  margin-left: 0;
-}
-.columns.columns26 > div > div:first-child > p:nth-of-type(4) {
-  order: 4;
-  margin-left: 0;
-}
-.columns.columns26 > div > div:first-child > p:last-child {
-  order: 5;
-}
-.columns.columns26 > div > div:first-child > p:first-child {
-  margin-bottom: 0.3rem;
-  padding-bottom: 1.1rem;
-}
-.columns.columns26 > div > div:first-child > p:last-child {
-  margin-bottom: 0;
-}
-.columns.columns26 > div > div:last-child {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  min-width: 0;
-  max-width: 95%;
-  margin-top: 0;
-}
-
-.columns.columns26 > div > div:last-child > p {
-  font-size: 1.06rem;
-  color: #222422;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-}
-
-@media (max-width: 900px) {
-  .columns.columns26 > div > div:last-child {
-    max-width: 100%;
-  }
-}
-
-.columns.columns26 img {
-  max-width: 100%;
-  height: auto;
-}
-.columns.columns26 picture img[alt*="headshot"],
-.columns.columns26 > div > div:first-child > p:nth-of-type(2) img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.columns.columns26 picture img[alt=""] {
-  height: 30px;
-  width: auto;
-  border-radius: 0;
-  object-fit: contain;
-}
-@media (max-width: 700px) {
-  .columns.columns26 > div {
-    grid-template-columns: 1fr;
-    padding: 1.2rem 2vw 1.2rem 2vw;
-  }
-  .columns.columns26 > div > div {
-    max-width: 100%;
-  }
-}
-
-
 .columns.columns1 {
   background: #FAFAF6;
   padding: 0;
@@ -1675,8 +1494,6 @@
   padding-top: 0;
   justify-content: flex-start;
 }
-
-/* LOGO + TITLE row in first column */
 .columns.columns9 > div > div:first-child > p:first-child {
   display: flex;
   flex-direction: row;
@@ -1690,8 +1507,6 @@
   line-height: 1.1;
   padding: 0;
 }
-
-/* Fix: Ensure logo/picture is visible and sized. */
 .columns.columns9 > div > div:first-child > p:first-child picture,
 .columns.columns9 > div > div:first-child > p:first-child img {
   display: inline-block;
@@ -1705,8 +1520,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* Remove margin from the .button-container and make "Fashion Blog" not look like a button */
 .columns.columns9 > div > div:first-child > .button-container {
   margin: 0 0 0px 0;
   padding: 0;
@@ -1728,8 +1541,6 @@
   font-family: inherit;
   line-height: 1.1;
 }
-
-/* Social icons row */
 .columns.columns9 > div > div:first-child > ul {
   display: flex;
   flex-direction: row;
@@ -1767,15 +1578,11 @@
   display: block;
   margin: 0;
 }
-
-/* Remove default ul/li spacing and bullets everywhere */
 .columns.columns9 ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-/* Section headings in columns 2-4 */
 .columns.columns9 > div > div:not(:first-child) > h2 {
   font-family: inherit;
   font-size: 0.93rem;
@@ -1787,8 +1594,6 @@
   line-height: 1.25;
   padding: 0;
 }
-
-/* Vertical list, links styling */
 .columns.columns9 > div > div:not(:first-child) ul {
   margin: 0;
   padding: 0;
@@ -1826,4 +1631,178 @@
   .columns.columns9 > div > div {
     min-width: 0;
   }
+}
+
+
+.columns.columns26 {
+  background: #fafbf8;
+  padding: 0;
+}
+
+.columns.columns26 > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  column-gap: 2vw;
+  padding: 3.5rem 4vw 2.5rem 4vw;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .columns.columns26 > div {
+    grid-template-columns: 1fr;
+    padding: 2rem 3vw 2rem 3vw;
+    row-gap: 2.5rem;
+  }
+}
+
+/* Headline styles */
+.columns.columns26 > div > div:first-child > p:first-child {
+  font-family: 'Syncopate', var(--heading-font-family), sans-serif;
+  font-size: 2.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+  color: #222422;
+  margin: 0 0 1.1rem 0;
+  padding: 0 0 1.1rem 0;
+  border-bottom: 1px solid #e4e5df;
+  width: 100%;
+  display: block;
+}
+
+/* --- Bottom row: Profile block + logo in a flex row --- */
+.columns.columns26 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Simulate bottom row using the two p's: avatar/name/role block and logo p */
+.columns.columns26 > div > div:first-child .columns26-bottom-row,
+.columns.columns26 > div > div:first-child > .profile-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2.2rem;
+  margin-top: 0.85rem;
+  width: 100%;
+}
+
+/* If wrapper not present, target the two p's directly */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2),
+.columns.columns26 > div > div:first-child > p:last-child {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 0.85rem;
+  margin-bottom: 0;
+}
+
+/* Avatar + text block (left side of row) */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) {
+  flex: 1 1 0;
+  gap: 1.1rem;
+  align-items: flex-start;
+  margin-right: 0;
+}
+
+/* Avatar image */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) picture img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* Name/role vertical stack next to avatar (simulate with next two p's) */
+.columns.columns26 > div > div:first-child > p:nth-of-type(2) > *:not(picture) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.08em;
+}
+
+/* Name/Role styles */
+.columns.columns26 > div > div:first-child > p:nth-of-type(3) {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222422;
+  margin: 0 0 0.15rem 0;
+  padding: 0;
+  line-height: 1.2;
+}
+.columns.columns26 > div > div:first-child > p:nth-of-type(4) {
+  font-size: 0.98rem;
+  color: #575756;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* Logo (right) */
+.columns.columns26 > div > div:first-child > p:last-child {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-left: 2.2rem;
+  margin-right: 0;
+  margin-top: 0.85rem;
+  min-width: 0;
+}
+
+.columns.columns26 > div > div:first-child > p:last-child picture img {
+  height: 27px;
+  width: auto;
+  vertical-align: top;
+  display: inline-block;
+}
+
+/* Responsive: Stack bottom row on mobile */
+@media (max-width: 700px) {
+  .columns.columns26 > div > div:first-child > p:nth-of-type(2),
+  .columns.columns26 > div > div:first-child > p:last-child {
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1.2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .columns.columns26 > div > div:first-child > p:last-child {
+    margin-left: 0;
+    margin-top: 1.2rem;
+    justify-content: flex-start;
+  }
+}
+
+/* Quote/Right column styles */
+.columns.columns26 > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  max-width: 95%;
+  margin-top: 0;
+}
+.columns.columns26 > div > div:last-child > p {
+  font-size: 1.09rem;
+  color: #222;
+  font-family: var(--body-font-family);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure block images scale cleanly */
+.columns.columns26 img {
+  max-width: 100%;
+  height: auto;
 }

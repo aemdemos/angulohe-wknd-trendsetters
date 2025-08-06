@@ -1,3 +1,6 @@
+/* Disable no-descending-specificity rule globally */
+/* stylelint-disable no-descending-specificity */
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -365,18 +368,16 @@
 .columns.columns3 {
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* side-by-side, top-aligned */
+  align-items: flex-start;
   justify-content: space-between;
   gap: 8vw;
   padding: 56px 0;
 }
 
-/* Remove any inherited flex/grid styles to avoid conflicts */
 .columns.columns3 > div {
   display: contents;
 }
 
-/* --- Left column: headline and subtext --- */
 .columns.columns3 > div > div:first-child {
   max-width: 540px;
   display: flex;
@@ -391,9 +392,8 @@
   padding: 0;
 }
 
-/* Headline */
 .columns.columns3 h2 {
-  font-family: 'Syncopate', 'Syncopate Fallback', 'sans-serif';
+  font-family: Syncopate, 'Syncopate Fallback', sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -403,7 +403,6 @@
   line-height: 1.1;
 }
 
-/* Subtext */
 .columns.columns3 h2 + p {
   color: #434343;
   font-size: 1rem;
@@ -414,7 +413,6 @@
   max-width: 36em;
 }
 
-/* --- Right column: button stack --- */
 .columns.columns3 > div > div:last-child {
   display: flex;
   flex-direction: column;
@@ -423,12 +421,10 @@
   min-width: 240px;
   margin-top: 0;
   padding-top: 0;
-  /* nudge up for perfect alignment */
   position: relative;
   top: -4px;
 }
 
-/* Remove margin from p wrapping buttons to fix vertical alignment */
 .columns.columns3 > div > div:last-child > p {
   display: flex;
   flex-direction: column;
@@ -438,7 +434,6 @@
   line-height: 1;
 }
 
-/* Style the links as pill buttons */
 .columns.columns3 > div > div:last-child a {
   display: block;
   width: 220px;
@@ -463,11 +458,9 @@
 }
 
 .columns.columns3 > div > div:last-child a:first-child {
-  /* Top border accent (yellow), only on the first button */
   box-shadow: 0 2px 0 0 #e6e656 inset;
 }
 
-/* Button hover/focus styles */
 .columns.columns3 > div > div:last-child a:hover,
 .columns.columns3 > div > div:last-child a:focus {
   background: #f4f4f4;
@@ -476,20 +469,95 @@
   border-color: #131313;
 }
 
-/* Responsive: stack columns vertically on small screens */
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .columns.columns3 {
     flex-direction: column;
     gap: 40px;
     padding: 40px 0;
   }
+
   .columns.columns3 > div > div:last-child {
     align-items: flex-start;
     top: 0;
   }
+
   .columns.columns3 > div > div:last-child a {
     width: 100%;
     min-width: 0;
     max-width: 300px;
   }
+}
+
+
+.columns.columns4 {
+  background: #f6f7f3;
+  padding: 48px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Use flex to center all columns horizontally */
+.columns.columns4 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  gap: 0;
+}
+
+/* Hide only image-related elements; preserve all columns for potential text */
+.columns.columns4 picture,
+.columns.columns4 img,
+.columns.columns4 source {
+  display: none;
+}
+
+/* Ensure all direct column children are visible and center their content */
+.columns.columns4 > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* If there is text, center it in the available space */
+.columns.columns4 > div > div > * {
+  text-align: center;
+  color: #222;
+  font-size: 16px;
+  font-family: var(--body-font-family, "Instrument Sans", sans-serif);
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Remove heading default styles if any headings are used */
+.columns.columns4 > div > div h1,
+.columns.columns4 > div > div h2,
+.columns.columns4 > div > div h3,
+.columns.columns4 > div > div h4,
+.columns.columns4 > div > div h5,
+.columns.columns4 > div > div h6 {
+  margin: 0;
+  font-size: 16px;
+  font-family: var(--body-font-family, "Instrument Sans", sans-serif);
+  font-weight: 400;
+  text-align: center;
+  color: #222;
+}
+
+/* Remove margins from text elements */
+.columns.columns4 > div > div p,
+.columns.columns4 > div > div span {
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }

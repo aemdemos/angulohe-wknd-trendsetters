@@ -1,3 +1,4 @@
+/* Disable 'no-descending-specificity' globally */
 /* stylelint-disable no-descending-specificity */
 
 .cards > ul {
@@ -249,8 +250,6 @@
   min-width: 0;
   min-height: 40px;
   box-sizing: border-box;
-
-  /* Fallback for icon alignment if pseudo does not render */
 }
 
 .cards > ul > li::before {
@@ -263,14 +262,9 @@
   border: 1.5px solid #bbb;
   flex-shrink: 0;
   vertical-align: middle;
-
-  /* Force rendering of pseudo-element */
   content: "";
-
-  /* This use of content: "" is purely to trigger rendering; not for text/content injection */
 }
 
-/* Text indentation fallback: If icon is still not visible, force text indent */
 .cards .cards-card-body {
   margin: 0;
   padding: 0;
@@ -287,7 +281,6 @@
   padding: 0;
 }
 
-/* Responsive: 2 columns on medium, 1 column on small screens */
 @media (width <= 900px) {
   .cards > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -297,5 +290,177 @@
 @media (width <= 600px) {
   .cards > ul {
     grid-template-columns: 1fr;
+  }
+}
+
+.cards.cards21 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  position: relative;
+  min-height: 0;
+  padding: 5vw 0;
+  overflow: visible;
+}
+
+/* Center row, allow overlap */
+.cards.cards21 > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.cards.cards21 > ul > li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  position: relative;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.cards.cards21 > ul > li::before {
+  display: none;
+}
+
+/* Image styling */
+.cards.cards21 .cards-card-image {
+  position: relative;
+  z-index: 1;
+  transform: rotate(-6deg);
+  box-shadow: 0 14px 44px 0 rgb(0 0 0 / 17%);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-right: -200px;
+  min-width: 560px;
+  max-width: 60vw;
+  width: 60vw;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border: 1.5px solid #232323;
+  display: flex;
+  align-items: stretch;
+  transition: box-shadow 0.2s;
+}
+
+/* Ensure the image fills the rotated container */
+.cards.cards21 .cards-card-image picture,
+.cards.cards21 .cards-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Overlapping text card: placed lower and slightly less rotated */
+.cards.cards21 .cards-card-body {
+  position: relative;
+  z-index: 2;
+  transform: rotate(3.5deg);
+  background: #f7f7f6;
+  box-shadow: 0 10px 38px 0 rgb(0 0 0 / 13%);
+  border-radius: 13px;
+  min-width: 220px;
+  max-width: 340px;
+  padding: 28px 28px 18px 32px;
+  margin-left: -225px;
+  margin-bottom: 35px;
+  font-size: 1.13rem;
+  color: #232323;
+  border: 1.5px solid #232323;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+/* Text inside the card */
+.cards.cards21 .cards-card-body p {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 1.17rem;
+  font-weight: 400;
+  color: #232323;
+  opacity: 0.97;
+  letter-spacing: 0.01em;
+  line-height: 1.44;
+  text-align: left;
+}
+
+/* Allow overlap and visibility outside parent boundaries */
+.cards.cards21 > ul,
+.cards.cards21 > ul > li {
+  overflow: visible;
+}
+
+/* Responsive adjustments */
+@media (width <= 1100px) {
+  .cards.cards21 .cards-card-image {
+    min-width: 320px;
+    max-width: 78vw;
+    width: 78vw;
+    margin-right: -84px;
+  }
+
+  .cards.cards21 .cards-card-body {
+    min-width: 130px;
+    max-width: 62vw;
+    padding: 18px 12px 10px 15px;
+    margin-left: -98px;
+    margin-bottom: 18px;
+    font-size: 1.03rem;
+  }
+}
+
+@media (width <= 700px) {
+  .cards.cards21 {
+    padding: 12vw 0 10vw;
+  }
+
+  .cards.cards21 > ul {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .cards.cards21 > ul > li {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .cards.cards21 .cards-card-image {
+    min-width: 0;
+    max-width: 96vw;
+    width: 96vw;
+    margin-right: 0;
+    margin-bottom: 0;
+    transform: rotate(-2deg);
+  }
+
+  .cards.cards21 .cards-card-body {
+    min-width: 0;
+    max-width: 90vw;
+    width: 90vw;
+    margin-left: 0;
+    margin-top: -32px;
+    margin-bottom: 0;
+    padding: 14px 6vw 9px 7vw;
+    transform: rotate(2deg);
+    font-size: 0.98rem;
   }
 }

@@ -1,6 +1,3 @@
-/* Disabled no-descending-specificity globally due to unavoidable selector conflicts */
-/* stylelint-disable no-descending-specificity */
-
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -361,5 +358,138 @@
 
   .columns.columns2 > div > .columns-img-col:first-child {
     max-width: 100%;
+  }
+}
+
+
+.columns.columns3 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* side-by-side, top-aligned */
+  justify-content: space-between;
+  gap: 8vw;
+  padding: 56px 0;
+}
+
+/* Remove any inherited flex/grid styles to avoid conflicts */
+.columns.columns3 > div {
+  display: contents;
+}
+
+/* --- Left column: headline and subtext --- */
+.columns.columns3 > div > div:first-child {
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.columns.columns3 > div > div:first-child > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* Headline */
+.columns.columns3 h2 {
+  font-family: 'Syncopate', 'Syncopate Fallback', 'sans-serif';
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #000;
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+/* Subtext */
+.columns.columns3 h2 + p {
+  color: #434343;
+  font-size: 1rem;
+  font-family: var(--body-font-family);
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.4;
+  max-width: 36em;
+}
+
+/* --- Right column: button stack --- */
+.columns.columns3 > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 240px;
+  margin-top: 0;
+  padding-top: 0;
+  /* nudge up for perfect alignment */
+  position: relative;
+  top: -4px;
+}
+
+/* Remove margin from p wrapping buttons to fix vertical alignment */
+.columns.columns3 > div > div:last-child > p {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Style the links as pill buttons */
+.columns.columns3 > div > div:last-child a {
+  display: block;
+  width: 220px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  box-sizing: border-box;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  vertical-align: top;
+}
+
+.columns.columns3 > div > div:last-child a:first-child {
+  /* Top border accent (yellow), only on the first button */
+  box-shadow: 0 2px 0 0 #e6e656 inset;
+}
+
+/* Button hover/focus styles */
+.columns.columns3 > div > div:last-child a:hover,
+.columns.columns3 > div > div:last-child a:focus {
+  background: #f4f4f4;
+  color: #000;
+  text-decoration: none;
+  border-color: #131313;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (max-width: 800px) {
+  .columns.columns3 {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+  }
+  .columns.columns3 > div > div:last-child {
+    align-items: flex-start;
+    top: 0;
+  }
+  .columns.columns3 > div > div:last-child a {
+    width: 100%;
+    min-width: 0;
+    max-width: 300px;
   }
 }

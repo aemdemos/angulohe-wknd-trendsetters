@@ -1,21 +1,16 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get all immediate child divs representing columns
-  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
-  // For each column, include its main content (usually an img)
-  const contentRow = columnDivs.map(div => {
-    const img = div.querySelector('img');
-    if (div.childElementCount === 1 && img) {
-      return img;
-    }
-    return div;
-  });
-  // Make sure header row is a single cell as per the example
-  const rows = [
-    ['Columns (columns38)'],
+  // Correct table structure: header is a single column, followed by a row with n columns
+  const headerRow = ['Columns (columns38)'];
+  // Get all immediate child divs (columns)
+  const columns = Array.from(element.querySelectorAll(':scope > div'));
+  // The content row: each cell contains a column element
+  const contentRow = columns;
+  // Compose the cells array so that headerRow is a single cell, contentRow is n cells
+  const cells = [
+    headerRow,
     contentRow
   ];
-  // Create table and replace
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

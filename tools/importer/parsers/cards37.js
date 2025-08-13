@@ -1,74 +1,73 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper to extract the image from a card
-  function getImage(card) {
-    // Find an img inside any .utility-aspect-1x1 or .utility-aspect-2x3
-    const imgWrapper = card.querySelector('.utility-aspect-2x3, .utility-aspect-1x1');
-    if (imgWrapper) {
-      const img = imgWrapper.querySelector('img');
-      if (img) return img;
+  // Helper to extract a card's main image and text content
+  function extractCard(cardEl) {
+    // Find the first image in the card (mandatory)
+    let img = null;
+    // Images may be within a div with aspect classes or directly in card
+    const aspectDiv = cardEl.querySelector('.utility-aspect-2x3, .utility-aspect-1x1');
+    if (aspectDiv) {
+      img = aspectDiv.querySelector('img');
+    } else {
+      img = cardEl.querySelector('img');
     }
-    // Fallback: any img in card
-    const img = card.querySelector('img');
-    return img || null;
+
+    // Build the text content element
+    const textContent = document.createElement('div');
+
+    // Heading (h2, h3, h4)
+    let heading = cardEl.querySelector('h2, h3, h4');
+    if (heading) {
+      textContent.appendChild(heading);
+    }
+    // Description (first <p> in card)
+    let desc = cardEl.querySelector('p');
+    if (desc) {
+      textContent.appendChild(desc);
+    }
+    // CTA (optional): look for .button or a.button directly inside card
+    let cta = cardEl.querySelector('.button, button, a.button');
+    if (cta) {
+      textContent.appendChild(cta);
+    }
+    return [img, textContent];
   }
 
-  // Helper to extract text content for the card (heading, desc, button)
-  function getCardText(card) {
-    const textNodes = [];
-    // Try all h3 (should be a heading)
-    const heading = card.querySelector('h2, h3, h4, h5, h6');
-    if (heading) textNodes.push(heading);
-    // Try first p
-    const para = card.querySelector('p');
-    if (para) textNodes.push(para);
-    // Try .button (may not exist)
-    const cta = card.querySelector('.button');
-    if (cta) textNodes.push(cta);
-    return textNodes.length === 1 ? textNodes[0] : textNodes;
-  }
+  // The first .w-layout-grid.grid-layout is the main grid
+  let mainGrid = element.querySelector('.w-layout-grid.grid-layout');
+  if (!mainGrid) mainGrid = element;
 
-  // Find the main .grid-layout container (may contain both main and sub cards)
-  const container = element.querySelector(':scope > .container');
-  if (!container) return;
-  const mainGrid = container.querySelector(':scope > .grid-layout');
-  if (!mainGrid) return;
-
-  // The main grid has direct <a> card(s) and a nested grid with more cards
-  // Get all direct <a> in mainGrid (usually the large card)
-  const directCards = Array.from(mainGrid.children).filter(
-    (child) => child.tagName === 'A' && child.classList.contains('utility-link-content-block')
-  );
-  // Get the nested grid (has remaining cards)
-  const nestedGrid = mainGrid.querySelector(':scope > .grid-layout');
-  let nestedCards = [];
-  if (nestedGrid) {
-    nestedCards = Array.from(nestedGrid.children).filter(
-      (child) => child.tagName === 'A' && child.classList.contains('utility-link-content-block')
-    );
-  }
-  // If mainGrid has more <a> after the nested grid, include them as well
-  const moreCards = Array.from(mainGrid.children).filter(
-    (child) => child.tagName === 'A' && child.classList.contains('utility-link-content-block') && !directCards.includes(child)
+  // Cards can be direct children or inside nested grid(s)
+  let cardEls = Array.from(mainGrid.children).filter(child =>
+    child.classList.contains('utility-link-content-block')
   );
 
-  // Collect all cards in order: directCards (the large one), then nestedCards, then moreCards
-  const allCards = [
-    ...directCards,
-    ...nestedCards,
-    // 'moreCards' shouldn't duplicate any already included
-    ...moreCards.filter((card) => !directCards.includes(card) && !nestedCards.includes(card)),
-  ];
+  // Find nested grids that may contain more cards
+  const nestedGrids = Array.from(mainGrid.querySelectorAll('.w-layout-grid'));
+  nestedGrids.forEach(grid => {
+    Array.from(grid.children).forEach(child => {
+      if (child.classList.contains('utility-link-content-block')) {
+        cardEls.push(child);
+      }
+    });
+  });
+  // Remove duplicate references
+  cardEls = Array.from(new Set(cardEls));
 
-  // Build the table rows
-  const rows = [['Cards (cards37)']];
-  allCards.forEach((card) => {
-    const img = getImage(card);
-    const textContent = getCardText(card);
-    rows.push([img ? img : '', textContent]);
+  // Compose the table rows
+  const rows = [];
+  // Header
+  rows.push(['Cards (cards37)']);
+  // One row per card (image, text content)
+  cardEls.forEach(cardEl => {
+    const [img, textContent] = extractCard(cardEl);
+    // Only include if both image and text content exist
+    if (img && textContent && (textContent.childNodes.length > 0)) {
+      rows.push([img, textContent]);
+    }
   });
 
-  // Create and replace with the block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // Build and replace
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

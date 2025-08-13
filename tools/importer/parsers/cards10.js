@@ -1,35 +1,54 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row (must match exactly)
-  const cells = [['Cards (cards10)']];
-  // Collect all cards (direct children <a> elements)
-  const cards = element.querySelectorAll(':scope > a.card-link');
-  cards.forEach((card) => {
-    // Image is always the img inside the aspect-ratio container
-    const imgContainer = card.querySelector('.utility-aspect-3x2');
+  // Compose header row as per spec
+  const headerRow = ['Cards (cards10)'];
+  const rows = [headerRow];
+
+  // Each card is a top-level <a>
+  const cards = Array.from(element.querySelectorAll(':scope > a'));
+
+  cards.forEach(card => {
+    // -------- IMAGE CELL --------
+    // Find image (usually inside the first child div)
     let img = null;
-    if (imgContainer) {
-      img = imgContainer.querySelector('img');
+    // Look for the first <img> tag within this card
+    const firstDiv = card.querySelector('div');
+    if (firstDiv) img = firstDiv.querySelector('img');
+    // Only continue if we found an image
+    if (!img) return;
+
+    // -------- TEXT CELL --------
+    // Find the main content container
+    const txtDiv = card.querySelector('.utility-padding-all-1rem');
+    let textCell = [];
+    if (txtDiv) {
+      // Optional tag
+      const tag = txtDiv.querySelector('.tag');
+      if (tag && tag.textContent.trim()) {
+        // Represent tag as a label on top, as in the screenshot
+        const tagWrap = document.createElement('div');
+        tagWrap.append(tag);
+        textCell.push(tagWrap);
+      }
+      // Heading (h3 or .h4-heading)
+      const heading = txtDiv.querySelector('h3, .h4-heading');
+      if (heading) {
+        textCell.push(heading);
+      }
+      // Description paragraph
+      const para = txtDiv.querySelector('p');
+      if (para) {
+        textCell.push(para);
+      }
     }
-    // Text content is in the .utility-padding-all-1rem div
-    const textContainer = card.querySelector('.utility-padding-all-1rem');
-    const cell2 = [];
-    if (textContainer) {
-      // Optional tag label
-      const tag = textContainer.querySelector('.tag-group .tag');
-      if (tag) cell2.push(tag);
-      // Heading (h3, .h4-heading)
-      const heading = textContainer.querySelector('h3, .h4-heading');
-      if (heading) cell2.push(heading);
-      // Description (p)
-      const desc = textContainer.querySelector('p');
-      if (desc) cell2.push(desc);
-    }
-    if (img && cell2.length > 0) {
-      cells.push([img, cell2]);
+    // Push row only if both image and text content present
+    if (img && textCell.length > 0) {
+      rows.push([img, textCell]);
     }
   });
-  // Create the block table and replace the element
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Create the table block
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace the original element with the created block table
   element.replaceWith(table);
 }

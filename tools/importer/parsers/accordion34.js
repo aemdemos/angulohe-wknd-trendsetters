@@ -1,45 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Create the header row as specified in the block info
-  const cells = [['Accordion (accordion34)']];
+  // Create the table header as per the block name
+  const cells = [
+    ['Accordion (accordion34)']
+  ];
 
-  // Select all immediate child accordions
-  const accordions = element.querySelectorAll(':scope > .accordion');
+  // Get all direct children that are accordions
+  const accordions = Array.from(element.querySelectorAll(':scope > .accordion'));
 
-  accordions.forEach((acc) => {
-    // Get the accordion title: must preserve any markup within the title
-    let titleContent = null;
-    const toggle = acc.querySelector('.w-dropdown-toggle');
+  accordions.forEach((accordion) => {
+    // Title: inside .w-dropdown-toggle > .paragraph-lg
+    let titleElem = null;
+    const toggle = accordion.querySelector('.w-dropdown-toggle');
     if (toggle) {
-      // Look for the main label inside the toggle
-      const para = toggle.querySelector('.paragraph-lg');
-      if (para) {
-        titleContent = para;
+      titleElem = toggle.querySelector('.paragraph-lg');
+    }
+    // Accordion content: inside nav.accordion-content > ...
+    let contentElem = null;
+    const nav = accordion.querySelector('nav.accordion-content');
+    if (nav) {
+      // Use the first child div or .w-richtext for the main content
+      // Some implementations might not have .w-richtext
+      const rich = nav.querySelector('.w-richtext');
+      if (rich) {
+        contentElem = rich;
       } else {
-        // Fallback: extract text content from toggle (could be a span, div, etc.)
-        // Reference the toggle directly for maximum fidelity
-        titleContent = toggle;
+        // fallback: use the content wrapper or nav itself
+        // try to find first div inside nav
+        const innerDiv = nav.querySelector('div');
+        if (innerDiv) {
+          contentElem = innerDiv;
+        } else {
+          // fallback: nav itself
+          contentElem = nav;
+        }
       }
     }
-    // Get the accordion content: preserve markup, reference the inner wrapper directly
-    let contentContent = null;
-    const dropdownList = acc.querySelector('.w-dropdown-list');
-    if (dropdownList) {
-      // Take the first element with class .utility-padding-all-1rem or .rich-text inside dropdownList, else dropdownList directly
-      const utility = dropdownList.querySelector('.utility-padding-all-1rem');
-      if (utility) {
-        // Prefer rich text wrapper if present
-        const rich = utility.querySelector('.rich-text');
-        contentContent = rich ? rich : utility;
-      } else {
-        const rich = dropdownList.querySelector('.rich-text');
-        contentContent = rich ? rich : dropdownList;
-      }
-    }
-    // Add the row to cells array
+    // Ensure that empty cells are set to '' so the table structure is correct
     cells.push([
-      titleContent,
-      contentContent
+      titleElem || '',
+      contentElem || ''
     ]);
   });
 

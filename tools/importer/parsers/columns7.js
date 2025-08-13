@@ -1,14 +1,27 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get all direct child column divs
-  const columns = Array.from(element.querySelectorAll(':scope > div'));
-  if (!columns.length) return;
-  // Header row: first cell is block name, others are empty strings, total columns.length cells
+  // Header row: single cell, matches example
   const headerRow = ['Columns (columns7)'];
-  while (headerRow.length < columns.length) headerRow.push('');
-  // Content row: one cell per column
-  const contentRow = columns;
-  const cells = [headerRow, contentRow];
+
+  // Get immediate child divs, each is a column
+  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
+
+  // For each column, grab ALL content inside that div
+  // (not just images, but any child text, lists, buttons, etc. in future HTML)
+  const columns = columnDivs.map((colDiv) => {
+    // If the column div has only one child, use it directly to avoid unnecessary wrappers
+    if (colDiv.children.length === 1) {
+      return colDiv.firstElementChild;
+    }
+    // Otherwise, return the whole div (contains multiple elements)
+    return colDiv;
+  });
+
+  const cells = [
+    headerRow,
+    columns
+  ];
+
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,35 +1,47 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block header row must be a single column
+  // 1. Header row with block name and variant
   const headerRow = ['Columns (columns5)'];
 
-  // Find the main grid containing the columns (should have 2 children: text block, image)
-  const grid = element.querySelector('.grid-layout.grid-gap-xxl');
+  // 2. Find the primary grid containing the columns
+  const grid = element.querySelector('.grid-layout.tablet-1-column');
   if (!grid) return;
-  const children = Array.from(grid.children);
+  // Get all direct children of the grid (should be 2: left block, right image)
+  const gridChildren = Array.from(grid.children);
 
-  // Find left and right columns
-  let left = null, right = null;
-  for (const child of children) {
-    if (!left && child.querySelector && child.querySelector('h2')) {
-      left = child;
-    } else if (!right && child.tagName === 'IMG') {
-      right = child;
-    }
+  // Edge case: If fewer than 2 children, abort
+  if (gridChildren.length < 2) return;
+
+  // 3. LEFT CELL: Content block (with heading, paragraph, buttons)
+  // The left block is the one containing the heading
+  const leftGrid = gridChildren.find(child => child.querySelector('h2'));
+  // The right block is the image
+  const rightGrid = gridChildren.find(child => child.tagName === 'IMG');
+  const leftCellContent = [];
+
+  if (leftGrid) {
+    // Heading
+    const heading = leftGrid.querySelector('h2');
+    if (heading) leftCellContent.push(heading);
+    // Paragraph (may be wrapped in .rich-text)
+    const paragraph = leftGrid.querySelector('.rich-text');
+    if (paragraph) leftCellContent.push(paragraph);
+    // Buttons
+    const buttonGroup = leftGrid.querySelector('.button-group');
+    if (buttonGroup) leftCellContent.push(buttonGroup);
   }
-  // Defensive fallback
-  if (!left && children.length) left = children[0];
-  if (!right && children.length > 1) right = children[1];
 
-  // Build the content row with as many columns as needed (2 here)
-  const contentRow = [left, right].map(cell => cell ? cell : '');
+  // 4. RIGHT CELL: Image
+  // Only add the image if it exists
+  const rightCellContent = rightGrid ? rightGrid : '';
 
-  // The table: the first row is the header as a single column, the second row is the content row with two columns
-  const table = WebImporter.DOMUtils.createTable([
+  // 5. Build the block table
+  const cells = [
     headerRow,
-    contentRow
-  ], document);
+    [leftCellContent, rightCellContent]
+  ];
 
-  // Replace original element
+  // 6. Create and replace
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

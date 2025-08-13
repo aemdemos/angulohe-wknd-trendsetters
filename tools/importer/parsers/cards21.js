@@ -1,34 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row: single column as in the example
+  // Header row as per the example
   const headerRow = ['Cards (cards21)'];
 
-  // Find all card elements
-  const cardElements = element.querySelectorAll('.card');
-  const cardRows = [];
+  // For this HTML, we expect one card per block
+  // Traverse down to the actual card content
+  // Structure: sticky div > rotate div > card > card-body > [h4, img]
+  let cardBody = element;
+  // The card-body is nested deeply - find it
+  cardBody = cardBody.querySelector('.card-body') || cardBody;
 
-  cardElements.forEach(card => {
-    const body = card.querySelector('.card-body') || card;
-    const img = body.querySelector('img');
-    const title = body.querySelector('.h4-heading');
-    const textCell = [];
-    if (title) textCell.push(title);
-    cardRows.push([img, textCell]);
-  });
+  // Extract the image (mandatory)
+  const img = cardBody.querySelector('img');
 
-  if (cardRows.length === 0) return;
+  // Extract the heading (optional, but present here)
+  // The heading is styled as h4-heading
+  const heading = cardBody.querySelector('.h4-heading');
 
-  // Compose the table rows: header row is only 1 cell, data rows are 2 cells
-  const tableRows = [headerRow, ...cardRows];
-
-  // Create and replace block
-  const table = WebImporter.DOMUtils.createTable(tableRows, document);
-
-  // Make header cell span all columns (colspan) for correct visual structure
-  const tableHeader = table.querySelector('tr:first-child th');
-  if (tableHeader && cardRows.length > 0) {
-    tableHeader.setAttribute('colspan', cardRows[0].length);
+  // Prepare the text cell
+  // If there are other textual nodes (description, cta), add them below the heading
+  // In this HTML, only heading is present
+  // We'll wrap them in a div for semantic grouping if needed
+  let textCell;
+  if (heading) {
+    textCell = heading;
+  } else {
+    // If no heading found, fallback to empty string
+    textCell = '';
   }
 
-  element.replaceWith(table);
+  // Compose the table rows: header and the card
+  const rows = [headerRow, [img, textCell]];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+
+  // Replace original element with the block table
+  element.replaceWith(block);
 }

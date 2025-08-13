@@ -1,30 +1,31 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the .grid-layout container inside the section
+  // Find the grid-layout container
   const grid = element.querySelector('.grid-layout');
   if (!grid) return;
-
-  // Get the direct children of the grid (they represent the columns)
+  // Get all direct children of the grid
   const gridChildren = Array.from(grid.children);
+  // The original grid structure appears to be:
+  // [text/heading column, contact list column, image column]
 
-  // For this layout, the columns appear to be:
-  //   [0]: left text content
-  //   [1]: contact list (ul)
-  //   [2]: image
+  // Let's try to preserve the visual column separation as in the source HTML
+  // We'll use the first two columns for the left cell, third for the right cell
 
-  // Defensive: ensure we don't break if some columns are missing
-  const leftContent = [];
-  if (gridChildren[0]) leftContent.push(gridChildren[0]);
-  if (gridChildren[1]) leftContent.push(gridChildren[1]);
-  const rightContent = gridChildren[2] || '';
+  // Find out which element is the image (should be img tag)
+  let imageColIndex = gridChildren.findIndex((el) => el.tagName === 'IMG');
+  if (imageColIndex === -1) imageColIndex = gridChildren.length - 1;
+  const imageCol = gridChildren[imageColIndex];
 
-  // Table header as required
+  // The left cell contains everything except the image column
+  const leftColNodes = gridChildren.filter((_, idx) => idx !== imageColIndex);
+  const leftCol = document.createElement('div');
+  leftColNodes.forEach((node) => leftCol.appendChild(node));
+
+  // Compose the table
   const cells = [
     ['Columns (columns18)'],
-    [leftContent, rightContent]
+    [leftCol, imageCol]
   ];
-
-  // Create the table block and replace
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,56 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row exactly matches 'Hero (hero28)'
+  // Header row (must match the block name exactly)
   const headerRow = ['Hero (hero28)'];
 
-  // Find the background image (img inside first grid div)
-  let backgroundImg = null;
-  const gridLayout = element.querySelector('.grid-layout');
-  if (gridLayout) {
-    const gridDivs = gridLayout.querySelectorAll(':scope > div');
-    for (const div of gridDivs) {
+  // 1. Extract the background image (optional)
+  let bgImg = null;
+  const grid = element.querySelector('.w-layout-grid');
+  if (grid) {
+    // Look for an img element in any of the direct children
+    const gridChildren = grid.querySelectorAll(':scope > div');
+    for (const div of gridChildren) {
       const img = div.querySelector('img');
       if (img) {
-        backgroundImg = img;
+        bgImg = img;
         break;
       }
     }
   }
+  const imageRow = [bgImg || ''];
 
-  // Find the content: title (h1), subheading (none in example), CTA (none in example)
-  // In this HTML, h1 is in utility-margin-bottom-6rem inside grid-layout > div
-  let contentEls = [];
-  if (gridLayout) {
-    const gridDivs = gridLayout.querySelectorAll(':scope > div');
-    for (const div of gridDivs) {
-      const marginBox = div.querySelector('.utility-margin-bottom-6rem');
-      if (marginBox) {
-        // Only add children that have content (skip empty button-group)
-        Array.from(marginBox.children).forEach(child => {
-          if (child.tagName.toLowerCase() === 'h1' || child.querySelector('h1')) {
-            contentEls.push(child);
-          } else if (child.textContent.trim()) {
-            contentEls.push(child);
+  // 2. Extract the title, subheading, CTA (all text content)
+  // According to the HTML, the title is in h1 in the second grid child
+  let contentCell = [];
+  if (grid) {
+    const gridChildren = grid.querySelectorAll(':scope > div');
+    // The second grid child appears to contain the text content
+    if (gridChildren.length > 1) {
+      const textContainer = gridChildren[1].querySelector('.utility-margin-bottom-6rem');
+      if (textContainer) {
+        // We'll collect all child nodes that are meaningful (headings, paragraphs, button groups)
+        for (const child of textContainer.childNodes) {
+          if (child.nodeType === 1) { // Element
+            // Only include h1, h2, h3, p, or .button-group
+            if (/^H[1-6]$/.test(child.tagName) || child.classList.contains('button-group')) {
+              contentCell.push(child);
+            }
           }
-        });
-        break;
+        }
       }
     }
   }
+  // If no content found, leave cell empty string
+  const textRow = [contentCell.length ? contentCell : ''];
 
-  // Fallbacks if no content found, but always send as array
-  if (!contentEls.length) {
-    contentEls = [];
-  }
-
-  // Compose table rows (3 rows, 1 cell each)
-  const rows = [
+  // 3. Compose the table rows
+  const cells = [
     headerRow,
-    [backgroundImg].filter(Boolean), // Row 2: background image if it exists
-    [contentEls.length > 1 ? contentEls : contentEls[0] || ''] // Row 3: title/subhead/cta if present
+    imageRow,
+    textRow
   ];
 
-  // Create table and replace element
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,32 +1,24 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header must be a single cell (the block name and variant)
-  const header = ['Columns (columns4)'];
+  // Table header as per the example
+  const headerRow = ['Columns (columns4)'];
 
-  // Get all direct child divs (columns)
-  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
+  // Get the immediate child divs that represent columns
+  const columns = Array.from(element.querySelectorAll(':scope > div'));
 
-  // Each column cell should contain the entire content of the column, not just an image
-  // To ensure robustness, move all children (not just images) into a container per column
-  const columnCells = columnDivs.map((col) => {
-    // If the column has more than one child, wrap them in a fragment
-    const content = Array.from(col.childNodes);
-    if (content.length === 1) {
-      return content[0];
-    } else {
-      // Use a div as container for multiple elements
-      const container = document.createElement('div');
-      content.forEach(node => container.appendChild(node));
-      return container;
-    }
+  // Extract the image from each column
+  const contentRow = columns.map(col => {
+    // If there is more than just an img in the column in future, consider more
+    // For now, image is the only content in each column
+    const img = col.querySelector('img');
+    return img ? img : '';
   });
 
-  // Build the table structure: header (1 col), then one row (N cols)
-  const cells = [
-    header,
-    columnCells
-  ];
+  // Build table array
+  const tableArray = [headerRow, contentRow];
 
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(tableArray, document);
+  // Replace the original element with the block
+  element.replaceWith(block);
 }

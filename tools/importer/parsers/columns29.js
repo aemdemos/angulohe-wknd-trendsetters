@@ -1,26 +1,30 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find all direct children representing columns
+  // Get the immediate child divs (columns)
   const columns = Array.from(element.querySelectorAll(':scope > div'));
-  const numColumns = columns.length;
 
-  // Header row: first cell with header, rest empty to match the number of columns
-  const headerRow = ['Columns (columns29)', ...Array(numColumns - 1).fill('')];
+  // Defensive: remove if no columns
+  if (columns.length === 0) {
+    element.remove();
+    return;
+  }
 
-  // For each column, extract the main content (usually the <img> inside an aspect ratio div)
-  const contentRow = columns.map(col => {
-    if (col.children.length === 1 && col.firstElementChild.tagName === 'DIV') {
-      const innerDiv = col.firstElementChild;
-      const img = innerDiv.querySelector('img');
-      if (img) return img;
-      return innerDiv;
-    }
-    return col;
-  });
+  // Header row: single cell, should span all columns (array of one cell)
+  const headerRow = ['Columns (columns29)'];
 
-  const table = WebImporter.DOMUtils.createTable([
+  // Content row: each column's content as a separate cell
+  const contentRow = columns;
+
+  // Compose table data: header is single cell, content row has N cells
+  const cells = [
     headerRow,
     contentRow
-  ], document);
+  ];
+
+  // Create the table (header will be a single <th>, content N <td>)
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // The WebImporter consumer is responsible for styling the header to span all columns if required.
+  // Replace the original element with the new block
   element.replaceWith(table);
 }

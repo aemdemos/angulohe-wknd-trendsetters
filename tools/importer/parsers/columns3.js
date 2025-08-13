@@ -1,32 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main grid that contains our columns
-  const grid = element.querySelector('.w-layout-grid');
+  // Find the grid layout inside the section
+  const grid = element.querySelector('.grid-layout');
   if (!grid) return;
 
-  // Get all direct children of the grid (columns in original layout)
-  const columns = Array.from(grid.children);
+  // Get all immediate grid children (columns)
+  const cols = Array.from(grid.children);
 
-  // Header row as specified
-  const headerRow = ['Columns (columns3)'];
+  // Edge case: If not at least two columns, fallback to whole content
+  if (cols.length < 2) {
+    const cells = [
+      ['Columns (columns3)'],
+      [element]
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    element.replaceWith(block);
+    return;
+  }
 
-  // For each column, collect all children and reference existing elements
-  const contentRow = columns.map(col => {
-    // If there's only one child, use it, else wrap the children in a div
-    if (col.children.length === 1) {
-      return col.firstElementChild;
-    } else {
-      const wrapper = document.createElement('div');
-      // Move all children into wrapper
-      while (col.firstChild) {
-        wrapper.appendChild(col.firstChild);
-      }
-      return wrapper;
-    }
-  });
+  // Reference the existing column elements directly for resilience
+  const col1 = cols[0]; // Left column (heading + description)
+  const col2 = cols[1]; // Right column (buttons)
 
-  const cells = [headerRow, contentRow];
-
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Create the block table matching the required structure
+  const cells = [
+    ['Columns (columns3)'],
+    [col1, col2]
+  ];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

@@ -1,32 +1,24 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid container with all columns
-  let grid = element.querySelector('.w-layout-grid');
-  let columns = [];
+  // 1. Find the grid layout containing the columns
+  const grid = element.querySelector('.w-layout-grid.grid-layout');
+  if (!grid) return;
 
-  // Defensive: try to find the right grid container
-  if (!grid) {
-    const container = element.querySelector('.container');
-    if (container) {
-      grid = container.querySelector('.w-layout-grid');
-    }
-  }
+  // 2. Get all direct children of the grid: each is a column
+  const columns = Array.from(grid.children);
 
-  if (grid) {
-    columns = Array.from(grid.children);
-  } else {
-    // fallback: just use all immediate children
-    columns = Array.from(element.children);
-  }
+  // 3. Prepare header row, matching perfectly the required block name
+  const headerRow = ['Columns (columns9)'];
 
-  // Compose the block table: Header row (single cell), then one row with all columns
-  const headerRow = ['Columns (columns9)']; // single cell
-  const contentRow = columns; // as many cells as there are columns
+  // 4. Prepare the first content row: reference the column elements directly
+  const contentRow = columns;
 
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow
-  ], document);
+  // 5. Compose the cells array
+  const cells = [headerRow, contentRow];
 
-  element.replaceWith(table);
+  // 6. Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // 7. Replace the original element with the new block
+  element.replaceWith(block);
 }

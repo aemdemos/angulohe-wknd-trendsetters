@@ -1,25 +1,19 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row with correct block name
+  // 1. Header row as required
   const headerRow = ['Cards'];
-
-  // Each direct child div of the grid is a card
-  const cardDivs = element.querySelectorAll(':scope > div');
-
   const rows = [headerRow];
-
-  cardDivs.forEach((cardDiv) => {
-    // Only add the meaningful card content, which is the text paragraph inside (not SVG icon)
-    // Look for the first <p> inside the card div
-    const p = cardDiv.querySelector('p');
-    // If a p is found, use it; otherwise, use the cardDiv as fallback
+  // 2. Find all cards as immediate children
+  const cardDivs = element.querySelectorAll(':scope > div');
+  cardDivs.forEach(cardDiv => {
+    // Each card is structured: icon+svg, then <p class="utility-margin-bottom-0">text</p>
+    // Only include the <p> in the block cell (per markdown example: only text, not icon)
+    const p = cardDiv.querySelector('p.utility-margin-bottom-0');
     if (p) {
-      rows.push([p]);
-    } else {
-      rows.push([cardDiv]);
+      rows.push([p]); // reference the existing <p> element
     }
   });
-
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(table);
+  // 3. Create and replace
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

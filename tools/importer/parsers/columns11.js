@@ -1,48 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper: Gets left and right cell content
-  const mainGrid = element.querySelector('.w-layout-grid.grid-layout.tablet-1-column');
-  let leftCell = '';
-  let rightCell = '';
+  // 1. Get the main content grids
+  const mainGrid = element.querySelector('.grid-layout.tablet-1-column.grid-gap-lg');
+  const lowerGrid = element.querySelector('.grid-layout.mobile-portrait-1-column.grid-gap-md');
 
-  if (mainGrid) {
-    const mainGridChildren = Array.from(mainGrid.children);
-    const leftCol = mainGridChildren[0];
-    const rightCol = mainGridChildren[1];
-    // Compose left cell: all children from leftCol and rightCol (as in layout)
-    const frag = document.createDocumentFragment();
-    if (leftCol) Array.from(leftCol.childNodes).forEach(c => frag.appendChild(c));
-    if (rightCol) Array.from(rightCol.childNodes).forEach(c => frag.appendChild(c));
-    leftCell = frag;
+  // 2. Get each main column (these are the top row columns in the block)
+  const mainCols = mainGrid ? Array.from(mainGrid.children) : [];
+  const leftCol = mainCols[0];
+  const rightCol = mainCols[1];
+
+  // 3. Left column content: eyebrow and heading
+  let leftCell = [];
+  if (leftCol) {
+    const eyebrow = leftCol.querySelector('.eyebrow');
+    const heading = leftCol.querySelector('h1, h2, h3, h4, h5, h6');
+    if (eyebrow) leftCell.push(eyebrow);
+    if (heading) leftCell.push(heading);
   }
 
-  // Right cell: the two images from the lower grid
-  const lowerGrid = element.querySelector('.w-layout-grid.grid-layout.mobile-portrait-1-column');
+  // 4. Right column content: rich paragraph, author, button
+  let rightCell = [];
+  if (rightCol) {
+    const richtext = rightCol.querySelector('.rich-text');
+    if (richtext) rightCell.push(richtext);
+    const author = rightCol.querySelector('.flex-horizontal.y-center.flex-gap-xs');
+    if (author) rightCell.push(author);
+    const button = rightCol.querySelector('.button');
+    if (button) rightCell.push(button);
+  }
+
+  // 5. Lower grid: two images for the next row
+  let imgCell1 = null;
+  let imgCell2 = null;
   if (lowerGrid) {
-    const imgs = Array.from(lowerGrid.querySelectorAll('img'));
-    if (imgs.length > 0) {
-      const frag = document.createDocumentFragment();
-      imgs.forEach(img => frag.appendChild(img));
-      rightCell = frag;
-    }
+    const imgDivs = Array.from(lowerGrid.children);
+    imgCell1 = imgDivs[0] ? imgDivs[0].querySelector('img') : null;
+    imgCell2 = imgDivs[1] ? imgDivs[1].querySelector('img') : null;
   }
 
-  // Build the table with a header row spanning both columns
-  const headerRow = [document.createTextNode('Columns (columns11)'), '']; // 2 cells as in example
+  // 6. Compose all rows for the block table
+  // FIX: header row must be a single-element array so createTable renders only one <th> spanning all columns
   const cells = [
-    headerRow,
-    [leftCell, rightCell],
+    ['Columns (columns11)'], // header row, single cell
+    [leftCell, rightCell],   // first row: two columns
+    [imgCell1, imgCell2]     // second row: two columns (images)
   ];
 
-  // Create the table
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Set colspan=2 on the first row's first cell, remove the second cell
-  const th = table.querySelector('tr:first-child th');
-  if (th) {
-    th.setAttribute('colspan', '2');
-    if (th.nextSibling) th.parentElement.removeChild(th.nextSibling);
-  }
-
-  element.replaceWith(table);
+  // 7. Create and replace
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

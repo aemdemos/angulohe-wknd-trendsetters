@@ -1,22 +1,41 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid containing the columns
-  const grid = element.querySelector('.w-layout-grid');
+  // Find the grid container (this holds the columns)
+  const grid = element.querySelector('.w-layout-grid, .grid-layout');
   if (!grid) return;
 
-  // Get all immediate children of the grid (the columns)
-  const columns = Array.from(grid.children).filter(child => child.nodeType === 1);
-  // If no columns found, don't proceed
+  // Get all direct children of the grid (each is a column)
+  const columns = Array.from(grid.children).filter(child => child.nodeType === Node.ELEMENT_NODE);
   if (columns.length === 0) return;
 
-  // The header row must be a single cell, REGARDLESS of column count in the next row
+  // Helper for extracting content for each column
+  function extractColumnContent(col) {
+    // Gather all immediate children of the column
+    const contentEls = Array.from(col.children).filter(child => child.nodeType === Node.ELEMENT_NODE);
+    if (contentEls.length === 0) return col; // If nothing, use the column as-is
+
+    // Special handling for elements with 'src' attribute that are not images
+    return contentEls.map(el => {
+      if (el.hasAttribute('src') && el.tagName.toLowerCase() !== 'img') {
+        // Convert to link
+        const a = document.createElement('a');
+        a.href = el.getAttribute('src');
+        a.textContent = el.getAttribute('src');
+        return a;
+      }
+      return el;
+    });
+  }
+
+  // Build rows for the table. The first row is the header, the second is the content (one cell per column)
   const headerRow = ['Columns (columns14)'];
-  // The next row must have as many columns as columns present
-  const bodyRow = columns;
+  const contentRow = columns.map(extractColumnContent);
 
-  // Compose the table cells array
-  const cells = [headerRow, bodyRow];
+  // Create the table and replace the element
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow,
+  ], document);
 
-  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

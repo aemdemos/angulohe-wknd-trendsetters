@@ -1,61 +1,62 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header row: must match example exactly
+  // Header row
   const headerRow = ['Hero (hero39)'];
 
-  // Find direct child grid divs
-  const gridLayout = element.querySelector(':scope > .w-layout-grid');
-  if (!gridLayout) return;
-  const gridDivs = gridLayout.querySelectorAll(':scope > div');
-
-  // Background image row
-  let bgImg = '';
-  if (gridDivs.length > 0) {
-    const img = gridDivs[0].querySelector('img');
-    if (img) bgImg = img;
+  // --- Get background image (img) ---
+  let bgImg = null;
+  // Find the first img inside the block (should be the hero background)
+  const imgs = element.querySelectorAll('img');
+  if (imgs.length > 0) {
+    bgImg = imgs[0];
   }
-  const imageRow = [bgImg];
 
-  // Content row: headline, subheading, CTA
+  // --- Get main content: headings, paragraphs, CTA ---
   let contentCell = [];
-  if (gridDivs.length > 1) {
-    // This grid contains the text and CTA
-    const contentGrid = gridDivs[1];
-    // Find the column that contains text and CTA
-    // Sometimes there's an inner grid
-    let contentParts = [];
-    const innerGrid = contentGrid.querySelector(':scope > .w-layout-grid');
-    if (innerGrid) {
-      // Typical structure: h1, then .flex-vertical
-      const h1 = innerGrid.querySelector('h1');
-      if (h1) contentParts.push(h1);
-      const flex = innerGrid.querySelector('.flex-vertical');
-      if (flex) {
-        // Paragraph (subheading)
-        const p = flex.querySelector('p');
-        if (p) contentParts.push(p);
-        // CTA button in .button-group
-        const btnGroup = flex.querySelector('.button-group');
-        if (btnGroup) {
-          const cta = btnGroup.querySelector('a');
-          if (cta) contentParts.push(cta);
-        }
-      }
-    } else {
-      // Fallback: look for h1, p, and a directly
-      const h1 = contentGrid.querySelector('h1');
-      if (h1) contentParts.push(h1);
-      const p = contentGrid.querySelector('p');
-      if (p) contentParts.push(p);
-      const cta = contentGrid.querySelector('a');
-      if (cta) contentParts.push(cta);
-    }
-    contentCell = contentParts;
+  // Find all content grids inside the block
+  // The grid containing the text is usually the one without an img
+  const grids = element.querySelectorAll('.grid-layout');
+  let textGrid = null;
+  if (grids.length > 1) {
+    textGrid = grids[1];
+  } else if (grids.length === 1) {
+    textGrid = grids[0];
   }
-  const contentRow = [contentCell];
+  // Defensive: only proceed if we have a grid
+  if (textGrid) {
+    // Get heading(s) (h1, h2, etc.)
+    const headings = textGrid.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headings.forEach(h => contentCell.push(h));
+    // Get paragraph(s)
+    const paragraphs = textGrid.querySelectorAll('p');
+    paragraphs.forEach(p => contentCell.push(p));
+    // Get CTA button link(s)
+    // Usually inside .button-group or any <a> that looks like a button
+    const buttonGroups = textGrid.querySelectorAll('.button-group');
+    buttonGroups.forEach(group => {
+      const links = group.querySelectorAll('a');
+      links.forEach(a => contentCell.push(a));
+    });
+    // Also get any direct <a> that may be styled as button but outside button-group
+    const directBtnLinks = textGrid.querySelectorAll('a[class*="button"]:not(.button-group a)');
+    directBtnLinks.forEach(a => {
+      if (!contentCell.includes(a)) contentCell.push(a);
+    });
+  }
 
-  // Assemble table
-  const cells = [headerRow, imageRow, contentRow];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Defensive: if nothing found, table cell must not be empty
+  if (contentCell.length === 0) {
+    // Fallback: add the textGrid itself
+    if (textGrid) contentCell.push(textGrid);
+    else contentCell.push(document.createTextNode(''));
+  }
+
+  // --- Build table ---
+  const cells = [
+    headerRow,
+    [bgImg ? bgImg : ''],
+    [contentCell]
+  ];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

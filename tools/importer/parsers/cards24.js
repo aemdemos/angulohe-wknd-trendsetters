@@ -1,34 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header as per specification
+  // Header row as specified
   const headerRow = ['Cards (cards24)'];
-
-  // Get all card anchor elements
-  const cardLinks = Array.from(element.querySelectorAll(':scope > a.utility-link-content-block'));
-
-  const rows = cardLinks.map((card) => {
-    // IMAGE CELL
-    // Image wrapper is always the first div child of card
-    const imgWrapper = card.querySelector(':scope > div');
-    let image = null;
-    if (imgWrapper) {
-      image = imgWrapper.querySelector('img'); // Reference the actual <img> element
+  const rows = [headerRow];
+  // Collect all cards (each <a> element)
+  const cards = element.querySelectorAll(':scope > a');
+  cards.forEach(card => {
+    // LEFT cell: find the image
+    let img = null;
+    const imgDiv = card.querySelector('.utility-aspect-2x3');
+    if (imgDiv) {
+      img = imgDiv.querySelector('img');
     }
-
-    // TEXT CELL
-    const textCell = document.createElement('div');
-    // Tag and date row (optional, but present in all cards here)
-    const tagRow = card.querySelector('.flex-horizontal');
-    if (tagRow) textCell.appendChild(tagRow);
-    // Title (h3)
-    const title = card.querySelector('h3, .h4-heading');
-    if (title) textCell.appendChild(title);
-    // (No description or CTA in this variant)
-    
-    return [image, textCell];
+    // RIGHT cell: tag, date, heading (no description present)
+    // Tag and date
+    const infoDiv = card.querySelector('.flex-horizontal');
+    const tag = infoDiv ? infoDiv.querySelector('.tag') : null;
+    const date = infoDiv ? infoDiv.querySelector('.paragraph-sm') : null;
+    // Heading
+    const heading = card.querySelector('h3');
+    // Compose right cell
+    const rightCell = document.createElement('div');
+    // Tag/date row
+    if (tag || date) {
+      const tagDateRow = document.createElement('div');
+      if (tag) tagDateRow.appendChild(tag);
+      if (date) {
+        // If tag exists, add a space between
+        if (tag) tagDateRow.appendChild(document.createTextNode(' '));
+        tagDateRow.appendChild(date);
+      }
+      rightCell.appendChild(tagDateRow);
+    }
+    // Heading (always present)
+    if (heading) rightCell.appendChild(heading);
+    rows.push([
+      img ? img : '',
+      rightCell
+    ]);
   });
-
-  const cells = [headerRow, ...rows];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

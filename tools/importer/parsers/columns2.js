@@ -1,34 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get the grid container
-  const grid = element.querySelector('.w-layout-grid');
-  if (!grid) return;
+  // 1. Header row EXACTLY matching the example
+  const headerRow = ['Columns (columns2)'];
 
-  // The three main columns are the first three direct children
-  const cols = Array.from(grid.children).slice(0, 3);
-  if (cols.length < 3) return;
+  // 2. Find the grid layout for columns (should be the main multi-column group)
+  const mainContainer = element.querySelector('.container');
+  const gridLayout = mainContainer && mainContainer.querySelector('.grid-layout');
 
-  // Column 1: the main feature block (left)
-  const col1 = cols[0];
+  // Edge case: If missing structure, fallback gracefully to empty columns (maintain 3 columns for layout)
+  if (!gridLayout) {
+    const emptyRow = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+    const table = WebImporter.DOMUtils.createTable([
+      headerRow,
+      emptyRow
+    ], document);
+    element.replaceWith(table);
+    return;
+  }
 
-  // Column 2: contains two blocks (each an <a>), wrap all <a> in a fragment
-  const col2 = document.createDocumentFragment();
-  Array.from(cols[1].children).forEach(child => {
-    if (child.tagName === 'A') col2.appendChild(child);
+  // 3. Extract left/main column (first child is the main big feature block)
+  const gridChildren = Array.from(gridLayout.children);
+  let leftColBlock = null, middleColBlock = null, rightColBlock = null;
+
+  // The first grid child is the big feature left column
+  leftColBlock = gridChildren[0];
+
+  // The second grid child is a flex containing multiple stacked image+text cards for middle column
+  // Find all <a> blocks inside it
+  middleColBlock = gridChildren[1];
+  const middleColBlocks = Array.from(middleColBlock.querySelectorAll('a.utility-link-content-block'));
+  // We want to reference them directly in a vertical container
+  const middleDiv = document.createElement('div');
+  middleColBlocks.forEach(block => {
+    middleDiv.appendChild(block);
   });
 
-  // Column 3: contains multiple <a> blocks, wrap all <a> in a fragment
-  const col3 = document.createDocumentFragment();
-  Array.from(cols[2].children).forEach(child => {
-    if (child.tagName === 'A') col3.appendChild(child);
+  // The third grid child is a flex containing only text blocks and dividers for right column
+  rightColBlock = gridChildren[2];
+  // Keep original children structure (text blocks & dividers)
+  const rightDiv = document.createElement('div');
+  Array.from(rightColBlock.children).forEach(child => {
+    rightDiv.appendChild(child);
   });
 
-  // Table header is a single column, content row has three columns
-  const cells = [
-    ['Columns (columns2)'],
-    [col1, col2, col3],
-  ];
+  // 4. Compose final table rows (always 3 columns as in the example)
+  const contentRow = [leftColBlock, middleDiv, rightDiv];
 
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // 5. Create table and replace element
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
+  element.replaceWith(table);
 }

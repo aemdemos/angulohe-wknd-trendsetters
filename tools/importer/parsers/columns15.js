@@ -1,62 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid-layout for the columns
-  const grid = element.querySelector('.w-layout-grid.grid-layout');
+  // Find the main grid container for the columns block
+  const container = element.querySelector('.container');
+  if (!container) return;
+  const grid = container.querySelector('.w-layout-grid');
   if (!grid) return;
 
-  // Get all direct children of the grid layout (should be at least 2)
-  const gridChildren = Array.from(grid.children);
-  if (gridChildren.length < 2) return;
+  // Get all direct children of the grid (columns)
+  const columns = Array.from(grid.children);
 
-  // Prepare left and right column cells
-  // Reference actual elements from DOM, not clones
-  const leftCol = gridChildren[0];
-  const rightCol = gridChildren[1];
-
-  // Left cell: get all childNodes, including text and elements, preserving order
-  const leftCellContent = [];
-  leftCol.childNodes.forEach(node => {
-    // Only include non-empty text nodes or elements
-    if (node.nodeType === Node.TEXT_NODE) {
-      if (node.textContent.trim()) {
-        leftCellContent.push(document.createTextNode(node.textContent));
-      }
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      leftCellContent.push(node);
+  // For each column, preserve all structure and text content
+  const colCells = columns.map(col => {
+    // For image columns, just reference the image element
+    if (col.tagName.toLowerCase() === 'img') {
+      return col;
     }
+    // For non-image columns, wrap all contents in a div to preserve semantic meaning
+    // Ensure that all text nodes are included (not just elements)
+    const wrapper = document.createElement('div');
+    // Move everything (children & text nodes) to the wrapper
+    while (col.childNodes.length) {
+      wrapper.appendChild(col.childNodes[0]);
+    }
+    return wrapper;
   });
 
-  // Right cell: for image or content
-  let rightCellContent = [];
-  if (rightCol.tagName && rightCol.tagName.toLowerCase() === 'img') {
-    rightCellContent = [rightCol];
-  } else {
-    // Like left, take all childNodes
-    rightCol.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        if (node.textContent.trim()) {
-          rightCellContent.push(document.createTextNode(node.textContent));
-        }
-      } else if (node.nodeType === Node.ELEMENT_NODE) {
-        rightCellContent.push(node);
-      }
-    });
-  }
-
-  // Build table rows: header, then row of columns
-  const rows = [];
-  rows.push(['Columns (columns15)']); // Header row, exactly
-  rows.push([leftCellContent, rightCellContent]);
-
-  // Create the block table
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-
-  // Set header colspan for correct rendering
-  const th = table.querySelector('th');
-  if (th && rows[1].length > 1) {
-    th.setAttribute('colspan', rows[1].length);
-  }
-
-  // Replace original element with the table
+  // Build the table
+  const headerRow = ['Columns (columns15)'];
+  const cells = [headerRow, colCells];
+  
+  // Create the block table and replace the element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

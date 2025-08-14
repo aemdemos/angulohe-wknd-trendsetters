@@ -2682,7 +2682,6 @@
   }
 }
 
-/* Left column - make it much wider for improved headline wrapping */
 .columns.columns36 > div > div:first-child {
   flex: 0 0 520px;
   min-width: 420px;
@@ -2700,7 +2699,6 @@
   }
 }
 
-/* Headline: allow for more natural line breaks */
 .columns.columns36 h1 {
   font-family: var(--heading-font-family);
   font-size: 64px;
@@ -2723,7 +2721,6 @@
   }
 }
 
-/* Paragraph and button spacing */
 .columns.columns36 > div > div:first-child p {
   font-family: var(--body-font-family);
   font-size: 16px;
@@ -2761,7 +2758,6 @@
   color: #595959;
 }
 
-/* Image card row */
 .columns.columns36 .columns-img-col > p {
   display: flex;
   flex-direction: row;
@@ -2787,7 +2783,6 @@
   padding-top: 0;
 }
 
-/* Image cards */
 .columns.columns36 .columns-img-col picture {
   display: block;
   width: 220px;
@@ -2825,5 +2820,77 @@
   .columns.columns36 .columns-img-col picture {
     width: 250px;
     height: 340px;
+  }
+}
+
+
+.columns.columns38 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Make all columns visually balanced and side images nearly match the center */
+.columns.columns38 .columns-img-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 0;
+  height: 380px;
+}
+
+/* Side images: almost as wide as the center image */
+.columns.columns38 .columns-img-col:nth-child(1),
+.columns.columns38 .columns-img-col:nth-child(3) {
+  flex-basis: 34vw;
+  max-width: 550px;
+}
+
+/* Center image: slightly wider */
+.columns.columns38 .columns-img-col:nth-child(2) {
+  flex-basis: 36vw;
+  max-width: 600px;
+}
+
+.columns.columns38 .columns-img-col picture,
+.columns.columns38 .columns-img-col img {
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  display: block;
+  object-fit: cover;
+  max-height: 380px;
+}
+
+/* Responsive: stack vertically and maximize width on small screens */
+@media (width <= 900px) {
+  .columns.columns38 > div {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .columns.columns38 .columns-img-col,
+  .columns.columns38 .columns-img-col:nth-child(1),
+  .columns.columns38 .columns-img-col:nth-child(2),
+  .columns.columns38 .columns-img-col:nth-child(3) {
+    flex: 0 1 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .columns.columns38 .columns-img-col picture,
+  .columns.columns38 .columns-img-col img {
+    max-height: none;
+    height: auto;
+    border-radius: 24px;
   }
 }

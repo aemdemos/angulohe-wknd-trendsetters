@@ -34,130 +34,6 @@
 }
 
 
-.columns.columns3 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8vw;
-  padding: 56px 0;
-}
-
-.columns.columns3 > div {
-  display: contents;
-}
-
-.columns.columns3 > div > div:first-child {
-  max-width: 540px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.columns.columns3 > div > div:first-child > div {
-  margin: 0;
-  padding: 0;
-}
-
-.columns.columns3 h2 {
-  font-family: Syncopate, 'Syncopate Fallback', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: #000;
-  margin-top: 0;
-  margin-bottom: 20px;
-  line-height: 1.1;
-}
-
-.columns.columns3 h2 + p {
-  color: #434343;
-  font-size: 1rem;
-  font-family: var(--body-font-family);
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 1.4;
-  max-width: 36em;
-}
-
-.columns.columns3 > div > div:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  min-width: 240px;
-  margin-top: 0;
-  padding-top: 0;
-  position: relative;
-  top: -4px;
-}
-
-.columns.columns3 > div > div:last-child > p {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-}
-
-.columns.columns3 > div > div:last-child a {
-  display: block;
-  width: 220px;
-  height: 38px;
-  line-height: 38px;
-  text-align: center;
-  border: 1px solid #000;
-  border-radius: 999px;
-  background: #fff;
-  color: #000;
-  font-family: var(--body-font-family);
-  font-size: 1rem;
-  font-weight: 400;
-  text-decoration: none;
-  box-sizing: border-box;
-  position: relative;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-  margin: 0;
-  outline: none;
-  padding: 0;
-  vertical-align: top;
-}
-
-.columns.columns3 > div > div:last-child a:first-child {
-  box-shadow: 0 2px 0 0 #e6e656 inset;
-}
-
-.columns.columns3 > div > div:last-child a:hover,
-.columns.columns3 > div > div:last-child a:focus {
-  background: #f4f4f4;
-  color: #000;
-  text-decoration: none;
-  border-color: #131313;
-}
-
-@media (width <= 800px) {
-  .columns.columns3 {
-    flex-direction: column;
-    gap: 40px;
-    padding: 40px 0;
-  }
-
-  .columns.columns3 > div > div:last-child {
-    align-items: flex-start;
-    top: 0;
-  }
-
-  .columns.columns3 > div > div:last-child a {
-    width: 100%;
-    min-width: 0;
-    max-width: 300px;
-  }
-}
-
-
 .columns.columns4 {
   background: #f6f7f3;
   padding: 48px 0;
@@ -1983,8 +1859,6 @@
   text-decoration: none;
 }
 
-
-/* Main columns layout: top-aligned, more outer padding for visual air */
 .columns.columns2 > div {
   display: flex;
   flex-direction: row;
@@ -2012,7 +1886,6 @@
   }
 }
 
-/* --- LEFT COLUMN: Hero image + text --- */
 .columns.columns2 > div > .columns-img-col:first-child {
   display: flex;
   flex-direction: column;
@@ -2031,7 +1904,6 @@
   }
 }
 
-/* Hero image: aspect ratio, rounded, shadow, tighter below */
 .columns.columns2 > div > .columns-img-col:first-child picture,
 .columns.columns2 > div > .columns-img-col:first-child img {
   width: 100%;
@@ -2043,7 +1915,6 @@
   background: none;
 }
 
-/* Hero text block */
 .columns.columns2 > div > .columns-img-col:first-child p {
   margin: 0;
   padding: 0;
@@ -2055,7 +1926,6 @@
   align-items: flex-start;
 }
 
-/* Headline and supporting text */
 .columns.columns2 > div > .columns-img-col:first-child a {
   font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
   font-weight: 700;
@@ -2080,7 +1950,6 @@
   }
 }
 
-/* --- MIDDLE COLUMN: Cards --- */
 .columns.columns2 > div > .columns-img-col:nth-child(2) {
   display: flex;
   flex-direction: column;
@@ -2094,7 +1963,6 @@
   padding: 0;
 }
 
-/* Each card: white, larger rounded container and more padding */
 .columns.columns2 > div > .columns-img-col:nth-child(2) p {
   margin: 0;
   padding: 32px 28px 28px;
@@ -2107,7 +1975,6 @@
   gap: 18px;
 }
 
-/* Card image: less side margin, more width */
 .columns.columns2 > div > .columns-img-col:nth-child(2) picture,
 .columns.columns2 > div > .columns-img-col:nth-child(2) img {
   width: 100%;
@@ -2119,7 +1986,6 @@
   background: none;
 }
 
-/* Card headline */
 .columns.columns2 > div > .columns-img-col:nth-child(2) a {
   font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
   font-size: 1.09rem;
@@ -2137,7 +2003,6 @@
   width: 100%;
 }
 
-/* Card subtext (if present as a second <a> after the image) */
 .columns.columns2 > div > .columns-img-col:nth-child(2) a + a {
   font-size: 0.97rem;
   font-weight: 400;
@@ -2147,7 +2012,6 @@
   line-height: 1.4;
 }
 
-/* --- RIGHT COLUMN: Vertical list --- */
 .columns.columns2 > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
@@ -2161,7 +2025,6 @@
   box-shadow: none;
 }
 
-/* List stacking */
 .columns.columns2 > div > div:not(.columns-img-col) p {
   display: flex;
   flex-direction: column;
@@ -2170,7 +2033,6 @@
   padding: 0;
 }
 
-/* List item styling: more vertical padding for breathing room */
 .columns.columns2 > div > div:not(.columns-img-col) a {
   display: block;
   font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
@@ -2196,7 +2058,6 @@
   padding-bottom: 0;
 }
 
-/* --- Responsive tweaks --- */
 @media (width <= 1100px) {
   .columns.columns2 > div {
     gap: 32px;
@@ -2216,7 +2077,6 @@
   }
 }
 
-/* Remove unwanted padding/margin/background for nested columns */
 .columns.columns2 > div > .columns-img-col,
 .columns.columns2 > div > div:not(.columns-img-col) {
   margin: 0;
@@ -2225,9 +2085,155 @@
   box-shadow: none;
 }
 
-/* Ensure no unwanted margin or background on innermost <p> */
 .columns.columns2 p {
   margin: 0;
   background: none;
   box-shadow: none;
+}
+
+
+.columns.columns3 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* let child columns fill vertical space for true centering */
+  justify-content: space-between;
+  gap: 7vw;
+  background: #fff;
+  padding: 56px 0;
+  width: 100%;
+}
+
+/* The direct child of .columns3 is the row holding two columns side by side */
+.columns.columns3 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  gap: 7vw;
+}
+
+/* LEFT COLUMN: Heading + paragraph */
+.columns.columns3 > div > div:first-child {
+  flex: 1 1 0;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove extra vertical space below the heading */
+.columns.columns3 h2 {
+  font-family: var(--heading-font-family);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  color: #000;
+  margin: 0 0 8px;
+  line-height: 1.08;
+}
+
+.columns.columns3 h2 + p {
+  color: #434343;
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.42;
+  max-width: 38em;
+}
+
+/* RIGHT COLUMN: perfectly vertically center the button block by auto top/bottom margins */
+.columns.columns3 > div > div:nth-child(2) {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0;
+  position: relative;
+  gap: 0;
+}
+
+/* Buttons vertical stack and tight gap */
+.columns.columns3 > div > div:nth-child(2) > p {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+
+/* Pill Button Styling */
+.columns.columns3 > div > div:nth-child(2) a {
+  display: block;
+  width: 230px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  margin: 0;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  outline: none;
+  padding: 0;
+  vertical-align: top;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Dual border effect for first button: black border + yellow outline */
+.columns.columns3 > div > div:nth-child(2) a:first-child {
+  border: 1px solid #000;
+  outline: 1.5px solid #f7ffb2;
+  outline-offset: 2px;
+}
+
+.columns.columns3 > div > div:nth-child(2) a:hover,
+.columns.columns3 > div > div:nth-child(2) a:focus {
+  background: #f4f4f4;
+  color: #000;
+  border-color: #131313;
+  text-decoration: none;
+}
+
+/* Responsiveness: stack columns vertically at <900px */
+@media (width <= 900px) {
+  .columns.columns3 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 36px;
+    padding: 40px 0;
+  }
+
+  .columns.columns3 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 36px;
+  }
+
+  .columns.columns3 > div > div:nth-child(2) {
+    align-items: flex-start;
+    min-width: 0;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .columns.columns3 > div > div:nth-child(2) a {
+    width: 100%;
+    max-width: 320px;
+  }
 }

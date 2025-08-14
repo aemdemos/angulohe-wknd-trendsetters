@@ -1,4 +1,3 @@
-/* stylelint-disable no-descending-specificity */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -42,90 +41,6 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-}
-
-.cards.cards17 > ul {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: #fff;
-  width: 100%;
-  place-items: stretch stretch;
-}
-
-.cards.cards17 > ul > li {
-  background: #fff;
-  border: none;
-  border-radius: 24px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  box-shadow: none;
-  min-width: 0;
-  min-height: 0;
-  aspect-ratio: 4/3;
-}
-
-.cards.cards17 .cards-card-image {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: stretch;
-  width: 100%;
-  height: 100%;
-  flex: 1 1 auto;
-  overflow: hidden;
-  background: #fff;
-}
-
-.cards.cards17 .cards-card-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 24px;
-}
-
-.cards.cards17 .cards-card-body {
-  display: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media (width <= 900px) {
-  .cards.cards17 > ul {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  .cards.cards17 > ul > li {
-    border-radius: 20px;
-    aspect-ratio: 4/3;
-  }
-
-  .cards.cards17 .cards-card-image img {
-    border-radius: 20px;
-  }
-}
-
-@media (width <= 600px) {
-  .cards.cards17 > ul {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .cards.cards17 > ul > li {
-    border-radius: 16px;
-    aspect-ratio: 4/3;
-  }
-
-  .cards.cards17 .cards-card-image img {
-    border-radius: 16px;
-  }
 }
 
 .cards > ul > li::before {
@@ -1308,8 +1223,6 @@
     grid-template-columns: 1fr;
   }
 }
-
-/* Card: distribute space evenly so image and body are visually connected */
 .cards.cards10 > ul > li {
   background: #fff;
   border: 1px solid #D3D3D3;
@@ -1325,13 +1238,9 @@
   min-height: 320px;
   height: auto;
 }
-
-/* Remove unwanted decorative badge */
 .cards.cards10 > ul > li::before {
   display: none;
 }
-
-/* Image block: aspect-ratio for width, fill top, no vertical space below */
 .cards.cards10 .cards-card-image {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -1352,8 +1261,6 @@
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
 }
-
-/* Card body: stack content tightly, reduce top padding to bring text closer to image */
 .cards.cards10 .cards-card-body {
   background: #fff;
   padding: 4px 16px 14px;
@@ -1403,4 +1310,99 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   margin-bottom: 0;
+}
+
+
+.cards.cards17 {
+  background: #fff;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+.cards.cards17 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  justify-items: center;
+  align-items: start;
+}
+
+.cards.cards17 > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.cards.cards17 .cards-card-image {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.cards.cards17 .cards-card-image picture,
+.cards.cards17 .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cards.cards17 .cards-card-image img {
+  object-fit: cover;
+  border-radius: 18px;
+  background: #f0f0f0;
+}
+
+.cards.cards17 .cards-card-body {
+  display: none;
+}
+
+.cards.cards17 > ul > li::before {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .cards.cards17 > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 600px;
+  }
+  .cards.cards17 > ul > li,
+  .cards.cards17 .cards-card-image img {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards.cards17 > ul {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 100%;
+  }
+  .cards.cards17 > ul > li,
+  .cards.cards17 .cards-card-image img {
+    border-radius: 8px;
+  }
 }

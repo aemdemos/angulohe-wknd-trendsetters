@@ -1,54 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Compose header row as per spec
+  // Table header from the example (must match exactly)
   const headerRow = ['Cards (cards10)'];
+
+  // Get all direct card links
+  const cardEls = Array.from(element.querySelectorAll(':scope > a.card-link'));
   const rows = [headerRow];
 
-  // Each card is a top-level <a>
-  const cards = Array.from(element.querySelectorAll(':scope > a'));
-
-  cards.forEach(card => {
-    // -------- IMAGE CELL --------
-    // Find image (usually inside the first child div)
-    let img = null;
-    // Look for the first <img> tag within this card
-    const firstDiv = card.querySelector('div');
-    if (firstDiv) img = firstDiv.querySelector('img');
-    // Only continue if we found an image
-    if (!img) return;
-
-    // -------- TEXT CELL --------
-    // Find the main content container
-    const txtDiv = card.querySelector('.utility-padding-all-1rem');
-    let textCell = [];
-    if (txtDiv) {
-      // Optional tag
-      const tag = txtDiv.querySelector('.tag');
-      if (tag && tag.textContent.trim()) {
-        // Represent tag as a label on top, as in the screenshot
-        const tagWrap = document.createElement('div');
-        tagWrap.append(tag);
-        textCell.push(tagWrap);
+  cardEls.forEach(card => {
+    // Get card image (always first .utility-aspect-3x2 img)
+    const imgContainer = card.querySelector('.utility-aspect-3x2');
+    const img = imgContainer ? imgContainer.querySelector('img') : null;
+    
+    // Find the content block
+    const contentDiv = card.querySelector('.utility-padding-all-1rem');
+    let textContent = [];
+    if (contentDiv) {
+      // Tag (if present)
+      const tag = contentDiv.querySelector('.tag-group .tag');
+      if (tag) {
+        // Use the original element
+        const tagDiv = document.createElement('div');
+        tagDiv.appendChild(tag);
+        textContent.push(tagDiv);
       }
-      // Heading (h3 or .h4-heading)
-      const heading = txtDiv.querySelector('h3, .h4-heading');
+      // Heading (if present)
+      const heading = contentDiv.querySelector('h3, .h4-heading');
       if (heading) {
-        textCell.push(heading);
+        textContent.push(heading);
       }
-      // Description paragraph
-      const para = txtDiv.querySelector('p');
+      // Description (if present)
+      const para = contentDiv.querySelector('p');
       if (para) {
-        textCell.push(para);
+        textContent.push(para);
       }
     }
-    // Push row only if both image and text content present
-    if (img && textCell.length > 0) {
-      rows.push([img, textCell]);
-    }
+    // Add the row, using null if the image or text is missing
+    rows.push([
+      img || '',
+      textContent.length > 0 ? textContent : ''
+    ]);
   });
 
-  // Create the table block
+  // Build and replace the block table
   const table = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace the original element with the created block table
   element.replaceWith(table);
 }

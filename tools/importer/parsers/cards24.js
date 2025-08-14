@@ -1,45 +1,30 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row as specified
+  // Table header exactly as required
   const headerRow = ['Cards (cards24)'];
-  const rows = [headerRow];
-  // Collect all cards (each <a> element)
-  const cards = element.querySelectorAll(':scope > a');
+  const rows = [];
+  // Each card is a direct child 'a.utility-link-content-block'
+  const cards = element.querySelectorAll(':scope > a.utility-link-content-block');
   cards.forEach(card => {
-    // LEFT cell: find the image
-    let img = null;
-    const imgDiv = card.querySelector('.utility-aspect-2x3');
-    if (imgDiv) {
-      img = imgDiv.querySelector('img');
+    // Image in first column
+    const imageContainer = card.querySelector(':scope > div');
+    let imgEl = null;
+    if (imageContainer) {
+      const img = imageContainer.querySelector('img');
+      if (img) imgEl = img;
     }
-    // RIGHT cell: tag, date, heading (no description present)
-    // Tag and date
-    const infoDiv = card.querySelector('.flex-horizontal');
-    const tag = infoDiv ? infoDiv.querySelector('.tag') : null;
-    const date = infoDiv ? infoDiv.querySelector('.paragraph-sm') : null;
+    // Second column: text content
+    const cellContent = [];
+    // Tag and date row
+    const tagRow = card.querySelector(':scope > div.flex-horizontal');
+    if (tagRow) cellContent.push(tagRow);
     // Heading
-    const heading = card.querySelector('h3');
-    // Compose right cell
-    const rightCell = document.createElement('div');
-    // Tag/date row
-    if (tag || date) {
-      const tagDateRow = document.createElement('div');
-      if (tag) tagDateRow.appendChild(tag);
-      if (date) {
-        // If tag exists, add a space between
-        if (tag) tagDateRow.appendChild(document.createTextNode(' '));
-        tagDateRow.appendChild(date);
-      }
-      rightCell.appendChild(tagDateRow);
-    }
-    // Heading (always present)
-    if (heading) rightCell.appendChild(heading);
-    rows.push([
-      img ? img : '',
-      rightCell
-    ]);
+    const heading = card.querySelector(':scope > h3');
+    if (heading) cellContent.push(heading);
+    // All text in these cards is within tags above, so nothing missed
+    rows.push([imgEl, cellContent]);
   });
-  // Create block table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  const tableArray = [headerRow, ...rows];
+  const table = WebImporter.DOMUtils.createTable(tableArray, document);
+  element.replaceWith(table);
 }

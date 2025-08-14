@@ -1,52 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Get the main content grids
-  const mainGrid = element.querySelector('.grid-layout.tablet-1-column.grid-gap-lg');
-  const lowerGrid = element.querySelector('.grid-layout.mobile-portrait-1-column.grid-gap-md');
-
-  // 2. Get each main column (these are the top row columns in the block)
-  const mainCols = mainGrid ? Array.from(mainGrid.children) : [];
-  const leftCol = mainCols[0];
-  const rightCol = mainCols[1];
-
-  // 3. Left column content: eyebrow and heading
-  let leftCell = [];
-  if (leftCol) {
-    const eyebrow = leftCol.querySelector('.eyebrow');
-    const heading = leftCol.querySelector('h1, h2, h3, h4, h5, h6');
-    if (eyebrow) leftCell.push(eyebrow);
-    if (heading) leftCell.push(heading);
+  // Get the main grid for textual content
+  const mainGrid = element.querySelector('.grid-layout.tablet-1-column');
+  let leftCol = [];
+  if (mainGrid) {
+    const headlineSection = mainGrid.children[0];
+    const contentSection = mainGrid.children[1];
+    if (headlineSection) leftCol.push(headlineSection);
+    if (contentSection) leftCol.push(contentSection);
   }
 
-  // 4. Right column content: rich paragraph, author, button
-  let rightCell = [];
-  if (rightCol) {
-    const richtext = rightCol.querySelector('.rich-text');
-    if (richtext) rightCell.push(richtext);
-    const author = rightCol.querySelector('.flex-horizontal.y-center.flex-gap-xs');
-    if (author) rightCell.push(author);
-    const button = rightCol.querySelector('.button');
-    if (button) rightCell.push(button);
+  // Get the image grid for visual content
+  const imageGrid = element.querySelector('.w-layout-grid.grid-layout.mobile-portrait-1-column');
+  let rightCol = [];
+  if (imageGrid) {
+    const imgs = imageGrid.querySelectorAll('img');
+    imgs.forEach(img => {
+      rightCol.push(img);
+    });
   }
 
-  // 5. Lower grid: two images for the next row
-  let imgCell1 = null;
-  let imgCell2 = null;
-  if (lowerGrid) {
-    const imgDivs = Array.from(lowerGrid.children);
-    imgCell1 = imgDivs[0] ? imgDivs[0].querySelector('img') : null;
-    imgCell2 = imgDivs[1] ? imgDivs[1].querySelector('img') : null;
-  }
-
-  // 6. Compose all rows for the block table
-  // FIX: header row must be a single-element array so createTable renders only one <th> spanning all columns
+  // Correct: header row is a single column
   const cells = [
-    ['Columns (columns11)'], // header row, single cell
-    [leftCell, rightCell],   // first row: two columns
-    [imgCell1, imgCell2]     // second row: two columns (images)
+    ['Columns (columns11)'],
+    [leftCol, rightCol]
   ];
 
-  // 7. Create and replace
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // To ensure header row is a single cell with colspan, create table and manually set colspan if necessary
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Find the header row (first tr) and set the th's colspan
+  const headerTr = table.querySelector('tr:first-child');
+  if (headerTr && headerTr.children.length === 1 && cells[1].length > 1) {
+    headerTr.children[0].setAttribute('colspan', cells[1].length);
+  }
+
+  element.replaceWith(table);
 }

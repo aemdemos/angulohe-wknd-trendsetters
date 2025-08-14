@@ -1,29 +1,39 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block table should have a single-cell header row, and the next row with N columns
+  // Find the grid container
+  const grid = element.querySelector('.w-layout-grid');
+  if (!grid) return;
+
+  // Get direct children of the grid as columns
+  const columns = Array.from(grid.children);
+  if (!columns.length) return;
+
+  // Create header row: exactly one cell, with header text
   const headerRow = ['Columns (columns35)'];
 
-  // Find the grid-layout container holding the columns
-  const grid = element.querySelector('.grid-layout');
-  let columnCells = [];
-  if (grid) {
-    // Each direct child of .grid-layout is a column
-    columnCells = Array.from(grid.children);
-    // If for some reason there are no columns, fallback to using grid as a single cell
-    if (columnCells.length === 0) {
-      columnCells = [grid];
+  // For each "column", collect all its direct children as a group (to preserve grouping)
+  const contentRow = columns.map(col => {
+    // If only one child, use it as is; if multiple, group into a fragment
+    const colChildren = Array.from(col.childNodes).filter(node => {
+      // Skip empty text nodes
+      return !(node.nodeType === Node.TEXT_NODE && !node.textContent.trim());
+    });
+    if (colChildren.length === 1) {
+      return colChildren[0];
+    } else {
+      // Group multiple children into a div (preserves structure)
+      const wrapper = document.createElement('div');
+      colChildren.forEach(child => wrapper.appendChild(child));
+      return wrapper;
     }
-  } else {
-    // fallback: treat everything as single column
-    columnCells = [element];
-  }
+  });
 
-  // The cells array: header is a single cell, content row is as many columns as needed
-  const cells = [headerRow, columnCells];
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
 
-  // Create the table block
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element with the table block
-  element.replaceWith(block);
+  // Replace the original element
+  element.replaceWith(table);
 }

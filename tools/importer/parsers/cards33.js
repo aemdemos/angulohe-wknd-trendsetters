@@ -1,56 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header should match exactly
+  // Table: header first row, then one row per card (2 columns: image, content)
   const headerRow = ['Cards (cards33)'];
   const rows = [headerRow];
 
-  // Select each card as a direct child anchor
+  // Get all top-level cards
   const cards = element.querySelectorAll(':scope > a');
-
   cards.forEach(card => {
-    // Find the image (first img in anchor)
+    // Image cell: first img inside card (should always exist)
     const img = card.querySelector('img');
-
-    // Find the content container (the first div after image inside grid)
-    // Usually: <div class="w-layout-grid ..."><img ...><div>[content]</div></div>
-    let grid = card.querySelector('div.w-layout-grid');
-    let contentDiv = null;
-    if (grid) {
-      // Find the div child (content) that is NOT the image
-      const divs = Array.from(grid.children).filter(c => c.tagName === 'DIV');
-      if (divs.length > 0) contentDiv = divs[0];
+    // Text cell: find the main content div (ignore the nested grid's image)
+    // Structure: a > div (grid) > [img, div (content)]
+    let contentCell = null;
+    const gridDiv = card.querySelector('div');
+    if (gridDiv) {
+      // Find all children of gridDiv that are divs (not img)
+      const possibleContentDivs = Array.from(gridDiv.children).filter(child => child.tagName === 'DIV');
+      if (possibleContentDivs.length > 0) {
+        contentCell = possibleContentDivs[0];
+      } else {
+        // fallback: if not found, use gridDiv (should not happen in provided html)
+        contentCell = gridDiv;
+      }
+    } else {
+      // fallback: use card itself
+      contentCell = card;
     }
-    // Fallback: first div after img
-    if (!contentDiv && img) {
-      let next = img.nextElementSibling;
-      while (next && next.tagName !== 'DIV') next = next.nextElementSibling;
-      contentDiv = next;
-    }
-    // Fallback: last div in anchor
-    if (!contentDiv) {
-      const divs = card.querySelectorAll('div');
-      if (divs.length > 0) contentDiv = divs[divs.length - 1];
-    }
-    // Defensive: if not found, use anchor itself
-    if (!contentDiv) contentDiv = card;
-
-    // Remove trailing 'Read' if it is a plain div (not a link)
-    // Find last child div that just says 'Read'
-    if (contentDiv && contentDiv.lastElementChild &&
-        contentDiv.lastElementChild.tagName === 'DIV' &&
-        contentDiv.lastElementChild.textContent.trim() === 'Read') {
-      contentDiv.removeChild(contentDiv.lastElementChild);
-    }
-
-    // Remove heading class for clarity
-    let heading = contentDiv.querySelector('h3');
-    if (heading) heading.removeAttribute('class');
-
-    // Compose the row: image (element reference as-is), contentDiv (contains heading, meta, description)
-    rows.push([img, contentDiv]);
+    rows.push([img, contentCell]);
   });
 
-  // Create table
+  // Create and replace
   const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }

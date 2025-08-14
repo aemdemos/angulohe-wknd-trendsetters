@@ -1,29 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main grid layout inside the section
-  const grid = element.querySelector('.w-layout-grid');
-  if (!grid) return;
-  // Find its immediate children for the columns
-  const children = Array.from(grid.children);
-  // There should be one content column (div) and one image column (img)
-  // First column: the div (content)
-  const contentCol = children.find(el => el.tagName === 'DIV');
-  // Second column: the image
-  const imageCol = children.find(el => el.tagName === 'IMG');
-
-  // Defensive: if one missing, fallback to empty
-  const contentCell = contentCol ? Array.from(contentCol.childNodes) : '';
-  const imageCell = imageCol || '';
-
-  // Prepare table rows
+  // Block name header, exactly matching the example
   const headerRow = ['Columns (columns27)'];
-  const row = [contentCell, imageCell];
-  // Create the table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    row
-  ], document);
 
-  // Replace the original section with the new block table
+  // Find the grid block inside the section
+  const grid = element.querySelector('.grid-layout');
+  let columns = [];
+
+  if (grid) {
+    // Get all direct children of the grid
+    const gridChildren = Array.from(grid.children);
+    // For this HTML, first column is the text content div, second is the image
+    if (gridChildren.length >= 2) {
+      // Column 1: entire left content block
+      columns.push(gridChildren[0]);
+      // Column 2: entire right image block (the <img> itself)
+      columns.push(gridChildren[1]);
+    } else {
+      // Unlikely fallback, but be robust: all children as columns
+      columns = gridChildren;
+    }
+  } else {
+    // Fallback: all direct children of element as columns
+    columns = Array.from(element.children);
+  }
+
+  // Build table: first row is header, second is the columns
+  const table = WebImporter.DOMUtils.createTable([headerRow, columns], document);
+  // Replace the element with the new block table
   element.replaceWith(table);
 }

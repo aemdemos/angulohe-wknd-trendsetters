@@ -1,48 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header exactly matches the example
+  // Prepare header row as in the example
   const headerRow = ['Cards (cards23)'];
   const cells = [headerRow];
 
-  // Find all .w-tab-pane children in order (each tab)
+  // Collect all cards from all tab panes
   const tabPanes = element.querySelectorAll('.w-tab-pane');
-  tabPanes.forEach(tabPane => {
-    // Find the grid containing all cards
+  tabPanes.forEach((tabPane) => {
+    // Find card containers (direct <a> children of the grid)
     const grid = tabPane.querySelector('.w-layout-grid');
     if (!grid) return;
-    // Each card is an <a>
-    const links = grid.querySelectorAll('a');
-    links.forEach(link => {
-      // Column 1: image (mandatory if exists)
-      let imageElem = null;
-      // Some cards are structured differently, so find image if present
-      const imgContainer = link.querySelector('.utility-aspect-3x2');
+    const cards = grid.querySelectorAll(':scope > a');
+    cards.forEach((card) => {
+      // --- COLUMN 1: Image ---
+      // Find an image inside the card, if present
+      let img = null;
+      // Most cards: image inside a div with 'aspect' in class
+      const imgContainer = card.querySelector('div[class*=aspect-3x2], div[class*=aspect]');
       if (imgContainer) {
-        imageElem = imgContainer.querySelector('img');
+        img = imgContainer.querySelector('img');
+      } else {
+        // Fallback: look for img directly
+        img = card.querySelector('img');
       }
-      // Column 2: title (h3) and description (paragraph-sm)
-      // Cards may have text in a wrapper or directly on the anchor
-      let textContainer = link.querySelector('.utility-text-align-center');
-      if (!textContainer) {
-        textContainer = link;
-      }
-      // Heading (optional)
-      const heading = textContainer.querySelector('h3');
-      // Description (optional)
-      const paragraph = textContainer.querySelector('.paragraph-sm');
-      // Compose text cell: heading (if exists) above description (if exists)
-      const textCellItems = [];
-      if (heading) textCellItems.push(heading);
-      if (paragraph) textCellItems.push(paragraph);
-      // Push the card row: image in first cell, text content in second cell
+      // --- COLUMN 2: Text ---
+      const textCellContent = [];
+      // Heading (h3)
+      const h3 = card.querySelector('h3');
+      if (h3) textCellContent.push(h3);
+      // Paragraph (description)
+      const para = card.querySelector('.paragraph-sm');
+      if (para) textCellContent.push(para);
+      // Add only if at least one field exists, otherwise empty string
       cells.push([
-        imageElem ? imageElem : '',
-        textCellItems.length ? textCellItems : ''
+        img || '',
+        textCellContent.length ? textCellContent : ''
       ]);
     });
   });
 
-  // Construct the table block
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Finalize table and replace element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

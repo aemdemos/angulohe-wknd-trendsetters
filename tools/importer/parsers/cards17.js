@@ -1,20 +1,24 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Cards (cards17) block: 2 columns: [Image | Text]
-  // The provided HTML only has images, no accompanying text per card.
-  // Table header must be exactly: 'Cards (cards17)'
-  // Each row: [image, empty cell]
-
+  // Header row for the block
   const headerRow = ['Cards (cards17)'];
-  // Get direct child divs (each with an image)
+
+  // Each immediate child div is a card that contains a single img
   const cardDivs = element.querySelectorAll(':scope > div');
-  const rows = Array.from(cardDivs).map((cardDiv) => {
-    const img = cardDiv.querySelector('img');
-    // If there is no img, handle with an empty string
-    return [img || '', ''];
+
+  // For each card div, extract the img
+  // This HTML contains only images, no text, so second cell is left blank (required by block schema)
+  const rows = Array.from(cardDivs).map(div => {
+    const img = div.querySelector('img');
+    return [img, ''];
   });
 
-  const tableData = [headerRow, ...rows];
-  const table = WebImporter.DOMUtils.createTable(tableData, document);
+  // Assemble the cells for the block
+  const cells = [headerRow, ...rows];
+
+  // Create the table block
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original grid element with the block table
   element.replaceWith(table);
 }

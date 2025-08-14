@@ -2530,10 +2530,10 @@
 .columns.columns35 > div {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Vertically center content in block */
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 48px 4vw; /* Equal vertical padding for balance */
+  padding: 48px 4vw;
   box-sizing: border-box;
   gap: 4vw;
 }
@@ -2654,4 +2654,176 @@
   box-shadow: 0 4px 0 #ecec7d;
   background: #f7f7f7;
   color: #111;
+}
+
+
+.columns.columns36 {
+  background: #f9f9f6;
+  padding: 56px 0;
+}
+
+.columns.columns36 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 16px;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 > div {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 10px;
+    gap: 16px;
+  }
+}
+
+/* Left column - make it much wider for improved headline wrapping */
+.columns.columns36 > div > div:first-child {
+  flex: 0 0 520px;
+  min-width: 420px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media (width <= 1100px) {
+  .columns.columns36 > div > div:first-child {
+    flex: 1 1 360px;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+/* Headline: allow for more natural line breaks */
+.columns.columns36 h1 {
+  font-family: var(--heading-font-family);
+  font-size: 64px;
+  font-weight: 400;
+  color: #111;
+  letter-spacing: 0.01em;
+  line-height: 1.07;
+  margin: 0 0 32px;
+  max-width: 600px;
+  text-transform: none;
+  word-break: normal;
+  hyphens: auto;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 h1 {
+    font-size: 38px;
+    margin-bottom: 18px;
+    max-width: 100%;
+  }
+}
+
+/* Paragraph and button spacing */
+.columns.columns36 > div > div:first-child p {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  color: #595959;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.columns.columns36 .button-container {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns36 .button-container .button {
+  display: inline-block;
+  padding: 11px 28px;
+  border-radius: 100px;
+  font-size: 16px;
+  border: 1.5px solid #111;
+  color: #111;
+  background: transparent;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+  box-shadow: none;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.columns.columns36 .button-container .button + .button {
+  border-color: #595959;
+  color: #595959;
+}
+
+/* Image card row */
+.columns.columns36 .columns-img-col > p {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 .columns-img-col > p {
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+}
+
+.columns.columns36 .columns-img-col {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Image cards */
+.columns.columns36 .columns-img-col picture {
+  display: block;
+  width: 220px;
+  height: 310px;
+  border-radius: 24px;
+  box-shadow: 0 4px 18px rgb(60 60 60 / 9%);
+  background: #fff;
+  flex: 0 0 auto;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.columns.columns36 .columns-img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 .columns-img-col picture {
+    width: 120px;
+    height: 160px;
+  }
+}
+
+@media (width >= 1400px) {
+  .columns.columns36 > div {
+    max-width: 1380px;
+    padding: 0 32px;
+    gap: 22px;
+  }
+
+  .columns.columns36 .columns-img-col picture {
+    width: 250px;
+    height: 340px;
+  }
 }

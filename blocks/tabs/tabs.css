@@ -1,9 +1,19 @@
+/* stylelint-disable no-descending-specificity */
 .tabs .tabs-list {
   display: flex;
-  gap: 0.5ch;
+  gap: 64px;
   max-width: 100%;
   font-size: var(--body-font-size-xs);
   overflow-x: auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 0 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (width >= 600px) {
@@ -47,10 +57,14 @@
 }
 
 .tabs .tabs-panel {
-  margin-top: -1px;
-  padding: 24px;
-  border: 1px solid #dadada;
+  padding: 0;
+  border: none;
   overflow: auto;
+  background: transparent;
+  margin-top: -1px;
+  width: 100%;
+  display: none;
+  box-sizing: border-box;
 }
 
 .tabs .tabs-panel[aria-hidden='true'] {
@@ -60,12 +74,11 @@
 
 .tabs {
   background: #000;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 48px;
+  padding-bottom: 48px;
   box-sizing: border-box;
 }
 
-/* Center content including tabs */
 .tabs .tabs-list,
 .tabs .tabs-panel > div {
   max-width: 980px;
@@ -73,22 +86,6 @@
   margin-right: auto;
 }
 
-/* Tab row - big horizontal space, compact below, baseline fix */
-.tabs .tabs-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 84px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0 0 2px 0; /* tighter to headline */
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Tab button: remove bold, get baseline, no background */
 .tabs .tabs-list .tabs-tab {
   appearance: none;
   background: none;
@@ -97,7 +94,7 @@
   border-radius: 0;
   box-shadow: none;
   color: #8a8a8a;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: Montserrat, Arial, sans-serif;
   font-size: 1.13rem;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -115,10 +112,9 @@
   background-color: transparent;
 }
 
-/* Tab label styling with spacing for underline */
 .tabs .tabs-list .tabs-tab p {
   margin: 0;
-  padding: 0 0 6px 0; /* space for underline */
+  padding: 0 0 6px;
   font-size: inherit;
   font-family: inherit;
   color: inherit;
@@ -129,13 +125,11 @@
   border-bottom: none;
 }
 
-/* Active tab: white, lighter, underline */
 .tabs .tabs-list .tabs-tab[aria-selected="true"] {
   color: #fff;
   font-weight: 400;
 }
 
-/* Underline: thin, short, with gap below text */
 .tabs .tabs-list .tabs-tab[aria-selected="true"] p {
   border-bottom: 1px solid #fff;
   border-radius: 1px;
@@ -147,34 +141,23 @@
   padding-bottom: 2px;
 }
 
-/* Remove any background on selected/inactive tab */
 .tabs .tabs-list .tabs-tab[aria-selected="true"],
 .tabs .tabs-list .tabs-tab[aria-selected="false"] {
   background: none;
 }
 
-/* Responsive: tabs gap/size */
-@media (max-width: 700px) {
+@media (width <= 700px) {
   .tabs .tabs-list {
     gap: 34px;
     margin-bottom: 4px;
   }
+
   .tabs .tabs-list .tabs-tab {
     font-size: 1rem;
     min-width: 42px;
   }
 }
 
-/* Panel container resets */
-.tabs .tabs-panel {
-  border: none;
-  background: transparent;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  display: none;
-  box-sizing: border-box;
-}
 .tabs .tabs-panel[aria-hidden="false"] {
   display: flex;
   justify-content: center;
@@ -183,7 +166,6 @@
   margin: 0;
 }
 
-/* Stack headline/image vertically, center all, smaller gap */
 .tabs .tabs-panel > div {
   display: flex;
   flex-direction: column;
@@ -191,53 +173,51 @@
   width: 100%;
   max-width: 980px;
   margin: 0 auto;
-  gap: 8px;
+  gap: 24px;
   padding: 0;
 }
 
-/* Headline: lighter, less letter spacing, compact gap */
 .tabs .tabs-panel h3 {
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.10em;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 2.75rem;
+  font-weight: 400;
+  letter-spacing: 0.13em;
   text-align: center;
   line-height: 1.08;
-  margin: 0;
+  margin: 0 0 18px;
   text-transform: uppercase;
 }
 
-/* Responsive headline tuning */
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .tabs .tabs-panel > div {
     max-width: 97vw;
     gap: 6px;
   }
+
   .tabs .tabs-panel h3 {
     font-size: 1.09rem;
     letter-spacing: 0.08em;
   }
+
   .tabs {
     padding-top: 22px;
     padding-bottom: 14px;
   }
 }
 
-/* Image styling: full-width, rounded, centered */
 .tabs .tabs-panel picture,
 .tabs .tabs-panel img {
   display: block;
   width: 100%;
   max-width: 980px;
   border-radius: 24px;
-  box-shadow: 0 3px 24px 0 rgba(0,0,0,0.10);
+  box-shadow: none;
   margin: 0 auto;
-  background: #222;
+  background: none;
   object-fit: cover;
 }
 
-/* Center image in the panel */
 .tabs .tabs-panel p {
   margin: 0;
   width: 100%;
@@ -246,7 +226,90 @@
   align-items: center;
 }
 
-/* Remove extra margin between headline and image */
 .tabs .tabs-panel h3 + p {
   margin-top: 0;
+}
+
+.tabs .tabs-tab {
+  background: none;
+  border: none;
+  outline: none;
+  color: #777;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  box-shadow: none;
+  border-radius: 0;
+  min-width: 52px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.tabs .tabs-tab[aria-selected="true"] {
+  color: #fff;
+}
+
+.tabs .tabs-tab p {
+  margin: 0;
+  padding-bottom: 8px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  border-bottom: none;
+  display: inline-block;
+}
+
+.tabs .tabs-tab[aria-selected="true"] p {
+  border-bottom: 2px solid #fff;
+  border-radius: 1px;
+  min-width: 1.5em;
+  width: auto;
+  padding-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (width <= 900px) {
+  .tabs .tabs-panel h3 {
+    font-size: 2rem;
+    letter-spacing: 0.09em;
+  }
+
+  .tabs .tabs-panel > div {
+    gap: 16px;
+    max-width: 97vw;
+  }
+
+  .tabs {
+    padding-top: 22px;
+    padding-bottom: 14px;
+  }
+}
+
+@media (width <= 600px) {
+  .tabs .tabs-list {
+    gap: 34px;
+    margin-bottom: 2px;
+  }
+
+  .tabs .tabs-tab {
+    font-size: 1rem;
+    min-width: 42px;
+  }
+
+  .tabs .tabs-panel h3 {
+    font-size: 1.35rem;
+    letter-spacing: 0.06em;
+  }
 }

@@ -59,218 +59,6 @@
 }
 
 
-.columns.columns11 > div {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 56px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 16px 40px;
-  background: var(--background-color);
-}
-
-@media (width <= 899px) {
-  .columns.columns11 > div {
-    flex-direction: column;
-    gap: 40px;
-    padding: 32px 0;
-  }
-}
-
-.columns.columns11 > div > div:first-child {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 0;
-  padding: 0;
-  margin: 0;
-  max-width: 48%;
-}
-
-.columns.columns11 > div > div:first-child > p:first-child {
-  font-size: var(--body-font-size-xs);
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-.columns.columns11 > div > div:first-child > h1 {
-  font-family: var(--heading-font-family);
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 1.05;
-  margin: 0 0 24px;
-  color: #111;
-  letter-spacing: -0.01em;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(2) {
-  font-size: 16px;
-  color: #222;
-  margin-bottom: 28px;
-  line-height: 1.5;
-  max-width: 440px;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(3) {
-  display: none;
-}
-
-.columns.columns11 > div > div:first-child > .meta-flex-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 18px;
-  margin: 18px 0 0;
-  padding: 0;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(4),
-.columns.columns11 > div > div:first-child > p:nth-of-type(5),
-.columns.columns11 > div > div:first-child > p:nth-of-type(6),
-.columns.columns11 > div > div:first-child > p:nth-of-type(7),
-.columns.columns11 > div > div:first-child > p.button-container {
-  display: inline-flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  vertical-align: middle;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(4) {
-  margin-left: 0;
-  font-weight: 600;
-  color: #111;
-  font-size: 15px;
-  margin-right: 0;
-  padding-right: 0;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(4) picture img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(5),
-.columns.columns11 > div > div:first-child > p:nth-of-type(6),
-.columns.columns11 > div > div:first-child > p:nth-of-type(7) {
-  font-size: 15px;
-  color: #666;
-  font-weight: 400;
-  margin: 0;
-  padding: 0 4px 0 0;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(6) {
-  font-size: 18px;
-  font-weight: 700;
-  color: #999;
-  margin-left: 1px;
-  margin-right: 6px;
-  padding: 0;
-}
-
-.columns.columns11 > div > div:first-child > p.button-container {
-  margin-left: 12px;
-  margin-bottom: 0;
-  padding: 0;
-}
-
-.columns-container > .columns-wrapper > .columns.columns11 .button {
-  border: 1.5px solid #111;
-  color: #111;
-  background: #fff;
-  border-radius: 28px;
-  font-size: 16px;
-  padding: 8px 26px;
-  font-weight: 500;
-  box-shadow: none;
-  transition: background 0.2s, color 0.2s;
-  margin: 0;
-  vertical-align: middle;
-}
-
-.columns-container > .columns-wrapper > .columns.columns11 .button:hover,
-.columns-container > .columns-wrapper > .columns.columns11 .button:focus {
-  background: #111;
-  color: #fff;
-}
-
-.columns.columns11 > div > div:first-child > p:nth-of-type(8),
-.columns.columns11 > div > div:first-child > p.button-container {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.columns.columns11 > div > .columns-img-col {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  max-width: 52%;
-}
-
-.columns.columns11 > div > .columns-img-col > p {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  margin: 0;
-  padding: 0;
-  align-items: flex-start;
-  justify-content: flex-end;
-}
-
-@media (width <= 899px) {
-  .columns.columns11 > div > .columns-img-col {
-    max-width: 100%;
-  }
-
-  .columns.columns11 > div > .columns-img-col > p {
-    flex-direction: column;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
-}
-
-.columns.columns11 > div > .columns-img-col picture {
-  flex: 1 1 0;
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  max-width: 370px;
-  display: block;
-}
-
-.columns.columns11 > div > .columns-img-col img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 22px;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
-}
-
-.columns.columns11 > div > div:first-child,
-.columns.columns11 > div > .columns-img-col {
-  margin: 0;
-  padding: 0;
-}
-
-
 .columns.columns14 {
   display: flex;
   flex-direction: row;
@@ -2057,7 +1845,6 @@
   box-sizing: border-box;
 }
 
-/* Main grid structure */
 .columns.columns9 > div {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2084,7 +1871,6 @@
   }
 }
 
-/* Columns vertical stack by default */
 .columns.columns9 > div > div {
   display: flex;
   flex-direction: column;
@@ -2095,7 +1881,6 @@
   box-sizing: border-box;
 }
 
-/* FIRST COLUMN: Special flex layout for logo/title/socials */
 .columns.columns9 > div > div:first-child {
   min-width: 200px;
   max-width: 240px;
@@ -2106,8 +1891,6 @@
   align-items: flex-start;
 }
 
-/* Combine logo and title horizontally: 
-   Target both <p>s directly under first column and layout them side by side */
 .columns.columns9 > div > div:first-child > p {
   display: flex;
   flex-direction: row;
@@ -2117,7 +1900,6 @@
   padding: 0;
 }
 
-/* Logo sizing */
 .columns.columns9 > div > div:first-child > p picture,
 .columns.columns9 > div > div:first-child > p img {
   display: inline-block;
@@ -2132,7 +1914,6 @@
   padding: 0;
 }
 
-/* Make "FASHION BLOG" bold and large */
 .columns.columns9 > div > div:first-child .button-container .button {
   background: none;
   color: #fff;
@@ -2150,7 +1931,6 @@
   line-height: 1.1;
 }
 
-/* SOCIAL ICONS ROW: always visible and right below title, tight spacing */
 .columns.columns9 > div > div:first-child > ul {
   display: flex;
   flex-direction: row;
@@ -2165,7 +1945,6 @@
   height: auto;
 }
 
-/* Only show icon items (odds), hide the text link items (evens) */
 .columns.columns9 > div > div:first-child > ul > li {
   display: flex;
   align-items: center;
@@ -2178,7 +1957,6 @@
   display: none;
 }
 
-/* Social icon link container */
 .columns.columns9 > div > div:first-child > ul li a {
   display: flex;
   align-items: center;
@@ -2187,7 +1965,6 @@
   font-size: 0;
 }
 
-/* Icon image style */
 .columns.columns9 > div > div:first-child > ul picture,
 .columns.columns9 > div > div:first-child > ul img {
   width: 16px;
@@ -2199,7 +1976,6 @@
   margin: 0;
 }
 
-/* --- NAVIGATION COLUMNS --- */
 .columns.columns9 > div > div:not(:first-child) {
   min-width: 120px;
 }
@@ -2246,11 +2022,229 @@
   color: #e0e0e0;
 }
 
-/* Prevent overflow issues */
 .columns.columns9 > div,
 .columns.columns9 > div > div,
 .columns.columns9 > div > div > ul {
   overflow: visible;
   height: auto;
   max-height: none;
+}
+
+
+.columns.columns11 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 32px 48px;
+  background: var(--background-color);
+}
+
+@media (width <= 900px) {
+  .columns.columns11 > div {
+    flex-direction: column;
+    gap: 40px;
+    padding: 32px 8px;
+  }
+}
+
+/* Left column: text only, remove image below text */
+.columns.columns11 > div > div:first-child {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* Hide extra image below text */
+.columns.columns11 > div > div:first-child > p:nth-of-type(3) {
+  display: none;
+}
+
+/* Headline and description */
+.columns.columns11 > div > div:first-child > p:first-child {
+  font-size: var(--body-font-size-xs);
+  color: #9a9a9a;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin: 0 0 10px;
+}
+
+.columns.columns11 > div > div:first-child > h1 {
+  font-family: var(--heading-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: #111;
+  margin: 0 0 32px;
+}
+
+.columns.columns11 > div > div:first-child > p:nth-of-type(2) {
+  font-size: 18px;
+  color: #222;
+  line-height: 1.5;
+  margin: 0 0 32px;
+  max-width: 480px;
+}
+
+/* --- Group meta and button horizontally as a row --- */
+.columns.columns11 > div > div:first-child .meta-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+/* If you can't add a wrapper, simulate a row with inline-block and negative margin */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4),
+.columns.columns11 > div > div:first-child > p:nth-of-type(5),
+.columns.columns11 > div > div:first-child > p:nth-of-type(7),
+.columns.columns11 > div > div:first-child > p.button-container {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 18px 0 0;
+  padding: 0;
+}
+
+/* Reduce space between meta info and button */
+.columns.columns11 > div > div:first-child > p.button-container {
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: 0;
+}
+
+/* Author styling */
+.columns.columns11 > div > div:first-child > p:nth-of-type(4) {
+  font-weight: 600;
+  color: #111;
+  font-size: 15px;
+}
+
+/* Date and read time styling */
+.columns.columns11 > div > div:first-child > p:nth-of-type(5),
+.columns.columns11 > div > div:first-child > p:nth-of-type(7) {
+  font-size: 15px;
+  color: #666;
+  font-weight: 400;
+}
+
+/* Hide stray separator */
+.columns.columns11 > div > div:first-child > p:nth-of-type(6) {
+  display: none;
+}
+
+/* Button styling */
+.columns.columns11 .button-container .button {
+  border: 1.5px solid #111;
+  color: #111;
+  background: #fff;
+  border-radius: 28px;
+  font-size: 16px;
+  padding: 8px 26px;
+  font-weight: 500;
+  box-shadow: none;
+  margin: 0;
+  line-height: 1.25;
+  transition: background 0.2s, color 0.2s;
+  vertical-align: middle;
+
+  /* To keep button in row, remove default top margin */
+}
+
+.columns.columns11 .button-container .button:hover,
+.columns.columns11 .button-container .button:focus {
+  background: #111;
+  color: #fff;
+}
+
+/* Right column: images side by side */
+.columns.columns11 > div > .columns-img-col {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-width: 700px;
+}
+
+/* Target the paragraph holding both pictures, lay them out horizontally */
+.columns.columns11 > div > .columns-img-col > p {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (width <= 900px) {
+  .columns.columns11 > div > .columns-img-col > p {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .columns.columns11 > div > .columns-img-col {
+    max-width: 100%;
+  }
+}
+
+/* Images: uniform squares, rounded corners */
+.columns.columns11 > div > .columns-img-col picture {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1/1;
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.columns.columns11 > div > .columns-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  aspect-ratio: 1/1;
+  background: #eee;
+}
+
+/* Remove extra spacing from columns */
+.columns.columns11 > div > div:first-child,
+.columns.columns11 > div > .columns-img-col {
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive heading size for mobile */
+@media (width <= 600px) {
+  .columns.columns11 > div > div:first-child > h1 {
+    font-size: 38px;
+  }
+
+  .columns.columns11 > div {
+    padding: 24px 2vw;
+    gap: 24px;
+  }
+
+  .columns.columns11 > div > .columns-img-col picture {
+    max-width: 100%;
+  }
 }

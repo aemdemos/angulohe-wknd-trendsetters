@@ -34,74 +34,6 @@
 }
 
 
-.columns.columns4 {
-  background: #f6f7f3;
-  padding: 48px 0;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.columns.columns4 > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 48px;
-  box-sizing: border-box;
-  gap: 0;
-}
-
-.columns.columns4 picture,
-.columns.columns4 img,
-.columns.columns4 source {
-  display: none;
-}
-
-.columns.columns4 > div > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-.columns.columns4 > div > div > * {
-  text-align: center;
-  color: #222;
-  font-size: 16px;
-  font-family: var(--body-font-family, "Instrument Sans", sans-serif);
-  font-weight: 400;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.columns.columns4 > div > div h1,
-.columns.columns4 > div > div h2,
-.columns.columns4 > div > div h3,
-.columns.columns4 > div > div h4,
-.columns.columns4 > div > div h5,
-.columns.columns4 > div > div h6 {
-  margin: 0;
-  font-size: 16px;
-  font-family: var(--body-font-family, "Instrument Sans", sans-serif);
-  font-weight: 400;
-  text-align: center;
-  color: #222;
-}
-
-.columns.columns4 > div > div p,
-.columns.columns4 > div > div span {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-
 .columns.columns5 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2095,7 +2027,7 @@
 .columns.columns3 {
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* let child columns fill vertical space for true centering */
+  align-items: stretch;
   justify-content: space-between;
   gap: 7vw;
   background: #fff;
@@ -2103,7 +2035,6 @@
   width: 100%;
 }
 
-/* The direct child of .columns3 is the row holding two columns side by side */
 .columns.columns3 > div {
   display: flex;
   flex-direction: row;
@@ -2112,7 +2043,6 @@
   gap: 7vw;
 }
 
-/* LEFT COLUMN: Heading + paragraph */
 .columns.columns3 > div > div:first-child {
   flex: 1 1 0;
   max-width: 580px;
@@ -2123,7 +2053,6 @@
   padding: 0;
 }
 
-/* Remove extra vertical space below the heading */
 .columns.columns3 h2 {
   font-family: var(--heading-font-family);
   font-size: 2.5rem;
@@ -2143,7 +2072,6 @@
   max-width: 38em;
 }
 
-/* RIGHT COLUMN: perfectly vertically center the button block by auto top/bottom margins */
 .columns.columns3 > div > div:nth-child(2) {
   flex: 0 0 260px;
   display: flex;
@@ -2158,7 +2086,6 @@
   gap: 0;
 }
 
-/* Buttons vertical stack and tight gap */
 .columns.columns3 > div > div:nth-child(2) > p {
   display: flex;
   flex-direction: column;
@@ -2168,7 +2095,6 @@
   align-items: stretch;
 }
 
-/* Pill Button Styling */
 .columns.columns3 > div > div:nth-child(2) a {
   display: block;
   width: 230px;
@@ -2193,7 +2119,6 @@
   position: relative;
 }
 
-/* Dual border effect for first button: black border + yellow outline */
 .columns.columns3 > div > div:nth-child(2) a:first-child {
   border: 1px solid #000;
   outline: 1.5px solid #f7ffb2;
@@ -2208,7 +2133,6 @@
   text-decoration: none;
 }
 
-/* Responsiveness: stack columns vertically at <900px */
 @media (width <= 900px) {
   .columns.columns3 {
     flex-direction: column;
@@ -2235,5 +2159,68 @@
   .columns.columns3 > div > div:nth-child(2) a {
     width: 100%;
     max-width: 320px;
+  }
+}
+
+
+.columns.columns4 {
+  background-color: #f6f7f4;
+  padding: 40px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Use flexbox for one-dimensional alignment, side-by-side columns */
+.columns.columns4 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Each image column centers its content and does not overflow */
+.columns.columns4 .columns-img-col {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Images: maintain size, aspect, and spacing */
+.columns.columns4 picture,
+.columns.columns4 img {
+  display: block;
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Responsive: stack columns vertically on smaller screens */
+@media (width <= 900px) {
+  .columns.columns4 > div {
+    flex-direction: column;
+    gap: 24px;
+    max-width: 96vw;
+    align-items: center;
+  }
+
+  .columns.columns4 .columns-img-col {
+    max-width: 100vw;
+  }
+
+  .columns.columns4 picture,
+  .columns.columns4 img {
+    max-width: 96vw;
   }
 }

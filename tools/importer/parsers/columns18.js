@@ -1,31 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid-layout container
-  const grid = element.querySelector('.grid-layout');
+  // Find the layout grid
+  const grid = element.querySelector('.w-layout-grid');
   if (!grid) return;
-  // Get all direct children of the grid
-  const gridChildren = Array.from(grid.children);
-  // The original grid structure appears to be:
-  // [text/heading column, contact list column, image column]
+  const children = Array.from(grid.children);
 
-  // Let's try to preserve the visual column separation as in the source HTML
-  // We'll use the first two columns for the left cell, third for the right cell
+  // We expect 3 main pieces: left content, right list, image.
+  // Identify them by their tags and content
+  let leftCol = null, rightCol = null, imgCol = null;
+  children.forEach(child => {
+    if (!leftCol && child.querySelector('h2')) {
+      leftCol = child; // Contains heading and paragraph
+    } else if (!rightCol && child.tagName === 'UL') {
+      rightCol = child; // Contact methods list
+    } else if (!imgCol && child.tagName === 'IMG') {
+      imgCol = child; // Image
+    }
+  });
 
-  // Find out which element is the image (should be img tag)
-  let imageColIndex = gridChildren.findIndex((el) => el.tagName === 'IMG');
-  if (imageColIndex === -1) imageColIndex = gridChildren.length - 1;
-  const imageCol = gridChildren[imageColIndex];
+  // Compose the left cell: leftCol and rightCol stacked as a block
+  const leftCellContent = [];
+  if (leftCol) leftCellContent.push(leftCol);
+  if (rightCol) leftCellContent.push(rightCol);
 
-  // The left cell contains everything except the image column
-  const leftColNodes = gridChildren.filter((_, idx) => idx !== imageColIndex);
-  const leftCol = document.createElement('div');
-  leftColNodes.forEach((node) => leftCol.appendChild(node));
+  // Compose the second row: left is all text/list, right is the image
+  // If the image is missing, just one column
+  const headerRow = ['Columns (columns18)'];
+  const secondRow = imgCol ? [leftCellContent, imgCol] : [leftCellContent];
 
-  // Compose the table
-  const cells = [
-    ['Columns (columns18)'],
-    [leftCol, imageCol]
-  ];
+  const cells = [headerRow, secondRow];
   const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original element
   element.replaceWith(table);
 }

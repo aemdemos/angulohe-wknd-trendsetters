@@ -1,27 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Create the header row exactly as required
+  // Header row, matching exactly the example
   const headerRow = ['Accordion (accordion13)'];
-  const rows = [];
+  const cells = [headerRow];
 
-  // Select all direct children with class 'divider' (each Accordion item)
-  const items = Array.from(element.querySelectorAll(':scope > .divider'));
-  items.forEach(divider => {
-    // Each divider contains one .grid-layout with two children: title and content
-    const grid = divider.querySelector('.grid-layout');
-    if (!grid) return; // skip if missing
-    // The title is .h4-heading (mandatory)
-    const title = grid.querySelector('.h4-heading');
-    // The content is .rich-text (mandatory), fallback to .paragraph-lg if needed
-    let content = grid.querySelector('.rich-text');
-    if (!content) {
-      content = grid.querySelector('.paragraph-lg');
+  // Extract all direct .divider children representing items
+  const dividers = Array.from(element.querySelectorAll(':scope > .divider'));
+  dividers.forEach(divider => {
+    // Each divider contains a grid with two children: heading and content
+    const grid = divider.querySelector('.w-layout-grid');
+    if (!grid) return; // Skip if grid missing
+    // Find heading and text content
+    let heading = null;
+    let body = null;
+    for (const child of grid.children) {
+      if (child.classList.contains('h4-heading')) {
+        heading = child;
+      } else if (
+        child.classList.contains('rich-text') ||
+        child.classList.contains('w-richtext') ||
+        child.classList.contains('paragraph-lg')
+      ) {
+        body = child;
+      }
     }
-    // Only push rows with BOTH title and content
-    if (title && content) rows.push([title, content]);
+    // Only add row if both heading and body found
+    if (heading && body) {
+      cells.push([heading, body]);
+    }
   });
-  // Compose the block table
-  const cells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+
+  // Create and replace element with table
+  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(blockTable);
 }

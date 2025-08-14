@@ -1,71 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header: must be exactly 'Tabs' as one cell
+  // Block name for header, exactly as in example
   const headerRow = ['Tabs'];
 
-  // 2. Find the tab menu (role=tablist) and tab content (role=tabpanel container)
-  let tabMenu;
-  let tabContent;
-  Array.from(element.children).forEach((child) => {
-    if (child.getAttribute('role') === 'tablist') {
-      tabMenu = child;
-    } else if (child.querySelector('[role="tabpanel"]')) {
-      tabContent = child;
-    }
+  // Get tab menu and tab content containers
+  const children = element.querySelectorAll(':scope > div');
+  if (children.length < 2) return; // edge: not enough structure
+  const tabMenu = children[0];
+  const tabContent = children[1];
+
+  // Extract tab labels
+  // Each tab menu link is an <a> with a <div> inside holding the label
+  const tabLinks = tabMenu.querySelectorAll('a');
+  const labels = Array.from(tabLinks).map(link => {
+    const labelDiv = link.querySelector('div');
+    return labelDiv ? labelDiv.textContent.trim() : link.textContent.trim();
   });
-  if (!tabMenu || !tabContent) return;
 
-  // 3. Get all tab labels and panes
-  const tabLinks = Array.from(tabMenu.querySelectorAll('[role="tab"]'));
-  const panes = Array.from(tabContent.querySelectorAll(':scope > [role="tabpanel"]'));
-  if (panes.length === 0) return;
+  // Extract tab panes
+  const tabPanes = tabContent.querySelectorAll('.w-tab-pane');
 
-  // 4. Build rows: each as [label, content], extracting only text from each grid (if present)
-  const rows = panes.map((pane) => {
-    // Find tab label
-    const tabId = pane.id;
-    const link = tabLinks.find(l => l.getAttribute('aria-controls') === tabId);
-    let label = '';
-    if (link) {
-      const labelDiv = link.querySelector('div');
-      label = labelDiv ? labelDiv.textContent.trim() : link.textContent.trim();
-    } else {
-      label = tabId;
-    }
-    // Extract tab content as plain text, preserving heading and formatting (no images)
-    let contentText = '';
-    const grid = pane.querySelector(':scope > .w-layout-grid, :scope > div');
+  // Build the table rows: each tab is one row, first cell = label, second = all pane content
+  const cells = [headerRow];
+  for (let i = 0; i < labels.length && i < tabPanes.length; i++) {
+    // For the tab content, take all direct children of .w-layout-grid (if present), else of pane
+    const grid = tabPanes[i].querySelector('.w-layout-grid');
+    let contentElems;
     if (grid) {
-      // Only keep heading and visible text, ignore images
-      let textParts = [];
-      const heading = grid.querySelector('h1, h2, h3, h4, h5, h6');
-      if (heading) {
-        textParts.push(heading.textContent.trim());
-      }
-      // Collect all text nodes that are not inside <img>
-      Array.from(grid.childNodes).forEach((node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const t = node.textContent.trim();
-          if (t) textParts.push(t);
-        } else if (
-          node.nodeType === Node.ELEMENT_NODE &&
-          !['IMG', 'PICTURE', 'SVG'].includes(node.nodeName) &&
-          !/^h[1-6]$/i.test(node.nodeName)
-        ) {
-          textParts.push(node.textContent.trim());
-        }
-      });
-      contentText = textParts.join(' ').replace(/ +/g, ' ').trim();
+      contentElems = Array.from(grid.children);
     } else {
-      contentText = pane.textContent.trim();
+      contentElems = Array.from(tabPanes[i].children);
     }
-    return [label, contentText];
-  });
+    // If multiple elements, pass as array to cell
+    let tabCell = contentElems.length === 1 ? contentElems[0] : contentElems;
+    // Only push row if both label and content are present
+    if (labels[i] && tabCell) {
+      cells.push([
+        labels[i],
+        tabCell
+      ]);
+    }
+  }
 
-  // 5. Compose table data: header row, then tab rows
-  const cells = [headerRow, ...rows];
-
-  // 6. Create table block and replace original element
+  // Create the block table and replace the original element
   const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

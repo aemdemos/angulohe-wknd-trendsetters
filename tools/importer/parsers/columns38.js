@@ -1,16 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Correct table structure: header is a single column, followed by a row with n columns
+  // Header row, exactly as required
   const headerRow = ['Columns (columns38)'];
-  // Get all immediate child divs (columns)
-  const columns = Array.from(element.querySelectorAll(':scope > div'));
-  // The content row: each cell contains a column element
-  const contentRow = columns;
-  // Compose the cells array so that headerRow is a single cell, contentRow is n cells
-  const cells = [
-    headerRow,
-    contentRow
-  ];
+
+  // Get direct child divs, each represents a column
+  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
+
+  // Second row: each cell is the content of a column div
+  // If the column div only contains a single meaningful child (e.g. an img), put the child; else the div
+  const contentRow = columnDivs.map(div => {
+    // Filter for visible child elements (ignore script/style etc.)
+    const children = Array.from(div.children).filter(
+      el => el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE'
+    );
+    if (children.length === 1) {
+      return children[0];
+    }
+    // If no children, div might have text
+    if (children.length === 0 && div.textContent.trim()) {
+      const span = document.createElement('span');
+      span.textContent = div.textContent.trim();
+      return span;
+    }
+    // Otherwise, use the div itself
+    return div;
+  });
+
+  const cells = [headerRow, contentRow];
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

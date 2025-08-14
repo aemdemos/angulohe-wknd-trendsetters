@@ -1,49 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Create the table header as per the block name
-  const cells = [
-    ['Accordion (accordion34)']
-  ];
+  // 1. Table header EXACTLY matches the example
+  const headerRow = ['Accordion (accordion34)'];
+  const cells = [headerRow];
 
-  // Get all direct children that are accordions
-  const accordions = Array.from(element.querySelectorAll(':scope > .accordion'));
+  // 2. Select all accordion items (immediate children that contain the accordion)
+  const accordionItems = element.querySelectorAll(':scope > .accordion');
 
-  accordions.forEach((accordion) => {
-    // Title: inside .w-dropdown-toggle > .paragraph-lg
-    let titleElem = null;
-    const toggle = accordion.querySelector('.w-dropdown-toggle');
+  accordionItems.forEach((item) => {
+    // Title: look for .w-dropdown-toggle > .paragraph-lg, else fallback to .w-dropdown-toggle
+    let titleEl = null;
+    const toggle = item.querySelector('.w-dropdown-toggle');
     if (toggle) {
-      titleElem = toggle.querySelector('.paragraph-lg');
+      titleEl = toggle.querySelector('.paragraph-lg') || toggle;
     }
-    // Accordion content: inside nav.accordion-content > ...
-    let contentElem = null;
-    const nav = accordion.querySelector('nav.accordion-content');
+    // Edge case: If still no titleEl, fallback to title text
+    if (!titleEl) {
+      const titleDiv = item.querySelector('div');
+      if (titleDiv) titleEl = titleDiv;
+    }
+
+    // Content: look for nav.accordion-content, then inner padding wrapper, then .rich-text
+    let contentEl = null;
+    const nav = item.querySelector('nav.accordion-content');
     if (nav) {
-      // Use the first child div or .w-richtext for the main content
-      // Some implementations might not have .w-richtext
-      const rich = nav.querySelector('.w-richtext');
-      if (rich) {
-        contentElem = rich;
-      } else {
-        // fallback: use the content wrapper or nav itself
-        // try to find first div inside nav
-        const innerDiv = nav.querySelector('div');
-        if (innerDiv) {
-          contentElem = innerDiv;
-        } else {
-          // fallback: nav itself
-          contentElem = nav;
-        }
-      }
+      // find the first wrapper to preserve semantics (e.g. padding wrappers)
+      const innerWrapper = nav.querySelector('.utility-padding-all-1rem') || nav;
+      // Prefer .rich-text if present to preserve internal formatting
+      contentEl = innerWrapper.querySelector('.rich-text') || innerWrapper;
     }
-    // Ensure that empty cells are set to '' so the table structure is correct
-    cells.push([
-      titleElem || '',
-      contentElem || ''
-    ]);
+    // If still no content, fallback to nav itself
+    if (!contentEl && nav) contentEl = nav;
+
+    // If for any reason title or content is missing, ensure there's at least an empty string
+    cells.push([titleEl || '', contentEl || '']);
   });
 
-  // Create and replace
+  // 3. Create and replace the table, referencing existing DOM nodes
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

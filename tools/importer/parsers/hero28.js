@@ -1,55 +1,39 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row (must match the block name exactly)
+  // 1. Header row: block name matches example
   const headerRow = ['Hero (hero28)'];
 
-  // 1. Extract the background image (optional)
-  let bgImg = null;
-  const grid = element.querySelector('.w-layout-grid');
-  if (grid) {
-    // Look for an img element in any of the direct children
-    const gridChildren = grid.querySelectorAll(':scope > div');
-    for (const div of gridChildren) {
-      const img = div.querySelector('img');
-      if (img) {
-        bgImg = img;
-        break;
-      }
+  // 2. Extract background image (2nd row)
+  // The image is inside the first grid cell of .w-layout-grid
+  let imgCell = '';
+  const gridDivs = element.querySelectorAll(':scope > .w-layout-grid > div');
+  if (gridDivs.length > 0) {
+    const imgEl = gridDivs[0].querySelector('img');
+    if (imgEl) {
+      imgCell = imgEl; // Reference the original img element
     }
   }
-  const imageRow = [bgImg || ''];
+  // If not found, leave cell empty
 
-  // 2. Extract the title, subheading, CTA (all text content)
-  // According to the HTML, the title is in h1 in the second grid child
-  let contentCell = [];
-  if (grid) {
-    const gridChildren = grid.querySelectorAll(':scope > div');
-    // The second grid child appears to contain the text content
-    if (gridChildren.length > 1) {
-      const textContainer = gridChildren[1].querySelector('.utility-margin-bottom-6rem');
-      if (textContainer) {
-        // We'll collect all child nodes that are meaningful (headings, paragraphs, button groups)
-        for (const child of textContainer.childNodes) {
-          if (child.nodeType === 1) { // Element
-            // Only include h1, h2, h3, p, or .button-group
-            if (/^H[1-6]$/.test(child.tagName) || child.classList.contains('button-group')) {
-              contentCell.push(child);
-            }
-          }
-        }
-      }
-    }
+  // 3. Extract content (title, subheading, cta) (3rd row)
+  // The content is inside the second grid cell
+  let contentCell = '';
+  if (gridDivs.length > 1) {
+    // The .container div contains heading and CTAs (if any), reference whole block for resilience
+    contentCell = gridDivs[1];
   }
-  // If no content found, leave cell empty string
-  const textRow = [contentCell.length ? contentCell : ''];
+  // If not found, leave cell empty
 
-  // 3. Compose the table rows
+  // 4. Compose the table rows
   const cells = [
     headerRow,
-    imageRow,
-    textRow
+    [imgCell],
+    [contentCell]
   ];
 
+  // 5. Create block table using provided helper
   const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // 6. Replace the original element with the new table
   element.replaceWith(table);
 }

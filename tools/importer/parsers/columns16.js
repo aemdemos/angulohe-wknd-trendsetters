@@ -1,30 +1,43 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid container for columns
-  const grid = element.querySelector('.w-layout-grid');
+  // Find the grid of columns
+  const grid = element.querySelector('.grid-layout');
   if (!grid) return;
 
-  // Each immediate child of grid is a column/cell
-  const columnDivs = Array.from(grid.children);
+  // Get all direct children representing columns
+  const colDivs = Array.from(grid.children);
 
-  // For each column, gather ALL direct child elements as the cell content
-  // This ensures images, text, buttons, lists, etc, are all included
-  const cells = columnDivs.map((col) => {
-    // We want to include everything inside this column
-    // Get all direct children (not just images)
-    const children = Array.from(col.children);
-    // If no children, include the column div itself
-    if (children.length === 0) return col;
-    return children;
+  // For each column, extract all meaningful content inside the column (typically image)
+  // If you want to include more than just images, collect all children of the inner-most div
+  const cellsRow = colDivs.map(colDiv => {
+    // Typically the structure is: colDiv > innerDiv > img
+    // We'll take the deepest div (if any), else fallback to colDiv
+    let contentDiv = colDiv;
+    // There may be a div inside the column div
+    if (colDiv.children.length === 1 && colDiv.firstElementChild.tagName === 'DIV') {
+      contentDiv = colDiv.firstElementChild;
+    }
+    // If the contentDiv has only one image, use the image
+    const img = contentDiv.querySelector('img');
+    if (img && contentDiv.childElementCount === 1) {
+      return img;
+    } else {
+      // Otherwise put all direct children of contentDiv in this cell
+      return Array.from(contentDiv.childNodes).filter(
+        node => node.nodeType === 1 || (node.nodeType === 3 && node.textContent.trim())
+      );
+    }
   });
 
-  // Build the table following the block requirements
-  const tableCells = [
-    ['Columns (columns16)'], // Header row, must match exactly
-    cells // Second row, each column contains one cell (may be array of elements)
-  ];
+  // Compose header, exactly as specified
+  const headerRow = ['Columns (columns16)'];
 
-  // Create the block table and replace the original element
-  const block = WebImporter.DOMUtils.createTable(tableCells, document);
-  element.replaceWith(block);
+  // Build table
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    cellsRow
+  ], document);
+
+  // Replace the original element
+  element.replaceWith(table);
 }

@@ -1,41 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid container (this holds the columns)
-  const grid = element.querySelector('.w-layout-grid, .grid-layout');
-  if (!grid) return;
+  // Header row for the block table
+  const headerRow = ['Columns (columns14)'];
 
-  // Get all direct children of the grid (each is a column)
-  const columns = Array.from(grid.children).filter(child => child.nodeType === Node.ELEMENT_NODE);
-  if (columns.length === 0) return;
-
-  // Helper for extracting content for each column
-  function extractColumnContent(col) {
-    // Gather all immediate children of the column
-    const contentEls = Array.from(col.children).filter(child => child.nodeType === Node.ELEMENT_NODE);
-    if (contentEls.length === 0) return col; // If nothing, use the column as-is
-
-    // Special handling for elements with 'src' attribute that are not images
-    return contentEls.map(el => {
-      if (el.hasAttribute('src') && el.tagName.toLowerCase() !== 'img') {
-        // Convert to link
-        const a = document.createElement('a');
-        a.href = el.getAttribute('src');
-        a.textContent = el.getAttribute('src');
-        return a;
-      }
-      return el;
-    });
+  // Find the grid container with columns
+  const grid = element.querySelector('.grid-layout');
+  if (!grid) {
+    // If no grid found, do nothing
+    return;
   }
 
-  // Build rows for the table. The first row is the header, the second is the content (one cell per column)
-  const headerRow = ['Columns (columns14)'];
-  const contentRow = columns.map(extractColumnContent);
+  // Get all direct children of the grid (these are the columns)
+  const columns = Array.from(grid.querySelectorAll(':scope > *'));
+  if (!columns.length) {
+    // No columns found, do nothing
+    return;
+  }
 
-  // Create the table and replace the element
-  const table = WebImporter.DOMUtils.createTable([
+  // For this HTML, the columns are:
+  // columns[0]: h2 (title)
+  // columns[1]: div with paragraph and button
+  // We want to preserve the semantic structure and not lose any content
+  // Prepare a cell for each column.
+  
+  // If there are more than two columns in other variations, generalize:
+  const rowCells = columns.map(col => col);
+
+  // Build the table rows
+  const tableRows = [
     headerRow,
-    contentRow,
-  ], document);
+    rowCells
+  ];
 
-  element.replaceWith(table);
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(tableRows, document);
+
+  // Replace the original element with the block table
+  element.replaceWith(block);
 }

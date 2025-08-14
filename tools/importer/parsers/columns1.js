@@ -1,37 +1,25 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row matches example
-  const headerRow = ['Columns (columns1)'];
-
-  // Find columns: image and content
+  // Locate the main grid containing columns
   const grid = element.querySelector('.grid-layout');
   if (!grid) return;
-  const children = Array.from(grid.children);
 
-  // Find the image column
-  const imgCol = children.find(child => child.tagName === 'IMG');
+  // Get the immediate children of the grid (these are the columns)
+  const columns = Array.from(grid.children);
 
-  // Find the text/content column
-  const textCol = children.find(child => child !== imgCol);
+  // The header row exactly as per instructions
+  const headerRow = ['Columns (columns1)'];
 
-  // Build the right column: heading, paragraph, button group
-  const cellContent = [];
-  if (textCol) {
-    const heading = textCol.querySelector('h1');
-    if (heading) cellContent.push(heading);
-    const subheading = textCol.querySelector('p');
-    if (subheading) cellContent.push(subheading);
-    const buttonGroup = textCol.querySelector('.button-group');
-    if (buttonGroup) cellContent.push(buttonGroup);
-  }
+  // Compose the second row: each column as its own cell
+  // Reference the original DOM nodes directly
+  const contentRow = columns;
 
-  // Use empty string for missing image or content
-  const row = [imgCol || '', cellContent.length ? cellContent : ''];
-
+  // Create the block table with the correct structure
   const table = WebImporter.DOMUtils.createTable([
     headerRow,
-    row
+    contentRow
   ], document);
 
+  // Replace the original block element with the new block table
   element.replaceWith(table);
 }

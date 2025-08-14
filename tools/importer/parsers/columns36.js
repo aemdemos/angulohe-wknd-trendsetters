@@ -1,48 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row should match the example block name
+  // Get the main grid layout containing columns
+  const grid = element.querySelector('.grid-layout');
+  if (!grid) return;
+
+  // Expect two main columns: text + actions, and images
+  const mainColumns = Array.from(grid.children);
+  if (mainColumns.length < 2) return;
+
+  // First column: text content
+  const textCol = mainColumns[0];
+  // Extract heading, paragraph, and button group
+  const heading = textCol.querySelector('h1');
+  const subheading = textCol.querySelector('p');
+  const buttons = textCol.querySelector('.button-group');
+  // Build the text cell: only push existing elements
+  const textCell = [];
+  if (heading) textCell.push(heading);
+  if (subheading) textCell.push(subheading);
+  if (buttons) textCell.push(buttons);
+
+  // Second column: images (find all img elements inside this column)
+  const imgCol = mainColumns[1];
+  const imgs = Array.from(imgCol.querySelectorAll('img'));
+
+  // Table header row must be exactly 'Columns (columns36)'
   const headerRow = ['Columns (columns36)'];
+  // Second row: first cell is text, second cell is all images
+  const contentRow = [textCell, imgs];
 
-  // 2. Extract the two main columns
-  //    - The first column: left content (heading, subheading, buttons)
-  //    - The second column: right content (all images)
-  const grid = element.querySelector('.w-layout-grid.grid-layout');
-  let leftCellContent = [];
-  let rightCellContent = [];
-
-  if (grid) {
-    // Get direct children, corresponding to columns
-    const cols = Array.from(grid.children);
-    // First column (text + buttons)
-    if (cols[0]) {
-      // Grab all elements (heading, subheading, button group) in column
-      // Reference them directly for semantic meaning and resilience
-      const heading = cols[0].querySelector('h1');
-      if (heading) leftCellContent.push(heading);
-      const subheading = cols[0].querySelector('p');
-      if (subheading) leftCellContent.push(subheading);
-      const buttonGroup = cols[0].querySelector('.button-group');
-      if (buttonGroup) leftCellContent.push(buttonGroup);
-    }
-    // Second column (images)
-    if (cols[1]) {
-      const imagesGrid = cols[1].querySelector('.w-layout-grid');
-      if (imagesGrid) {
-        const imgs = imagesGrid.querySelectorAll('img');
-        imgs.forEach(img => rightCellContent.push(img));
-      }
-    }
-  }
-
-  // Ensure semantic grouping: cell arrays can be empty if no data
-  const row = [leftCellContent, rightCellContent];
-
-  // Final block table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    row
-  ], document);
-
-  // Replace the original block with the new table
-  element.replaceWith(table);
+  const cells = [headerRow, contentRow];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

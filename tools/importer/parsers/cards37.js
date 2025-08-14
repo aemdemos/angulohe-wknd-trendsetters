@@ -1,73 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper to extract a card's main image and text content
-  function extractCard(cardEl) {
-    // Find the first image in the card (mandatory)
-    let img = null;
-    // Images may be within a div with aspect classes or directly in card
-    const aspectDiv = cardEl.querySelector('.utility-aspect-2x3, .utility-aspect-1x1');
-    if (aspectDiv) {
-      img = aspectDiv.querySelector('img');
-    } else {
-      img = cardEl.querySelector('img');
-    }
+  // Define the header row as specified
+  const headerRow = ['Cards (cards37)'];
 
-    // Build the text content element
-    const textContent = document.createElement('div');
-
-    // Heading (h2, h3, h4)
-    let heading = cardEl.querySelector('h2, h3, h4');
-    if (heading) {
-      textContent.appendChild(heading);
-    }
-    // Description (first <p> in card)
-    let desc = cardEl.querySelector('p');
-    if (desc) {
-      textContent.appendChild(desc);
-    }
-    // CTA (optional): look for .button or a.button directly inside card
-    let cta = cardEl.querySelector('.button, button, a.button');
-    if (cta) {
-      textContent.appendChild(cta);
-    }
-    return [img, textContent];
-  }
-
-  // The first .w-layout-grid.grid-layout is the main grid
-  let mainGrid = element.querySelector('.w-layout-grid.grid-layout');
-  if (!mainGrid) mainGrid = element;
-
-  // Cards can be direct children or inside nested grid(s)
-  let cardEls = Array.from(mainGrid.children).filter(child =>
-    child.classList.contains('utility-link-content-block')
-  );
-
-  // Find nested grids that may contain more cards
-  const nestedGrids = Array.from(mainGrid.querySelectorAll('.w-layout-grid'));
-  nestedGrids.forEach(grid => {
+  // Helper to flatten all card elements regardless of grid nesting
+  function getCardNodes(grid) {
+    const cards = [];
     Array.from(grid.children).forEach(child => {
-      if (child.classList.contains('utility-link-content-block')) {
-        cardEls.push(child);
+      if (child.classList && child.classList.contains('utility-link-content-block')) {
+        cards.push(child);
+      } else if (child.classList && child.classList.contains('w-layout-grid')) {
+        // Nested grid, recurse
+        cards.push(...getCardNodes(child));
       }
     });
-  });
-  // Remove duplicate references
-  cardEls = Array.from(new Set(cardEls));
+    return cards;
+  }
 
-  // Compose the table rows
-  const rows = [];
-  // Header
-  rows.push(['Cards (cards37)']);
-  // One row per card (image, text content)
-  cardEls.forEach(cardEl => {
-    const [img, textContent] = extractCard(cardEl);
-    // Only include if both image and text content exist
-    if (img && textContent && (textContent.childNodes.length > 0)) {
-      rows.push([img, textContent]);
+  // Find the main grid containing all cards
+  let cardNodes = [];
+  const container = element.querySelector('.container');
+  if (container) {
+    const mainGrid = container.querySelector('.w-layout-grid');
+    if (mainGrid) {
+      cardNodes = getCardNodes(mainGrid);
     }
+  }
+
+  // Fallback if not found
+  if (cardNodes.length === 0) {
+    cardNodes = Array.from(element.querySelectorAll('.utility-link-content-block'));
+  }
+
+  // Compose table rows
+  const rows = cardNodes.map(card => {
+    // Get image (mandatory)
+    const img = card.querySelector('img.cover-image');
+    // Get heading (h3 or h4)
+    const heading = card.querySelector('h3, h4');
+    // Get description
+    const desc = card.querySelector('p');
+    // Get CTA button (optional)
+    const cta = card.querySelector('.button');
+    // Compose right cell content, preserving order
+    const cellContent = [];
+    if (heading) cellContent.push(heading);
+    if (desc) cellContent.push(desc);
+    if (cta) cellContent.push(cta);
+    return [img, cellContent];
   });
 
-  // Build and replace
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(table);
+  const cells = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

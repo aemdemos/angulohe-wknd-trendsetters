@@ -1,35 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main grid container for the columns block
-  const container = element.querySelector('.container');
-  if (!container) return;
-  const grid = container.querySelector('.w-layout-grid');
-  if (!grid) return;
+  // Find the actual grid of columns
+  const grid = element.querySelector('.grid-layout');
+  let leftCol = null;
+  let rightCol = null;
 
-  // Get all direct children of the grid (columns)
-  const columns = Array.from(grid.children);
+  if (grid) {
+    // Get the immediate children of the grid layout
+    const children = Array.from(grid.children);
+    // Left column: anything that's not an image (usually a div with content)
+    leftCol = children.find(child => child.tagName !== 'IMG');
+    // Right column: first image
+    rightCol = children.find(child => child.tagName === 'IMG');
+  }
+  // If not found, fallback: use first two children if available
+  if (!leftCol && element.children.length > 0) leftCol = element.children[0];
+  if (!rightCol && element.children.length > 1) rightCol = element.children[1];
 
-  // For each column, preserve all structure and text content
-  const colCells = columns.map(col => {
-    // For image columns, just reference the image element
-    if (col.tagName.toLowerCase() === 'img') {
-      return col;
-    }
-    // For non-image columns, wrap all contents in a div to preserve semantic meaning
-    // Ensure that all text nodes are included (not just elements)
-    const wrapper = document.createElement('div');
-    // Move everything (children & text nodes) to the wrapper
-    while (col.childNodes.length) {
-      wrapper.appendChild(col.childNodes[0]);
-    }
-    return wrapper;
-  });
-
-  // Build the table
+  // The block header row must match exactly
   const headerRow = ['Columns (columns15)'];
-  const cells = [headerRow, colCells];
-  
-  // Create the block table and replace the element
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+
+  // Compose table row: only include cells that have content
+  const row = [];
+  if (leftCol) row.push(leftCol);
+  if (rightCol) row.push(rightCol);
+
+  // If no grid structure, use the whole element as a single cell
+  const cells = grid ? [headerRow, row] : [headerRow, [element]];
+
+  // Create the columns block and replace
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

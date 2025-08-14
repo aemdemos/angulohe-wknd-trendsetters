@@ -1,47 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block name for the header row
+  // The block table should have a single-cell header row, and the next row with N columns
   const headerRow = ['Columns (columns35)'];
 
-  // Find the grid which contains the columns (usually direct children)
+  // Find the grid-layout container holding the columns
   const grid = element.querySelector('.grid-layout');
-  let columnElements = [];
-
+  let columnCells = [];
   if (grid) {
-    // Get the immediate children of the grid, which are the columns
-    columnElements = Array.from(grid.children);
-  } else {
-    // Fallback: if grid not found, treat container children as columns
-    const container = element.querySelector('.container');
-    if (container) {
-      columnElements = Array.from(container.children);
-    } else {
-      // If nothing else, treat the element itself as one column
-      columnElements = [element];
+    // Each direct child of .grid-layout is a column
+    columnCells = Array.from(grid.children);
+    // If for some reason there are no columns, fallback to using grid as a single cell
+    if (columnCells.length === 0) {
+      columnCells = [grid];
     }
+  } else {
+    // fallback: treat everything as single column
+    columnCells = [element];
   }
 
-  // For each column element, gather all its children as a fragment, or just use the element itself
-  const rowCells = columnElements.map((colEl) => {
-    // If the element is a link, button, or has only one child, just reference it directly
-    if (colEl.children.length === 0 || colEl.tagName === 'A' || colEl.tagName === 'BUTTON') {
-      return colEl;
-    } else {
-      // Otherwise, combine all children (preserving structure)
-      const frag = document.createDocumentFragment();
-      Array.from(colEl.childNodes).forEach((child) => {
-        frag.appendChild(child);
-      });
-      return frag;
-    }
-  });
+  // The cells array: header is a single cell, content row is as many columns as needed
+  const cells = [headerRow, columnCells];
 
-  // Compose the table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    rowCells
-  ], document);
+  // Create the table block
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Replace the original block with the new table
-  element.replaceWith(table);
+  // Replace the original element with the table block
+  element.replaceWith(block);
 }

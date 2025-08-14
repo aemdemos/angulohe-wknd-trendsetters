@@ -1,55 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row EXACTLY matching the example
-  const headerRow = ['Columns (columns2)'];
+  // Find the grid layout within the element
+  const grid = element.querySelector('.grid-layout');
+  if (!grid) return;
 
-  // 2. Find the grid layout for columns (should be the main multi-column group)
-  const mainContainer = element.querySelector('.container');
-  const gridLayout = mainContainer && mainContainer.querySelector('.grid-layout');
+  // The grid should have 3 main children:
+  // 1. Left (main column): big card w/ image, tag, heading, paragraph
+  // 2. Center (vertical): 2 cards, each with image, tag, heading, paragraph
+  // 3. Right (vertical): vertical stack of small cards with heading and paragraph, separated with dividers
+  const gridChildren = Array.from(grid.children);
+  if (gridChildren.length < 3) return;
+  const leftCol = gridChildren[0];
+  const centerCol = gridChildren[1];
+  const rightCol = gridChildren[2];
 
-  // Edge case: If missing structure, fallback gracefully to empty columns (maintain 3 columns for layout)
-  if (!gridLayout) {
-    const emptyRow = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
-    const table = WebImporter.DOMUtils.createTable([
-      headerRow,
-      emptyRow
-    ], document);
-    element.replaceWith(table);
-    return;
-  }
+  // For left and center, wrap entire content
+  // For right, filter out empty text nodes
+  const leftContent = leftCol;
+  
+  // Center: only the <a class="utility-link-content-block ..."> elements inside the center col
+  const centerContent = Array.from(centerCol.querySelectorAll('a.utility-link-content-block'));
 
-  // 3. Extract left/main column (first child is the main big feature block)
-  const gridChildren = Array.from(gridLayout.children);
-  let leftColBlock = null, middleColBlock = null, rightColBlock = null;
-
-  // The first grid child is the big feature left column
-  leftColBlock = gridChildren[0];
-
-  // The second grid child is a flex containing multiple stacked image+text cards for middle column
-  // Find all <a> blocks inside it
-  middleColBlock = gridChildren[1];
-  const middleColBlocks = Array.from(middleColBlock.querySelectorAll('a.utility-link-content-block'));
-  // We want to reference them directly in a vertical container
-  const middleDiv = document.createElement('div');
-  middleColBlocks.forEach(block => {
-    middleDiv.appendChild(block);
+  // Right: collect all a.utility-link-content-block and divider elements in order
+  const rightContent = [];
+  rightCol.childNodes.forEach(child => {
+    if (child.nodeType === 1) { // element nodes only
+      rightContent.push(child);
+    }
   });
 
-  // The third grid child is a flex containing only text blocks and dividers for right column
-  rightColBlock = gridChildren[2];
-  // Keep original children structure (text blocks & dividers)
-  const rightDiv = document.createElement('div');
-  Array.from(rightColBlock.children).forEach(child => {
-    rightDiv.appendChild(child);
-  });
+  // Compose the table: header row (one cell), then columns row (three cells)
+  const cells = [
+    ['Columns (columns2)'], // header row: one cell ONLY
+    [leftContent, centerContent, rightContent], // columns row: three cells
+  ];
 
-  // 4. Compose final table rows (always 3 columns as in the example)
-  const contentRow = [leftColBlock, middleDiv, rightDiv];
-
-  // 5. Create table and replace element
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow
-  ], document);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,30 +1,28 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get the immediate child divs (columns)
-  const columns = Array.from(element.querySelectorAll(':scope > div'));
-
-  // Defensive: remove if no columns
-  if (columns.length === 0) {
-    element.remove();
-    return;
-  }
-
-  // Header row: single cell, should span all columns (array of one cell)
+  // Header row must be a single cell, exactly as in the example
   const headerRow = ['Columns (columns29)'];
 
-  // Content row: each column's content as a separate cell
-  const contentRow = columns;
+  // Extract all immediate child divs for columns
+  const columnDivs = element.querySelectorAll(':scope > div');
+  const columnCells = [];
+  columnDivs.forEach((div) => {
+    // If the div contains only an image, use the image element; else use the div
+    const img = div.querySelector('img');
+    if (img && div.children.length === 1) {
+      columnCells.push(img);
+    } else {
+      columnCells.push(div);
+    }
+  });
 
-  // Compose table data: header is single cell, content row has N cells
+  // Cells array: first row (header, single cell), second row (content, N columns)
   const cells = [
     headerRow,
-    contentRow
+    columnCells,
   ];
 
-  // Create the table (header will be a single <th>, content N <td>)
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // The WebImporter consumer is responsible for styling the header to span all columns if required.
-  // Replace the original element with the new block
-  element.replaceWith(table);
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

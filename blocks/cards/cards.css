@@ -80,151 +80,6 @@
   }
 }
 
-.cards.cards24 > ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-@media (width <= 1100px) {
-  .cards.cards24 > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width <= 650px) {
-  .cards.cards24 > ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-.cards.cards24 > ul > li {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 4px 24px rgb(30 30 30 / 8%);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-.cards.cards24 > ul > li::before {
-  display: none;
-}
-
-.cards.cards24 .cards-card-image {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-  background: #eee;
-  display: block;
-}
-
-.cards.cards24 .cards-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0;
-}
-
-.cards.cards24 .cards-card-body {
-  padding: 28px 28px 32px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-  background: transparent;
-  margin: 0;
-}
-
-.cards.cards24 .cards-card-body .cards24-tagdate-row,
-.cards.cards24 .cards-card-body .cards24-tagdate-fake {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-
-.cards.cards24 .cards-card-body > p:first-child,
-.cards.cards24 .cards-card-body > p:nth-child(2) {
-  display: inline-flex;
-  align-items: baseline;
-  font-size: 12px;
-  font-family: var(--body-font-family);
-  font-weight: 500;
-  line-height: 1.2;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 0;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.cards.cards24 .cards-card-body > p:first-child {
-  background: #f2f2f2;
-  border-radius: 16px;
-  padding: 3px 14px;
-  color: #373737;
-  letter-spacing: 0.05em;
-  margin-left: 4px;
-  margin-right: 12px;
-  min-width: 0;
-  max-width: 64%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cards.cards24 .cards-card-body > p:nth-child(2) {
-  background: none;
-  color: #373737;
-  margin-left: auto;
-  margin-right: 6px;
-  text-align: right;
-  min-width: 0;
-  max-width: 34%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cards.cards24 .cards-card-body > h3 {
-  margin-top: 32px;
-  clear: both;
-}
-
-.cards.cards24 .cards-card-body h3 {
-  font-size: 22px;
-  font-family: var(--heading-font-family);
-  font-weight: 600;
-  color: #232323;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  text-align: left;
-  margin-bottom: 0;
-  word-break: break-word;
-  margin-top: 32px;
-}
-
-.cards.cards24 .cards-card-body p,
-.cards.cards24 .cards-card-body h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
 
 .cards.cards33 > ul {
   display: grid;
@@ -1244,8 +1099,6 @@
   box-sizing: border-box;
   width: 100%;
 }
-
-/* Grid with wider left column for visual weight */
 .cards.cards23 > ul {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
@@ -1257,8 +1110,6 @@
   width: 100%;
   background: transparent;
 }
-
-/* Cards fill grid cells and are visually balanced */
 .cards.cards23 > ul > li {
   display: flex;
   flex-direction: column;
@@ -1273,8 +1124,6 @@
   transition: box-shadow 0.2s;
   position: relative;
 }
-
-/* Top row: left card (image+text), right card (just text, with border) */
 .cards.cards23 > ul > li:nth-child(2) {
   border: 1px solid #222;
   background: #fff;
@@ -1293,8 +1142,6 @@
   width: 100%;
   height: 100%;
 }
-
-/* Card image: more rectangular, less square */
 .cards.cards23 > ul > li .cards-card-image {
   width: 100%;
   aspect-ratio: 16/11;
@@ -1311,8 +1158,6 @@
   object-fit: cover;
   display: block;
 }
-
-/* Card body spacing & typography */
 .cards.cards23 > ul > li .cards-card-body {
   padding: 24px 32px 18px;
   display: flex;
@@ -1349,8 +1194,6 @@
 .cards.cards23 > ul > li:nth-child(2) p {
   text-align: center;
 }
-
-/* Bottom row: overlay effect, more transparent and compact */
 .cards.cards23 > ul > li:nth-child(3),
 .cards.cards23 > ul > li:nth-child(4) {
   position: relative;
@@ -1390,8 +1233,6 @@
   text-align: inherit;
   font-size: 0.92rem;
 }
-
-/* Responsive grid: stack cards on mobile */
 @media (max-width: 900px) {
   .cards.cards23 {
     padding: 24px 8px;
@@ -1440,10 +1281,238 @@
     min-height: 18px;
   }
 }
-
-/* Remove default bullets and extra spacing for ul */
 .cards.cards23 > ul {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+
+.cards.cards24 {
+  background: #f9f9f9;
+  padding: 36px 0;
+}
+
+/* ----- Grid Layout ----- */
+.cards.cards24 > ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.1rem;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1100px) {
+  .cards.cards24 > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .cards.cards24 > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----- Card Container ----- */
+.cards.cards24 > ul > li {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 282px;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* ----- Card Image ----- */
+.cards.cards24 .cards-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1.17;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: #eee;
+  display: block;
+}
+.cards.cards24 .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+/* ----- Card Body: Tighten up, stack, but flex row for label/date ----- */
+.cards.cards24 .cards-card-body {
+  padding: 13px 15px 17px 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  margin: 0;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+}
+
+/* ----- Flex row for first two p's (label/date row) ----- */
+.cards.cards24 .cards-card-body-labeldate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Select first two p's and arrange as flex row above h3 */
+.cards.cards24 .cards-card-body > p:first-child,
+.cards.cards24 .cards-card-body > p:nth-child(2) {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  font-size: 15px;
+  font-family: var(--body-font-family);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.16;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Parent row arrangement (label left, date right) */
+.cards.cards24 .cards-card-body > p:first-child {
+  background: #f5f5f5;
+  color: #222;
+  border-radius: 15px;
+  padding: 3px 13px 3px 12px;
+  margin-right: 8px;
+  letter-spacing: 0.045em;
+  max-width: 60%;
+  flex: 0 1 auto;
+  order: 1;
+}
+
+.cards.cards24 .cards-card-body > p:nth-child(2) {
+  color: #222;
+  background: none;
+  margin-left: auto;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  max-width: 38%;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+  order: 2;
+}
+
+/* --- Force the first two p's to appear together above h3 --- */
+.cards.cards24 .cards-card-body {
+  /* custom stacking: label/date row above title, then title */
+}
+.cards.cards24 .cards-card-body > h3 {
+  order: 3;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: #222;
+  text-transform: uppercase;
+  font-family: 'Syncopate', var(--heading-font-family), 'Montserrat', sans-serif;
+  font-size: 1.62rem;
+  font-weight: 800;
+  letter-spacing: 0.018em;
+  line-height: 1.08;
+  word-break: break-word;
+  text-align: left;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Remove unwanted spacing */
+.cards.cards24 .cards-card-body p,
+.cards.cards24 .cards-card-body h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 900px) {
+  .cards.cards24 > ul {
+    gap: 0.9rem;
+  }
+  .cards.cards24 > ul > li {
+    max-width: 98vw;
+  }
+  .cards.cards24 .cards-card-image {
+    border-radius: 13px 13px 0 0;
+  }
+  .cards.cards24 .cards-card-body {
+    padding: 8px 5px 10px 5px;
+  }
+  .cards.cards24 .cards-card-body > h3 {
+    font-size: 1.09rem;
+    margin-top: 7px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards.cards24 {
+    padding: 12px 0;
+  }
+  .cards.cards24 > ul {
+    gap: 0.3rem;
+  }
+  .cards.cards24 .cards-card-body {
+    padding: 6px 2px 6px 2px;
+  }
+  .cards.cards24 .cards-card-body > h3 {
+    font-size: 0.98rem;
+    margin-top: 3px;
+  }
+}
+
+/* Remove any unwanted before pseudo-elements */
+.cards.cards24 > ul > li::before {
+  display: none;
+}
+
+/* --- Creative fix: put label/date p's in a flex row using nth-child --- */
+.cards.cards24 .cards-card-body {
+  /* Tighter grouping overall */
+  gap: 0;
+}
+.cards.cards24 .cards-card-body > p:first-child {
+  margin-right: 9px;
+}
+.cards.cards24 .cards-card-body > p:first-child,
+.cards.cards24 .cards-card-body > p:nth-child(2) {
+  /* Ensure both are on the same line */
+  float: left;
+  clear: none;
+}
+.cards.cards24 .cards-card-body > h3 {
+  clear: left;
+}
+
+@media (min-width: 651px) {
+  .cards.cards24 .cards-card-body > p:first-child,
+  .cards.cards24 .cards-card-body > p:nth-child(2) {
+    float: none;
+    display: inline-flex;
+    vertical-align: top;
+  }
+  .cards.cards24 .cards-card-body > h3 {
+    display: block;
+  }
 }

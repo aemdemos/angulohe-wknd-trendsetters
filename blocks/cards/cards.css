@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -5,7 +6,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 24px;
-  gap: 24px;
+  gap: 10px 15px;
 }
 
 .cards > ul > li {
@@ -13,7 +14,7 @@
   background-color: var(--background-color);
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   background: none;
   padding: 0;
   margin: 0;
@@ -25,12 +26,15 @@
 .cards .cards-card-body {
   margin: 0;
   padding: 0;
-  font-size: 12px;
-  line-height: 16px;
-  color: #222;
+  font-size: 13px;
+  line-height: 1.36;
+  color: #1a1a1a;
   font-weight: 400;
   width: 100%;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-family: var(--body-font-family), Arial, sans-serif;
 }
 
 .cards .cards-card-image {
@@ -45,15 +49,19 @@
 
 .cards > ul > li::before {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   margin-right: 12px;
   border-radius: 50%;
-  background-color: #e5e5e5;
-  border: 1.5px solid #bbb;
+  background-color: transparent;
+  border: none;
   flex-shrink: 0;
-  vertical-align: middle;
+  vertical-align: text-top;
   content: "";
+  margin-top: 0;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: left top;
 }
 
 .cards .cards-card-body p {
@@ -1142,11 +1150,11 @@
 }
 
 @media (width <= 1100px) {
-  .cards.cards25 > ul {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 175px 175px 180px 160px 140px;
-    gap: 16px 12px;
-    padding: 0 5px;
+.cards.cards25 > ul {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 180px);
+    gap: 12px;
+    padding: 0 1px;
   }
   .cards.cards25 > ul > li:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
   .cards.cards25 > ul > li:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 3; }
@@ -1223,6 +1231,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 .cards.cards10 > ul > li {
   background: #fff;
   border: 1px solid #D3D3D3;
@@ -1238,9 +1247,11 @@
   min-height: 320px;
   height: auto;
 }
+
 .cards.cards10 > ul > li::before {
   display: none;
 }
+
 .cards.cards10 .cards-card-image {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -1261,6 +1272,7 @@
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
 }
+
 .cards.cards10 .cards-card-body {
   background: #fff;
   padding: 4px 16px 14px;
@@ -1329,8 +1341,7 @@
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  justify-items: center;
-  align-items: start;
+  place-items: start center;
 }
 
 .cards.cards17 > ul > li {
@@ -1383,26 +1394,82 @@
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .cards.cards17 > ul {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     max-width: 600px;
   }
+
   .cards.cards17 > ul > li,
   .cards.cards17 .cards-card-image img {
     border-radius: 12px;
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .cards.cards17 > ul {
     grid-template-columns: 1fr;
     gap: 10px;
     max-width: 100%;
   }
+
   .cards.cards17 > ul > li,
   .cards.cards17 .cards-card-image img {
     border-radius: 8px;
   }
+}
+
+
+.cards {
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+}
+
+@media (width <= 900px) {
+  .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (width <= 600px) {
+  .cards > ul {
+    grid-template-columns: 1fr;
+    gap: 6px 0;
+  }
+}
+
+/* Unique icons per card */
+.cards > ul > li:nth-child(1)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="14" y1="14" x2="11.5" y2="11.5"/></svg>');
+}
+
+.cards > ul > li:nth-child(2)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="14" height="8" rx="2"/><path d="M2 5l7 5 7-5"/></svg>');
+}
+
+.cards > ul > li:nth-child(3)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="5.5"/><path d="M9 6v3h2"/></svg>');
+}
+
+.cards > ul > li:nth-child(4)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2v14M2 9h14"/><circle cx="9" cy="9" r="5.5"/></svg>');
+}
+
+.cards > ul > li:nth-child(5)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="12" height="12" rx="2"/></svg>');
+}
+
+.cards > ul > li:nth-child(6)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7"/><path d="M6 9l2 2 4-4"/></svg>');
+}
+
+.cards > ul > li:nth-child(7)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="6" r="3"/><path d="M3 15c0-2.5 3-4 6-4s6 1.5 6 4"/></svg>');
+}
+
+.cards > ul > li:nth-child(8)::before {
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="%231a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="14" height="8" rx="2"/><path d="M2 5l7 5 7-5"/></svg>');
 }

@@ -1,19 +1,27 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row per spec
+  // Table header should exactly match example
   const headerRow = ['Cards'];
-  // Each immediate child div is a card
+  // Get all direct children representing card wrappers
   const cardDivs = element.querySelectorAll(':scope > div');
+  
   const rows = [headerRow];
   cardDivs.forEach(cardDiv => {
-    // Each card has a <p> as the main card content (no heading in this HTML, just a paragraph)
+    // Each card: grab the relevant text node (keep p as is for semantic meaning)
+    // It's always a <p> inside each cardDiv
     const p = cardDiv.querySelector('p');
-    // Only push if there is a paragraph
-    if (p) {
+    // Defensive: only add row if content exists
+    if (p && p.textContent.trim()) {
       rows.push([p]);
     }
   });
-  // Create the table and replace
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(table);
+
+  // Only create the table if there are card rows
+  if (rows.length > 1) {
+    const table = WebImporter.DOMUtils.createTable(rows, document);
+    element.replaceWith(table);
+  } else {
+    // If no cards are found, remove the element
+    element.remove();
+  }
 }

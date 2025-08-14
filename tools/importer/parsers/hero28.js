@@ -1,39 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row: block name matches example
+  // Table header matches exactly
   const headerRow = ['Hero (hero28)'];
 
-  // 2. Extract background image (2nd row)
-  // The image is inside the first grid cell of .w-layout-grid
-  let imgCell = '';
-  const gridDivs = element.querySelectorAll(':scope > .w-layout-grid > div');
-  if (gridDivs.length > 0) {
-    const imgEl = gridDivs[0].querySelector('img');
-    if (imgEl) {
-      imgCell = imgEl; // Reference the original img element
+  // Extract background image (if exists)
+  let imageEl = null;
+  const gridLayout = element.querySelector('.w-layout-grid');
+  if (gridLayout) {
+    // The first grid child is usually image container
+    const firstGridChild = gridLayout.children[0];
+    if (firstGridChild) {
+      // Search for the background image inside
+      const parallaxDiv = firstGridChild.querySelector('.ix-parallax-scale-out-hero');
+      if (parallaxDiv) {
+        const img = parallaxDiv.querySelector('img');
+        if (img) {
+          imageEl = img;
+        }
+      }
     }
   }
-  // If not found, leave cell empty
 
-  // 3. Extract content (title, subheading, cta) (3rd row)
-  // The content is inside the second grid cell
-  let contentCell = '';
-  if (gridDivs.length > 1) {
-    // The .container div contains heading and CTAs (if any), reference whole block for resilience
-    contentCell = gridDivs[1];
+  // Extract text content (title, subtitle, CTA)
+  let textContentEl = null;
+  if (gridLayout && gridLayout.children.length > 1) {
+    const secondGridChild = gridLayout.children[1];
+    // The text is within a container with utility-margin-bottom-6rem
+    const textHolder = secondGridChild.querySelector('.utility-margin-bottom-6rem');
+    if (textHolder) {
+      textContentEl = textHolder;
+    }
   }
-  // If not found, leave cell empty
 
-  // 4. Compose the table rows
-  const cells = [
+  // Table structure: 1 column, 3 rows, header and content
+  // Use empty string for missing image/textContent for robustness
+  const rows = [
     headerRow,
-    [imgCell],
-    [contentCell]
+    [imageEl ? imageEl : ''],
+    [textContentEl ? textContentEl : ''],
   ];
 
-  // 5. Create block table using provided helper
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // 6. Replace the original element with the new table
-  element.replaceWith(table);
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

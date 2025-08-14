@@ -1,40 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid layout within the element
-  const grid = element.querySelector('.grid-layout');
-  if (!grid) return;
+  // Find the main grid container that holds the three columns of content
+  const mainContainer = element.querySelector('.container');
+  if (!mainContainer) return;
+  const mainGrid = mainContainer.querySelector('.w-layout-grid');
+  if (!mainGrid) return;
 
-  // The grid should have 3 main children:
-  // 1. Left (main column): big card w/ image, tag, heading, paragraph
-  // 2. Center (vertical): 2 cards, each with image, tag, heading, paragraph
-  // 3. Right (vertical): vertical stack of small cards with heading and paragraph, separated with dividers
-  const gridChildren = Array.from(grid.children);
+  // Get all direct children of the grid
+  const gridChildren = Array.from(mainGrid.children);
+  // Defensive check: must have 3 columns as per the example screenshot
   if (gridChildren.length < 3) return;
-  const leftCol = gridChildren[0];
-  const centerCol = gridChildren[1];
-  const rightCol = gridChildren[2];
 
-  // For left and center, wrap entire content
-  // For right, filter out empty text nodes
-  const leftContent = leftCol;
-  
-  // Center: only the <a class="utility-link-content-block ..."> elements inside the center col
-  const centerContent = Array.from(centerCol.querySelectorAll('a.utility-link-content-block'));
+  // First column: large card with image, tags, heading, paragraph
+  const leftCard = gridChildren[0];
+  // Second column: contains two stacked cards (each with image, tag, heading, paragraph)
+  const middleColumn = gridChildren[1];
+  // Third column: contains six stacked links (each with heading and paragraph, separated by dividers)
+  const rightColumn = gridChildren[2];
 
-  // Right: collect all a.utility-link-content-block and divider elements in order
-  const rightContent = [];
-  rightCol.childNodes.forEach(child => {
-    if (child.nodeType === 1) { // element nodes only
-      rightContent.push(child);
-    }
-  });
+  // For left column: use as is
+  // For middle column: extract only .utility-link-content-block elements (ignore any spacing wrappers)
+  const middleBlocks = Array.from(middleColumn.children).filter(e => e.classList.contains('utility-link-content-block'));
+  const middleColDiv = document.createElement('div');
+  middleBlocks.forEach(b => middleColDiv.appendChild(b));
 
-  // Compose the table: header row (one cell), then columns row (three cells)
-  const cells = [
-    ['Columns (columns2)'], // header row: one cell ONLY
-    [leftContent, centerContent, rightContent], // columns row: three cells
-  ];
+  // For right column: only take .utility-link-content-block elements and ignore .divider and others
+  const rightBlocks = Array.from(rightColumn.children).filter(e => e.classList.contains('utility-link-content-block'));
+  const rightColDiv = document.createElement('div');
+  rightBlocks.forEach(b => rightColDiv.appendChild(b));
 
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Build the table, header exactly as in the example: 'Columns (columns2)'
+  const headerRow = ['Columns (columns2)'];
+  const contentRow = [leftCard, middleColDiv, rightColDiv];
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
+
+  // Replace the original section element with the new table
   element.replaceWith(table);
 }

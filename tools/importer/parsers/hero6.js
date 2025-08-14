@@ -1,41 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header row as specified
+  // Table header matches example exactly
   const headerRow = ['Hero (hero6)'];
 
-  // Safely find background image (img element)
-  let imgElem = null;
-  const imgCandidates = element.querySelectorAll('img');
-  if (imgCandidates.length > 0) {
-    // Use the first image as background if present
-    imgElem = imgCandidates[0];
-  }
-
-  // Find card container holding the heading, subheading, and CTAs
-  let contentBlock = null;
-  // The card with text is nested, find it
-  contentBlock = element.querySelector('.card');
-
-  // If there is no .card, fallback to div with heading
-  if (!contentBlock) {
-    // Try to find heading and paragraph inside the element
-    const fallbackDiv = document.createElement('div');
-    const heading = element.querySelector('h1, h2, h3, h4, h5, h6');
-    const subheading = element.querySelector('p');
-    if (heading) fallbackDiv.appendChild(heading);
-    if (subheading) fallbackDiv.appendChild(subheading);
-    if (fallbackDiv.childNodes.length > 0) {
-      contentBlock = fallbackDiv;
+  // Extract background image: look for <img> inside deepest grid
+  let imgEl = null;
+  const gridDivs = element.querySelectorAll(':scope > div');
+  for (const div of gridDivs) {
+    // Try immediate children then deeper
+    const imgs = div.querySelectorAll('img');
+    if (imgs.length) {
+      imgEl = imgs[0];
+      break;
     }
   }
 
-  // Compose table as per specification: 1 column, 3 rows
+  // Extract card with heading, subheading, CTA group
+  let cardEl = null;
+  for (const div of gridDivs) {
+    // The card is a descendant of the right column grid
+    cardEl = div.querySelector('.card');
+    if (cardEl) {
+      break;
+    }
+  }
+
+  // If no image or content, use empty string as fallback (edge case handling)
   const cells = [
     headerRow,
-    [imgElem ? imgElem : ''],
-    [contentBlock ? contentBlock : '']
+    [imgEl || ''],
+    [cardEl || '']
   ];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
 
+  // Create table and replace
+  const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

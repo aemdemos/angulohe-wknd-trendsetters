@@ -1,41 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The Cards block header, as specified
+  // The block header must exactly match the example: 'Cards (cards25)'
   const headerRow = ['Cards (cards25)'];
+  const rows = [headerRow];
 
-  // Collect all direct child divs that look like cards
-  const cardRows = [];
+  // Select all direct children representing cards
   const children = Array.from(element.querySelectorAll(':scope > div'));
-  children.forEach((cardDiv) => {
-    // Find the image for the card
-    const img = cardDiv.querySelector('img');
-    if (!img) return; // skip if no image (not a card)
 
-    // Find text content (title and description)
-    let textContainer = cardDiv.querySelector('.utility-padding-all-2rem');
-    let title = null, desc = null;
-    if (textContainer) {
-      title = textContainer.querySelector('h3');
-      desc = textContainer.querySelector('p');
-    } else {
-      // Fallback to search in cardDiv if the structure varies
-      title = cardDiv.querySelector('h3');
-      desc = cardDiv.querySelector('p');
+  children.forEach((child) => {
+    // Find the first <img> in the card
+    const img = child.querySelector('img');
+    // Find the text area (utility-padding-all-2rem) if present
+    const textWrapper = child.querySelector('.utility-padding-all-2rem');
+    let textContent = '';
+    if (textWrapper) {
+      // Gather h3 and p elements if present, preserving their structure
+      const parts = [];
+      const h3 = textWrapper.querySelector('h3');
+      if (h3) parts.push(h3);
+      const p = textWrapper.querySelector('p');
+      if (p) parts.push(p);
+      // Only add if there's actual text
+      if (parts.length > 0) textContent = parts;
     }
-
-    // Compose the text cell
-    const textCell = [];
-    if (title) textCell.push(title);
-    if (desc) textCell.push(desc);
-
-    cardRows.push([
-      img,
-      textCell.length ? textCell : ''
-    ]);
+    // Only include rows with both image and text content
+    if (img && textContent) {
+      rows.push([img, textContent]);
+    }
   });
 
-  // Assemble full table structure
-  const cells = [headerRow, ...cardRows];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace element
+  element.replaceWith(block);
 }

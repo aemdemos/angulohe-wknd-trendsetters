@@ -1,35 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get the main grid layout containing columns
-  const grid = element.querySelector('.grid-layout');
+  // Table header matches example
+  const headerRow = ['Columns (columns36)'];
+
+  // Get main container and grid
+  const container = element.querySelector('.container');
+  if (!container) return;
+  const grid = container.querySelector('.grid-layout');
   if (!grid) return;
 
-  // Expect two main columns: text + actions, and images
-  const mainColumns = Array.from(grid.children);
-  if (mainColumns.length < 2) return;
+  // Get immediate children of grid (columns)
+  const columns = Array.from(grid.children);
+  if (columns.length < 2) return;
 
-  // First column: text content
-  const textCol = mainColumns[0];
-  // Extract heading, paragraph, and button group
-  const heading = textCol.querySelector('h1');
-  const subheading = textCol.querySelector('p');
-  const buttons = textCol.querySelector('.button-group');
-  // Build the text cell: only push existing elements
-  const textCell = [];
-  if (heading) textCell.push(heading);
-  if (subheading) textCell.push(subheading);
-  if (buttons) textCell.push(buttons);
+  // Left column: text and buttons
+  const leftCol = columns[0];
+  const leftColContent = [];
+  // Add heading
+  const heading = leftCol.querySelector('h1');
+  if (heading) leftColContent.push(heading);
+  // Add subheading
+  const subheading = leftCol.querySelector('p');
+  if (subheading) leftColContent.push(subheading);
+  // Add button group
+  const buttonGroup = leftCol.querySelector('.button-group');
+  if (buttonGroup) leftColContent.push(buttonGroup);
 
-  // Second column: images (find all img elements inside this column)
-  const imgCol = mainColumns[1];
-  const imgs = Array.from(imgCol.querySelectorAll('img'));
+  // Right column: grid of images
+  const rightCol = columns[1];
+  // Find grid with images inside rightCol
+  let imgEls = [];
+  const imageGrid = rightCol.querySelector('.grid-layout');
+  if (imageGrid) {
+    imgEls = Array.from(imageGrid.querySelectorAll('img'));
+  }
+  // If no imageGrid, fallback to all images inside rightCol
+  if (imgEls.length === 0) {
+    imgEls = Array.from(rightCol.querySelectorAll('img'));
+  }
+  // Defensive: only keep non-empty images
+  imgEls = imgEls.filter(img => img.getAttribute('src'));
 
-  // Table header row must be exactly 'Columns (columns36)'
-  const headerRow = ['Columns (columns36)'];
-  // Second row: first cell is text, second cell is all images
-  const contentRow = [textCell, imgs];
+  // Structure matches example: header, then one row, two columns
+  const row = [leftColContent, imgEls];
+  const cells = [headerRow, row];
 
-  const cells = [headerRow, contentRow];
+  // Create table and replace element
   const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

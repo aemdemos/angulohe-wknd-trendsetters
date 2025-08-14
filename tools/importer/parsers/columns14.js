@@ -1,40 +1,25 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the block table
+  // Header row: single cell (per spec)
   const headerRow = ['Columns (columns14)'];
 
-  // Find the grid container with columns
+  // Find the grid layout (columns wrapper)
   const grid = element.querySelector('.grid-layout');
-  if (!grid) {
-    // If no grid found, do nothing
-    return;
-  }
+  if (!grid) return;
 
-  // Get all direct children of the grid (these are the columns)
-  const columns = Array.from(grid.querySelectorAll(':scope > *'));
-  if (!columns.length) {
-    // No columns found, do nothing
-    return;
-  }
+  // Get all direct children of grid as columns
+  const columns = Array.from(grid.children);
 
-  // For this HTML, the columns are:
-  // columns[0]: h2 (title)
-  // columns[1]: div with paragraph and button
-  // We want to preserve the semantic structure and not lose any content
-  // Prepare a cell for each column.
-  
-  // If there are more than two columns in other variations, generalize:
-  const rowCells = columns.map(col => col);
+  // Edge case: do nothing if no real columns
+  if (columns.length === 0) return;
 
-  // Build the table rows
-  const tableRows = [
+  // Compose table: header row is a single cell, content row is each column in a cell
+  const cells = [
     headerRow,
-    rowCells
+    columns
   ];
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(tableRows, document);
-
-  // Replace the original element with the block table
+  // Create and replace block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

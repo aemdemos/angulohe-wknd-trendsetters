@@ -1,32 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row, exactly as required
+  // The block name header, exactly as in the example
   const headerRow = ['Columns (columns38)'];
 
-  // Get direct child divs, each represents a column
-  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
+  // Get all top-level columns (direct children of the grid)
+  const columnDivs = element.querySelectorAll(':scope > div');
 
-  // Second row: each cell is the content of a column div
-  // If the column div only contains a single meaningful child (e.g. an img), put the child; else the div
-  const contentRow = columnDivs.map(div => {
-    // Filter for visible child elements (ignore script/style etc.)
-    const children = Array.from(div.children).filter(
-      el => el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE'
-    );
-    if (children.length === 1) {
-      return children[0];
-    }
-    // If no children, div might have text
-    if (children.length === 0 && div.textContent.trim()) {
-      const span = document.createElement('span');
-      span.textContent = div.textContent.trim();
-      return span;
-    }
-    // Otherwise, use the div itself
-    return div;
+  // For each column, include ALL content (text, images, buttons, lists, etc.)
+  const columnsRow = Array.from(columnDivs).map((col) => {
+    // If the column has multiple children, include all as an array (preserving node order)
+    // If only one child, just include it
+    // If there is raw text (not wrapped in a child element), include it too
+    const cellContent = [];
+    // Add any text node (not empty or whitespace only)
+    Array.from(col.childNodes).forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        cellContent.push(node);
+      } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        // Wrap text node in a span to keep it in the cell
+        const span = document.createElement('span');
+        span.textContent = node.textContent;
+        cellContent.push(span);
+      }
+    });
+    // If only one item, return it directly; else return array
+    return cellContent.length === 1 ? cellContent[0] : cellContent;
   });
 
-  const cells = [headerRow, contentRow];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Compose the table: one header row, one content row
+  const cells = [headerRow, columnsRow];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

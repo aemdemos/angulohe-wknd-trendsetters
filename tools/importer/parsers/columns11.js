@@ -1,38 +1,62 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get the main grid for textual content
-  const mainGrid = element.querySelector('.grid-layout.tablet-1-column');
-  let leftCol = [];
+  // Header row: single column, block name exactly as in example
+  const headerRow = ['Columns (columns11)'];
+
+  // Find top grid: left and right columns for first content row
+  const mainGrid = element.querySelector('.grid-layout.tablet-1-column.grid-gap-lg');
+  let leftCell = '', rightCell = '';
+
   if (mainGrid) {
-    const headlineSection = mainGrid.children[0];
-    const contentSection = mainGrid.children[1];
-    if (headlineSection) leftCol.push(headlineSection);
-    if (contentSection) leftCol.push(contentSection);
+    // LEFT: Eyebrow and Heading
+    const leftCol = mainGrid.children[0];
+    const leftContent = [];
+    if (leftCol) {
+      const eyebrow = leftCol.querySelector('.eyebrow');
+      if (eyebrow) leftContent.push(eyebrow);
+      const heading = leftCol.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) leftContent.push(heading);
+    }
+    leftCell = leftContent.length === 1 ? leftContent[0] : leftContent;
+
+    // RIGHT: Description, author info, button
+    const rightCol = mainGrid.children[1];
+    const rightContent = [];
+    if (rightCol) {
+      const desc = rightCol.querySelector('.rich-text');
+      if (desc) rightContent.push(desc);
+      const grid = rightCol.querySelector('.grid-layout');
+      if (grid) {
+        const authorRow = grid.querySelector('.flex-horizontal');
+        if (authorRow) rightContent.push(authorRow);
+        const readMoreBtn = grid.querySelector('a.button');
+        if (readMoreBtn) rightContent.push(readMoreBtn);
+      }
+    }
+    rightCell = rightContent.length === 1 ? rightContent[0] : rightContent;
   }
 
-  // Get the image grid for visual content
-  const imageGrid = element.querySelector('.w-layout-grid.grid-layout.mobile-portrait-1-column');
-  let rightCol = [];
+  // First content row: two columns
+  const firstContentRow = [leftCell, rightCell];
+
+  // Find image grid: next row of two images
+  const imageGrid = element.querySelector('.grid-layout.mobile-portrait-1-column');
+  let imageRow = ['', ''];
   if (imageGrid) {
-    const imgs = imageGrid.querySelectorAll('img');
-    imgs.forEach(img => {
-      rightCol.push(img);
+    const imgDivs = imageGrid.querySelectorAll('.utility-aspect-1x1');
+    // Ensure exactly two columns as in example
+    imageRow = Array.from(imgDivs).map(div => {
+      const img = div.querySelector('img');
+      return img ? img : '';
     });
+    // If less than 2 images, pad with empty string
+    while (imageRow.length < 2) imageRow.push('');
+    // If more than 2 images, slice
+    imageRow = imageRow.slice(0, 2);
   }
 
-  // Correct: header row is a single column
-  const cells = [
-    ['Columns (columns11)'],
-    [leftCol, rightCol]
-  ];
-
-  // To ensure header row is a single cell with colspan, create table and manually set colspan if necessary
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  // Find the header row (first tr) and set the th's colspan
-  const headerTr = table.querySelector('tr:first-child');
-  if (headerTr && headerTr.children.length === 1 && cells[1].length > 1) {
-    headerTr.children[0].setAttribute('colspan', cells[1].length);
-  }
-
+  // As per fix: first row is single column, content/image rows are two columns
+  const rows = [headerRow, firstContentRow, imageRow];
+  const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }

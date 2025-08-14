@@ -1,43 +1,57 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main content grid inside the section
+  // Get the main container
   const container = element.querySelector('.container');
-  const grid = container && container.querySelector('.grid-layout');
+  if (!container) return;
+  const grid = container.querySelector('.w-layout-grid.grid-layout');
   if (!grid) return;
 
-  // Get the primary children: [heading, paragraph, innerGrid]
-  const gridChildren = Array.from(grid.children);
-  if (gridChildren.length < 3) return; // Edge case guard
+  // Find the inner grid that represents the columns area
+  let innerGrid = null;
+  Array.from(grid.children).forEach(child => {
+    if (child.classList.contains('w-layout-grid') && child !== grid) {
+      innerGrid = child;
+    }
+  });
+  if (!innerGrid) return;
 
-  const heading = gridChildren[0]; // <p class="h2-heading ...">
-  const quote = gridChildren[1];   // <p class="paragraph-lg ...">
-  const innerGrid = gridChildren[2]; // <div class="w-layout-grid ...">
+  // Gather header elements (top <p>s)
+  const headerEls = [];
+  Array.from(grid.children).forEach(child => {
+    if (child.tagName.toLowerCase() === 'p') {
+      headerEls.push(child);
+    }
+  });
 
-  // The innerGrid has: [divider, attribution (avatar/name), icon]
-  const innerGridChildren = Array.from(innerGrid.children);
-  // Defensive: innerGrid should have at least 3 children
-  if (innerGridChildren.length < 3) return;
-  // Attribution block (avatar + name/title)
-  const attributionBlock = innerGridChildren[1];
-  // Right column block (svg icon)
-  const iconBlock = innerGridChildren[2];
+  // Compose left and right column content from inner grid
+  let leftCol = document.createElement('div');
+  let rightCol = document.createElement('div');
+  Array.from(innerGrid.children).forEach(child => {
+    if (
+      child.classList.contains('divider') ||
+      child.classList.contains('flex-horizontal')
+    ) {
+      leftCol.appendChild(child);
+    } else if (child.classList.contains('utility-display-inline-block')) {
+      rightCol.appendChild(child);
+    }
+  });
 
-  // Create left column: heading, quote, attribution
-  const leftCol = document.createElement('div');
-  leftCol.appendChild(heading);
-  leftCol.appendChild(quote);
-  leftCol.appendChild(attributionBlock);
+  // Compose left cell: heading, quote, divider, avatar, author name
+  const leftColContent = document.createElement('div');
+  headerEls.forEach(el => leftColContent.appendChild(el));
+  Array.from(leftCol.children).forEach(el => leftColContent.appendChild(el));
 
-  // Create right column: icon
-  const rightCol = document.createElement('div');
-  rightCol.appendChild(iconBlock);
+  // Compose right cell: logo/svg
+  const rightColContent = document.createElement('div');
+  Array.from(rightCol.children).forEach(el => rightColContent.appendChild(el));
 
-  // Compose the table
+  // Correct table structure: header is a single column, then content row with two columns
   const cells = [
-    ['Columns (columns26)'], // Header exactly as specified
-    [leftCol, rightCol]
+    ['Columns (columns26)'], // header row: one column only
+    [leftColContent, rightColContent], // content row: two columns
   ];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
 
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

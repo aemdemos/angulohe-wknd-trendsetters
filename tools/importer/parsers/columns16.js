@@ -1,43 +1,46 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid of columns
-  const grid = element.querySelector('.grid-layout');
-  if (!grid) return;
-
-  // Get all direct children representing columns
-  const colDivs = Array.from(grid.children);
-
-  // For each column, extract all meaningful content inside the column (typically image)
-  // If you want to include more than just images, collect all children of the inner-most div
-  const cellsRow = colDivs.map(colDiv => {
-    // Typically the structure is: colDiv > innerDiv > img
-    // We'll take the deepest div (if any), else fallback to colDiv
-    let contentDiv = colDiv;
-    // There may be a div inside the column div
-    if (colDiv.children.length === 1 && colDiv.firstElementChild.tagName === 'DIV') {
-      contentDiv = colDiv.firstElementChild;
-    }
-    // If the contentDiv has only one image, use the image
-    const img = contentDiv.querySelector('img');
-    if (img && contentDiv.childElementCount === 1) {
-      return img;
-    } else {
-      // Otherwise put all direct children of contentDiv in this cell
-      return Array.from(contentDiv.childNodes).filter(
-        node => node.nodeType === 1 || (node.nodeType === 3 && node.textContent.trim())
-      );
-    }
-  });
-
-  // Compose header, exactly as specified
+  // Table Header
   const headerRow = ['Columns (columns16)'];
 
-  // Build table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    cellsRow
-  ], document);
+  // Find the grid layout containing the columns
+  const grid = element.querySelector('.w-layout-grid');
+  if (!grid) return;
 
-  // Replace the original element
-  element.replaceWith(table);
+  // Each grid child is a column: extract all direct children of grid
+  const columns = Array.from(grid.children);
+
+  // For each column, get ALL its visible content (not just images)
+  const columnCells = columns.map(col => {
+    // Get all direct children of the column's innermost wrapper
+    // If the column contains only one wrapper, use it
+    let innermost = col;
+    // Traverse down if the column has only one child, and that child is a div
+    while (
+      innermost.children.length === 1 && 
+      innermost.firstElementChild && 
+      innermost.firstElementChild.tagName === 'DIV'
+    ) {
+      innermost = innermost.firstElementChild;
+    }
+    // Collect all children of innermost as content for that column
+    const cellContent = Array.from(innermost.childNodes).filter(node => {
+      // Ignore empty text nodes
+      if (node.nodeType === Node.TEXT_NODE) return node.textContent.trim().length > 0;
+      // Accept all element nodes
+      if (node.nodeType === Node.ELEMENT_NODE) return true;
+      return false;
+    });
+    // If no content, insert empty text node
+    return cellContent.length ? cellContent : document.createTextNode('');
+  });
+
+  // Build table
+  const cells = [
+    headerRow,
+    columnCells
+  ];
+
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

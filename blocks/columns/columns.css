@@ -33,187 +33,6 @@
   }
 }
 
-.columns.columns2 > div {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 52px;
-  padding-top: 48px;
-  padding-bottom: 0;
-  box-sizing: border-box;
-}
-
-@media (width <= 900px) {
-  .columns.columns2 > div {
-    flex-direction: column;
-    gap: 32px;
-    padding: 0;
-  }
-}
-
-.columns.columns2 > div > .columns-img-col:first-child {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 1.1rem;
-  margin: 0;
-  min-width: 0;
-  flex: 1 1 365px;
-  max-width: 420px;
-}
-
-.columns.columns2 > div > .columns-img-col:first-child picture {
-  width: 100%;
-  margin-bottom: 0;
-}
-
-.columns.columns2 > div > .columns-img-col:first-child img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 2px 20px 0 rgb(60 60 60 / 7%);
-  display: block;
-  margin-bottom: 0;
-}
-
-.columns.columns2 > div > .columns-img-col:first-child a,
-.columns.columns2 > div > .columns-img-col:first-child p {
-  color: #181818;
-  font-family: Syncopate, sans-serif;
-  font-size: 2.04rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 1.06;
-  margin: 0;
-  word-wrap: break-word;
-  white-space: normal;
-  max-width: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: left;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-  min-width: 0;
-  margin: 0;
-  flex: 1 1 320px;
-  max-width: 350px;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) p {
-  display: flex;
-  flex-direction: column;
-  background: #fcfcfc;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px 0 rgb(60 60 60 / 5%);
-  padding: 0 0 1.1rem;
-  margin: 0;
-  gap: 0;
-  max-width: 100%;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) picture {
-  width: 100%;
-  margin-bottom: 0;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border-radius: 16px 16px 0 0;
-  display: block;
-  margin-bottom: 0;
-  box-shadow: none;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) a {
-  display: block;
-  color: #181818;
-  font-family: var(--body-font-family);
-  font-size: 1.04rem;
-  font-weight: 500;
-  line-height: 1.3;
-  margin: 1rem 1.2rem 0;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  min-height: 48px;
-  max-width: 100%;
-  white-space: normal;
-  word-wrap: break-word;
-  text-align: left;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) {
-  flex: 1 1 300px;
-  min-width: 0;
-  max-width: 300px;
-  margin: 0;
-  padding: 0;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) p {
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-  margin: 0;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) a {
-  display: block;
-  font-family: Syncopate, sans-serif;
-  font-size: 1.03rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #181818;
-  letter-spacing: 0.01em;
-  line-height: 1.15;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 0.36em;
-  margin-bottom: 0.02em;
-  white-space: normal;
-  word-wrap: break-word;
-  text-align: left;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) a:last-child {
-  border-bottom: none;
-}
-
-.columns.columns2 > div > .columns-img-col,
-.columns.columns2 > div > div:not(.columns-img-col) {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
-
-@media (width <= 900px) {
-  .columns.columns2 > div > .columns-img-col,
-  .columns.columns2 > div > div:not(.columns-img-col) {
-    padding: 0 4vw;
-    max-width: 100%;
-  }
-
-  .columns.columns2 > div > .columns-img-col:first-child a,
-  .columns.columns2 > div > .columns-img-col:first-child p {
-    font-size: 1.19rem;
-    max-width: 100%;
-  }
-
-  .columns.columns2 > div > .columns-img-col:first-child {
-    max-width: 100%;
-  }
-}
-
 
 .columns.columns3 {
   display: flex;
@@ -1995,9 +1814,7 @@
   padding: 4rem 0;
 }
 
-/* Outer flex container (remove vertical centering, anchor to top with padding) */
 .columns.columns1 > div {
-  /* No min-height: 100vh, use padding above */
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -2007,7 +1824,6 @@
   width: 100%;
 }
 
-/* Row for image and content, align tops, increase gap */
 .columns.columns1 > div > div {
   display: flex;
   flex-direction: row;
@@ -2020,7 +1836,6 @@
   overflow: visible;
 }
 
-/* Responsive stacking for small screens */
 @media (width <= 900px) {
   .columns.columns1 {
     padding: 2.5rem 0;
@@ -2034,7 +1849,6 @@
   }
 }
 
-/* Image column: allow to shrink and grow, but cap width, align with top */
 .columns.columns1 .columns-img-col {
   display: flex;
   align-items: flex-start;
@@ -2067,7 +1881,6 @@
   }
 }
 
-/* Content column: allow to shrink, cap max width, prevent overflow, align top */
 .columns.columns1 > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
@@ -2090,9 +1903,8 @@
   }
 }
 
-/* Headline styles */
 .columns.columns1 > div > div:not(.columns-img-col) > h1 {
-  font-family: Orbitron, Montserrat Alternates, var(--heading-font-family), Arial, sans-serif;
+  font-family: Orbitron, "Montserrat Alternates", var(--heading-font-family), Arial, sans-serif;
   font-size: clamp(2.5rem, 7vw, 4.8rem);
   font-weight: 400;
   color: #131313;
@@ -2111,7 +1923,6 @@
   }
 }
 
-/* Supporting paragraph: reduce space below */
 .columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
   color: #878787;
   font-size: 1rem;
@@ -2128,7 +1939,6 @@
   }
 }
 
-/* Button container and button styles: bring button closer, keep proportions */
 .columns.columns1 .button-container {
   display: flex;
   flex-direction: row;
@@ -2171,4 +1981,253 @@
   color: #FAFAF6;
   border-color: #131313;
   text-decoration: none;
+}
+
+
+/* Main columns layout: top-aligned, more outer padding for visual air */
+.columns.columns2 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 64px;
+  background: #f9f9f7;
+  padding: 60px 36px 60px 56px;
+  box-sizing: border-box;
+}
+
+@media (width <= 1100px) {
+  .columns.columns2 > div {
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 36px;
+  }
+}
+
+@media (width <= 900px) {
+  .columns.columns2 > div {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+    padding: 0 8px;
+  }
+}
+
+/* --- LEFT COLUMN: Hero image + text --- */
+.columns.columns2 > div > .columns-img-col:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 520px;
+  min-width: 280px;
+  flex: 1 1 400px;
+  gap: 18px;
+  margin-top: 0;
+}
+
+@media (width <= 1100px) {
+  .columns.columns2 > div > .columns-img-col:first-child {
+    max-width: 100%;
+  }
+}
+
+/* Hero image: aspect ratio, rounded, shadow, tighter below */
+.columns.columns2 > div > .columns-img-col:first-child picture,
+.columns.columns2 > div > .columns-img-col:first-child img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-bottom: 0;
+  box-shadow: 0 4px 20px rgb(36 38 38 / 8%);
+  background: none;
+}
+
+/* Hero text block */
+.columns.columns2 > div > .columns-img-col:first-child p {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  box-shadow: none;
+  align-items: flex-start;
+}
+
+/* Headline and supporting text */
+.columns.columns2 > div > .columns-img-col:first-child a {
+  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.05rem;
+  line-height: 1.13;
+  color: #191919;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (width <= 900px) {
+  .columns.columns2 > div > .columns-img-col:first-child a {
+    font-size: 1.18rem;
+  }
+}
+
+/* --- MIDDLE COLUMN: Cards --- */
+.columns.columns2 > div > .columns-img-col:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 40px;
+  max-width: 400px;
+  min-width: 240px;
+  flex: 1 1 340px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Each card: white, larger rounded container and more padding */
+.columns.columns2 > div > .columns-img-col:nth-child(2) p {
+  margin: 0;
+  padding: 32px 28px 28px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 6px 28px rgb(50 60 50 / 9%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* Card image: less side margin, more width */
+.columns.columns2 > div > .columns-img-col:nth-child(2) picture,
+.columns.columns2 > div > .columns-img-col:nth-child(2) img {
+  width: 100%;
+  margin: 0 0 16px;
+  aspect-ratio: 16/9;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: none;
+  background: none;
+}
+
+/* Card headline */
+.columns.columns2 > div > .columns-img-col:nth-child(2) a {
+  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
+  font-size: 1.09rem;
+  font-weight: 700;
+  color: #181818;
+  line-height: 1.22;
+  text-transform: none;
+  margin: 0;
+  padding: 0 0 3px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-align: left;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Card subtext (if present as a second <a> after the image) */
+.columns.columns2 > div > .columns-img-col:nth-child(2) a + a {
+  font-size: 0.97rem;
+  font-weight: 400;
+  color: #636363;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* --- RIGHT COLUMN: Vertical list --- */
+.columns.columns2 > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 220px;
+  max-width: 320px;
+  flex: 1 1 270px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* List stacking */
+.columns.columns2 > div > div:not(.columns-img-col) p {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* List item styling: more vertical padding for breathing room */
+.columns.columns2 > div > div:not(.columns-img-col) a {
+  display: block;
+  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #181818;
+  line-height: 1.52;
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 22px 0;
+  margin-bottom: 0;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+
+.columns.columns2 > div > div:not(.columns-img-col) a:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* --- Responsive tweaks --- */
+@media (width <= 1100px) {
+  .columns.columns2 > div {
+    gap: 32px;
+  }
+
+  .columns.columns2 > div > .columns-img-col:first-child,
+  .columns.columns2 > div > .columns-img-col:nth-child(2),
+  .columns.columns2 > div > div:not(.columns-img-col) {
+    max-width: 100%;
+  }
+}
+
+@media (width <= 700px) {
+  .columns.columns2 > div {
+    gap: 18px;
+    padding: 0 4vw;
+  }
+}
+
+/* Remove unwanted padding/margin/background for nested columns */
+.columns.columns2 > div > .columns-img-col,
+.columns.columns2 > div > div:not(.columns-img-col) {
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Ensure no unwanted margin or background on innermost <p> */
+.columns.columns2 p {
+  margin: 0;
+  background: none;
+  box-shadow: none;
 }

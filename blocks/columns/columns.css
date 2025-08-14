@@ -2297,7 +2297,6 @@
   min-height: 75vh;
 }
 
-/* Left column styles */
 .columns.columns30 > div > div:first-child {
   display: flex;
   flex-direction: column;
@@ -2338,7 +2337,6 @@
   margin-bottom: 0;
 }
 
-/* --- Right column: flex vertical centering of heading+paragraphs as a group --- */
 .columns.columns30 > div > div:nth-child(2),
 .columns.columns30 > div > div:nth-child(3) {
   grid-column: 2 / 3;
@@ -2352,9 +2350,6 @@
   align-items: flex-start;
 }
 
-/* Use a flexbox column, centering heading+paragraphs as a group */
-
-/* Reduce gap between heading and paragraphs */
 .columns.columns30 > div > div:nth-child(2) h2 {
   font-family: var(--heading-font-family);
   font-size: clamp(42px, 7vw, 90px);
@@ -2383,7 +2378,6 @@
   margin-bottom: 0;
 }
 
-/* Vertically center the right column group as a whole */
 @media (width >= 901px) {
   .columns.columns30 > div {
     align-items: center;
@@ -2396,7 +2390,6 @@
   }
 }
 
-/* Mobile: stack and remove min-height for responsiveness */
 @media (width <= 900px) {
   .columns.columns30 > div {
     grid-template-columns: 1fr;
@@ -2424,5 +2417,98 @@
   .columns.columns30 > div > div:nth-child(3) p {
     max-width: 100%;
     font-size: clamp(24px, 7vw, 42px);
+  }
+}
+
+
+.columns.columns31 {
+  background: #fafbf7;
+  padding: 0;
+}
+
+.columns.columns31 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Ensure vertical centering */
+  justify-content: flex-start;
+  gap: 2vw; /* Tighter gap for closer match */
+  width: 100%;
+  padding: 0.5vw 0;
+  box-sizing: border-box;
+}
+
+.columns.columns31 > div > div {
+  min-width: 0;
+}
+
+/* Text columns: allow comfortable two-line wrapping, match font and line height */
+.columns.columns31 > div > div:nth-child(1),
+.columns.columns31 > div > div:nth-child(2) {
+  flex: 0 1 370px;
+  max-width: 370px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  display: flex;
+  align-items: center;
+}
+
+.columns.columns31 > div > div:nth-child(1) p,
+.columns.columns31 > div > div:nth-child(2) p {
+  font-size: 13px;
+  color: #222;
+  margin: 0;
+  font-family: 'Instrument Sans', 'Instrument Sans Fallback', sans-serif;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+/* Button container: vertical align center for button */
+.columns.columns31 .button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Button: slightly taller to visually center with text columns */
+.columns.columns31 .button {
+  display: inline-block;
+  padding: 7px 22px; /* Slightly increased vertical padding */
+  font-size: 13px;
+  border: 1px solid #222;
+  border-radius: 9999px;
+  background: #fff;
+  color: #222;
+  font-family: 'Instrument Sans', 'Instrument Sans Fallback', sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 0 0 #ffffb0;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+@media (width <= 900px) {
+  .columns.columns31 > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 2vw 0;
+  }
+
+  .columns.columns31 > div > div:nth-child(1),
+  .columns.columns31 > div > div:nth-child(2) {
+    max-width: 100%;
+    flex-basis: auto;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    align-items: flex-start;
+  }
+
+  .columns.columns31 .button-container {
+    justify-content: flex-start;
   }
 }

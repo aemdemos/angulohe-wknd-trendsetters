@@ -68,17 +68,17 @@
 .hero-container > .hero-wrapper > .block.hero .button,
 .hero.hero39 .button-container .button {
   background: #fff;
-  color: #23272F;
-  border: 1.5px solid #23272F;
-  border-radius: 999px;
-  padding: 1.2em 2.9em;
-  font-size: 1.18rem;
-  font-family: Syncopate, 'Syncopate Fallback', sans-serif;
+  color: #232323;
+  border: 1.5px solid #232323;
+  border-radius: 36px;
+  padding: 8px 32px;
+  font-size: 1.07rem;
+  font-family: inherit;
   font-weight: 400;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   box-shadow: none;
-  min-width: 225px;
-  min-height: 60px;
+  min-width: unset;
+  min-height: unset;
   margin: 0;
   letter-spacing: 0.01em;
   text-align: center;
@@ -537,13 +537,15 @@
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
+  border-radius: 16px;
   overflow: hidden;
-  padding: 0;
-  border-radius: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 0;
 }
 
-/* BACKGROUND IMAGE */
 .hero.hero39 > div:first-child {
   position: absolute;
   inset: 0;
@@ -551,6 +553,7 @@
   height: 100vh;
   z-index: 1;
   pointer-events: none;
+  display: flex;
 }
 
 .hero.hero39 > div:first-child picture,
@@ -559,23 +562,22 @@
   height: 100vh;
   object-fit: cover;
   display: block;
-  pointer-events: none;
 }
 
-/* CONTENT CONTAINER (move higher, tighten content) */
 .hero.hero39 > div:nth-child(2) {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: flex-start;
-  height: 100vh;
-  max-width: 430px;
-  margin-left: min(14vw, 185px);
-  margin-top: 2.4vh;
-  margin-bottom: 0;
-  padding: 0;
+  min-height: 0;
+  max-width: 1060px;
+  width: 100%;
+  padding-left: 44px;
+  padding-bottom: 14px;
+  padding-top: 0;
+  margin-left: 0;
   box-sizing: border-box;
 }
 
@@ -586,88 +588,79 @@
   gap: 1.05rem;
 }
 
-/* HEADLINE: larger, much tighter */
 .hero.hero39 h1 {
   font-family: Orbitron, Montserrat, Syncopate, Arial, sans-serif;
-  font-size: clamp(3.7rem, 8.7vw, 5.9rem);
-  line-height: 0.97;
-  font-weight: 400;
-  color: #F7F7F7;
-  letter-spacing: 0.01em;
-  margin: 0 0 0.3rem;
-  max-width: 97vw;
+  font-size: clamp(4.2rem, 10vw, 6.7rem);
+  font-weight: 600;
+  line-height: 1.01;
+  color: #fff;
+  max-width: 920px;
+  margin-bottom: 0;
+  letter-spacing: 0.03em;
   text-align: left;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* PARAGRAPH: softer, smaller, closer to button */
 .hero.hero39 p {
   font-family: Inter, Arial, sans-serif;
-  font-size: 0.97rem;
-  line-height: 1.46;
-  color: #ececec;
-  margin: 0 0 0.08rem;
+  font-size: 1.14rem;
+  color: #f5f5f5;
+  max-width: 520px;
+  line-height: 1.48;
+  margin: 0;
   text-align: left;
-  max-width: 370px;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* BUTTON: smaller, compact, close to text */
 .hero.hero39 .button-container {
-  margin: 0;
   width: 100%;
-}
-
-.hero.hero39 .button-container .button {
-  background: transparent;
-  color: #E0E0E0;
-  border: 1.2px solid #E0E0E0;
-  border-radius: 48px;
-  padding: 7px 17px;
-  font-size: 1.02rem;
-  font-family: inherit;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  box-shadow: none;
-  min-width: 112px;
-  min-height: 36px;
   margin: 0;
-  text-align: center;
-  display: inline-block;
-  align-self: flex-start;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
 }
 
 .hero.hero39 .button-container .button:hover,
 .hero.hero39 .button-container .button:focus {
-  background: rgb(255 255 255 / 13%);
-  color: #fff;
-  border-color: #fff;
+  background: #f6f6f6;
+  color: #232323;
+  border-color: #232323;
 }
 
-/* RESPONSIVE: keep content high and tight on mobile */
+/* Responsive adjustments */
+@media (width <= 1200px) {
+  .hero.hero39 > div:nth-child(2) {
+    max-width: 92vw;
+    padding-left: 6vw;
+  }
+
+  .hero.hero39 h1 {
+    max-width: 95vw;
+    font-size: clamp(2.7rem, 8vw, 4.3rem);
+  }
+}
+
 @media (width <= 900px) {
   .hero.hero39 {
     min-height: 70vh;
     height: 70vh;
+    border-radius: 12px;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   .hero.hero39 > div:nth-child(2) {
-    max-width: 97vw;
-    margin-left: 7vw;
-    margin-top: 2vw;
-    height: 70vh;
+    padding-left: 4vw;
+    padding-bottom: 6px;
+    max-width: 98vw;
   }
 
   .hero.hero39 h1 {
-    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
-    margin-bottom: 0.25rem;
+    font-size: clamp(2.0rem, 7vw, 2.7rem);
+    max-width: 97vw;
   }
 
   .hero.hero39 p {
-    font-size: 0.93rem;
-    max-width: 94vw;
-    margin-bottom: 0.04rem;
+    font-size: 1rem;
+    max-width: 97vw;
   }
 }
 
@@ -676,23 +669,25 @@
     min-height: 48vh;
     height: 48vh;
     border-radius: 0;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   .hero.hero39 > div:nth-child(2) {
+    padding-left: 2vw;
+    padding-bottom: 3px;
     max-width: 99vw;
-    margin-left: 3vw;
-    margin-top: 2.2vw;
-    height: 48vh;
   }
 
   .hero.hero39 h1 {
-    font-size: clamp(1.15rem, 10vw, 1.7rem);
-    margin-bottom: 0.15rem;
+    font-size: clamp(1.1rem, 8vw, 1.4rem);
+    margin-bottom: 0;
+    max-width: 99vw;
   }
 
   .hero.hero39 p {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     max-width: 99vw;
-    margin-bottom: 0.02rem;
+    margin-bottom: 0;
   }
 }

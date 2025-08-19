@@ -86,181 +86,6 @@
   text-decoration: none;
 }
 
-
-.columns.columns1 {
-  background: #FAFAF6;
-  padding: 4rem 0;
-}
-
-.columns.columns1 > div {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.columns.columns1 > div > div {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: clamp(4rem, 8vw, 7rem);
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  overflow: visible;
-}
-
-@media (width <= 900px) {
-  .columns.columns1 {
-    padding: 2.5rem 0;
-  }
-
-  .columns.columns1 > div > div {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
-  }
-}
-
-.columns.columns1 .columns-img-col {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 0 1 540px;
-  min-width: 0;
-}
-
-.columns.columns1 .columns-img-col img {
-  width: 100%;
-  max-width: 520px;
-  height: auto;
-  border-radius: 2rem;
-  object-fit: cover;
-  background: none;
-  box-shadow: none;
-  display: block;
-}
-
-@media (width <= 1200px) {
-  .columns.columns1 .columns-img-col img {
-    max-width: 340px;
-  }
-}
-
-@media (width <= 900px) {
-  .columns.columns1 .columns-img-col img {
-    max-width: 320px;
-    border-radius: 1rem;
-  }
-}
-
-.columns.columns1 > div > div:not(.columns-img-col) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 540px;
-  gap: 1.3rem;
-  padding-left: 0;
-  overflow-wrap: anywhere;
-}
-
-@media (width <= 900px) {
-  .columns.columns1 > div > div:not(.columns-img-col) {
-    align-items: center;
-    text-align: center;
-    max-width: 99vw;
-    gap: 1.2rem;
-  }
-}
-
-.columns.columns1 > div > div:not(.columns-img-col) > h1 {
-  font-family: Orbitron, "Montserrat Alternates", var(--heading-font-family), Arial, sans-serif;
-  font-size: clamp(2.5rem, 7vw, 4.8rem);
-  font-weight: 400;
-  color: #131313;
-  line-height: 1.08;
-  letter-spacing: -1px;
-  margin: 0 0 1.3rem;
-  text-align: left;
-  overflow-wrap: break-word;
-}
-
-@media (width <= 900px) {
-  .columns.columns1 > div > div:not(.columns-img-col) > h1 {
-    font-size: 2.1rem;
-    text-align: center;
-    margin-bottom: 1.2rem;
-  }
-}
-
-.columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
-  color: #878787;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.55;
-  margin: 0 0 0.7rem;
-  text-align: left;
-}
-
-@media (width <= 900px) {
-  .columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
-    text-align: center;
-    margin-bottom: 0.7rem;
-  }
-}
-
-.columns.columns1 .button-container {
-  display: flex;
-  flex-direction: row;
-  gap: 1.2rem;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 0;
-}
-
-@media (width <= 900px) {
-  .columns.columns1 .button-container {
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
-}
-
-.columns-container > .columns-wrapper > .block.columns.columns1 .button,
-.columns.columns1 .button-container .button {
-  background: #FAFAF6;
-  color: #131313;
-  border: 1.5px solid #131313;
-  border-radius: 2rem;
-  padding: 0.85em 2.25em;
-  font-size: 1rem;
-  font-family: inherit;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-  box-shadow: none;
-  margin: 0;
-  line-height: 1.2;
-  text-align: center;
-}
-
-.columns-container > .columns-wrapper > .block.columns.columns1 .button:hover,
-.columns-container > .columns-wrapper > .block.columns.columns1 .button:focus,
-.columns.columns1 .button-container .button:hover,
-.columns.columns1 .button-container .button:focus {
-  background: #131313;
-  color: #FAFAF6;
-  border-color: #131313;
-  text-decoration: none;
-}
-
 .columns.columns2 > div {
   display: flex;
   flex-direction: row;
@@ -2836,7 +2661,6 @@
   box-sizing: border-box;
 }
 
-/* Make all columns visually balanced and side images nearly match the center */
 .columns.columns38 .columns-img-col {
   display: flex;
   align-items: center;
@@ -2847,14 +2671,12 @@
   height: 380px;
 }
 
-/* Side images: almost as wide as the center image */
 .columns.columns38 .columns-img-col:nth-child(1),
 .columns.columns38 .columns-img-col:nth-child(3) {
   flex-basis: 34vw;
   max-width: 550px;
 }
 
-/* Center image: slightly wider */
 .columns.columns38 .columns-img-col:nth-child(2) {
   flex-basis: 36vw;
   max-width: 600px;
@@ -2870,7 +2692,6 @@
   max-height: 380px;
 }
 
-/* Responsive: stack vertically and maximize width on small screens */
 @media (width <= 900px) {
   .columns.columns38 > div {
     flex-direction: column;
@@ -2893,4 +2714,178 @@
     height: auto;
     border-radius: 24px;
   }
+}
+
+
+.columns.columns1 {
+  background: #FAFAF6;
+  padding: 4.5rem 0;
+}
+
+/* Main row: align items at the top for natural heading-to-image alignment, tighter gap */
+.columns.columns1 > div {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.columns.columns1 > div > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  /* Allow for a negative margin-top for the text column to nudge it upwards */
+}
+
+@media (width <= 900px) {
+  .columns.columns1 > div > div {
+    flex-direction: column;
+    gap: 2.4rem;
+    max-width: 96vw;
+    align-items: center;
+  }
+}
+
+.columns.columns1 .columns-img-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-top: 0.4rem;
+}
+
+.columns.columns1 .columns-img-col img {
+  width: 340px;
+  height: 340px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 6px 32px 0 rgb(0 0 0 / 7%);
+  display: block;
+}
+
+@media (width <= 900px) {
+  .columns.columns1 .columns-img-col img {
+    width: 88vw;
+    max-width: 320px;
+    height: auto;
+    border-radius: 16px;
+  }
+}
+
+/* Text column: nudge up, control max width and wrapping, more vertical air between elements */
+.columns.columns1 > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  max-width: 550px;
+  margin-top: 1.7rem;
+  gap: 2.2rem;
+  padding: 0;
+}
+
+@media (width <= 900px) {
+  .columns.columns1 > div > div:not(.columns-img-col) {
+    align-items: center;
+    max-width: 99vw;
+    text-align: center;
+    gap: 1.45rem;
+    margin-top: 0;
+  }
+}
+
+/* Heading styles: more geometric, larger, more open, wrap nicely */
+.columns.columns1 > div > div:not(.columns-img-col) > h1 {
+  font-family: Orbitron, 'Montserrat Alternates', Arial, sans-serif;
+  font-size: 3.6rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.17;
+  color: #111;
+  margin: 0 0 0.25em;
+  text-align: left;
+  text-transform: none;
+  overflow-wrap: break-word;
+  max-width: 26ch;
+}
+
+@media (width <= 900px) {
+  .columns.columns1 > div > div:not(.columns-img-col) > h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+/* Description: lighter, slightly larger, more margin below for button airiness */
+.columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
+  color: #bcbcbc;
+  font-size: 1.23rem;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  margin: 0 0 2.8rem;
+  line-height: 1.72;
+  text-align: left;
+  max-width: 38ch;
+}
+
+@media (width <= 900px) {
+  .columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
+    text-align: center;
+    margin-bottom: 1.3rem;
+    max-width: 100%;
+  }
+}
+
+/* Button container: more margin above, visual separation, and large gap for "double-button" feel */
+.columns.columns1 .button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.7rem;
+  padding: 0;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .columns.columns1 .button-container {
+    justify-content: center;
+    margin-top: 1.2rem;
+  }
+}
+
+.columns-container > .columns-wrapper > .block.columns.columns1 .button,
+.columns.columns1 .button-container .button {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+  border-radius: 999px;
+  font-size: 1.18rem;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 500;
+  padding: 19px 65px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  box-shadow: none;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.columns-container > .columns-wrapper > .block.columns.columns1 .button:hover,
+.columns.columns1 .button-container .button:hover,
+.columns.columns1 .button-container .button:focus {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  text-decoration: none;
 }

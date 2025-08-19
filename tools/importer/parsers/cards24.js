@@ -1,51 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header row
   const headerRow = ['Cards (cards24)'];
-  const cells = [headerRow];
-
-  // Each card is an <a> inside the grid
-  const cardLinks = Array.from(element.querySelectorAll(':scope > a'));
-
-  cardLinks.forEach((a) => {
-    // Image: first img inside the aspect-ratio container
-    const imageContainer = a.querySelector('.utility-aspect-2x3');
-    const img = imageContainer ? imageContainer.querySelector('img') : null;
-
-    // Text cell construction
-    const textContent = document.createElement('div');
-
-    // Top info bar: tags and date (if present)
-    const infoBar = a.querySelector('.flex-horizontal');
-    if (infoBar) {
-      // Use a single line, tags first then date
-      const infoLine = document.createElement('div');
-      Array.from(infoBar.children).forEach((el) => {
-        // Use a span for each tag/date
-        const span = document.createElement('span');
-        span.textContent = el.textContent;
-        span.style.marginRight = '8px';
-        infoLine.appendChild(span);
-      });
-      textContent.appendChild(infoLine);
+  const cards = Array.from(element.querySelectorAll(':scope > a'));
+  const rows = cards.map(card => {
+    // First cell: image (must reference existing element)
+    const imgDiv = card.querySelector('div.utility-aspect-2x3');
+    const img = imgDiv ? imgDiv.querySelector('img') : null;
+    // Second cell: text content from meta (tag/date) and title
+    const metaDiv = card.querySelector('.flex-horizontal');
+    let tag = metaDiv ? metaDiv.querySelector('.tag') : null;
+    let date = metaDiv ? metaDiv.querySelector('.paragraph-sm') : null;
+    let title = card.querySelector('h3, .h4-heading');
+    // Compose the text cell: 
+    // - meta (tag/date) as inline
+    // - title as heading (bold)
+    const textCellParts = [];
+    // meta (tag + date)
+    if (tag || date) {
+      const metaContainer = document.createElement('div');
+      if (tag) {
+        const tagEl = document.createElement('span');
+        tagEl.textContent = tag.textContent;
+        metaContainer.appendChild(tagEl);
+      }
+      if (date) {
+        if (tag) metaContainer.appendChild(document.createTextNode(' '));
+        const dateEl = document.createElement('span');
+        dateEl.textContent = date.textContent;
+        metaContainer.appendChild(dateEl);
+      }
+      textCellParts.push(metaContainer);
     }
-
-    // Headline/title (h3/h4-heading)
-    const heading = a.querySelector('h3, .h4-heading');
-    if (heading) {
-      // Use the original heading element for structure
-      textContent.appendChild(heading);
+    // title
+    if (title) {
+      // Bold the heading for block table (as in example)
+      const strong = document.createElement('strong');
+      strong.textContent = title.textContent;
+      textCellParts.push(strong);
     }
-    
-    // No description or CTA in this specific HTML, but structure allows for it if present
-    // Add the row to the block table
-    cells.push([
-      img || '',
-      textContent
-    ]);
+    return [img, textCellParts];
   });
-
-  // Create and replace block
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    ...rows
+  ], document);
   element.replaceWith(table);
 }

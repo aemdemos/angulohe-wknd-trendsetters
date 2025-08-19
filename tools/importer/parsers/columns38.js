@@ -1,33 +1,16 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Correct header: single column, exactly as specified
+  // Header row: exactly one column with the block name
   const headerRow = ['Columns (columns38)'];
-
-  // Extract columns (each child div is a column)
+  // Second row: one cell per direct child div (column)
   const columns = Array.from(element.querySelectorAll(':scope > div'));
-
-  // Edge case: If columns are empty, do nothing
+  // Only process if there are columns
   if (columns.length === 0) return;
-
-  // Single row with multiple columns, matching the example
   const contentRow = columns;
-
-  // Cells array: header is single column, then content row with one cell per column
-  const cells = [headerRow, contentRow];
-
-  // Create block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Fix the header row: merge header cell across all columns
-  if (columns.length > 1) {
-    const tr = block.querySelector('tr');
-    const th = tr.querySelector('th');
-    th.setAttribute('colspan', columns.length);
-    // Remove any extra header cells if present
-    while (th.nextSibling) {
-      tr.removeChild(th.nextSibling);
-    }
-  }
-  // Replace with the new block
-  element.replaceWith(block);
+  // Build the table with a single-cell header row, and a content row with N columns
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
+  element.replaceWith(table);
 }

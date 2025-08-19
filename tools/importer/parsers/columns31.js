@@ -1,29 +1,27 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Extract the grid of columns
-  const grid = element.querySelector(
-    '.grid-layout, .desktop-3-column, .tablet-2-column, .mobile-landscape-1-column'
-  );
-  const columns = grid ? Array.from(grid.children) : Array.from(element.children);
+  // Header row for Columns block - must match exactly
+  const headerRow = ['Columns (columns31)'];
+
+  // Try to find the grid container holding the columns
+  let grid = element.querySelector('.grid-layout');
+  if (!grid) grid = element;
+
+  // All immediate children of the grid are the columns
+  const columns = Array.from(grid.children);
+
+  // Edge case: if there are no columns, do nothing
   if (columns.length === 0) return;
 
-  // Create a header row with one cell, spanning all columns
-  const headerRow = [document.createElement('th')];
-  headerRow[0].textContent = 'Columns (columns31)';
-  headerRow[0].setAttribute('colspan', columns.length);
+  // Build content row: each cell is the referred column node (preserves content and semantics)
+  const contentRow = columns.map(col => col);
 
-  // Content row: reference each column's element
-  const contentRow = columns;
+  // Compose cells as per the structure (header row, column row)
+  const cells = [headerRow, contentRow];
 
-  // Compose cells for the table
-  const cells = [
-    headerRow,
-    contentRow
-  ];
-
-  // Create the table block
+  // Create the columns block table
   const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Replace the original element with the table
+  // Replace the original element in the DOM
   element.replaceWith(block);
 }

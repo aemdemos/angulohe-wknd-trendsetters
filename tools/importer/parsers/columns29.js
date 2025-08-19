@@ -1,26 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get all the immediate column divs (each column)
-  const columns = Array.from(element.querySelectorAll(':scope > div'));
-
-  // Build the header row with one cell (matches example exactly)
+  // According to requirements, the header row must have exactly one cell, regardless of column count
   const headerRow = ['Columns (columns29)'];
 
-  // Build the content row: one cell for each column
-  const contentRow = columns.map((colDiv) => colDiv);
+  // Get all direct column wrappers
+  const columnDivs = Array.from(element.querySelectorAll(':scope > div'));
 
-  // Create the table with the properly structured header row
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow
-  ], document);
+  // For each column div, collect all its direct children (usually a single aspect-ratio wrapper or content block)
+  // If the content block contains multiple elements, include them all in an array
+  const columns = columnDivs.map((colDiv) => {
+    // If the column contains a single element, just use that; otherwise, pass an array
+    const children = Array.from(colDiv.childNodes).filter(node => {
+      // Ignore empty text nodes
+      return !(node.nodeType === Node.TEXT_NODE && !node.textContent.trim());
+    });
+    if (children.length === 1) {
+      return children[0];
+    }
+    return children;
+  });
 
-  // After table is created, set colspan on the header cell so it matches the number of columns
-  const tr = table.querySelector('tr'); // first row
-  if (tr && tr.children.length === 1 && contentRow.length > 1) {
-    tr.children[0].setAttribute('colspan', String(contentRow.length));
-  }
+  // Build the table
+  const cells = [
+    headerRow, // header row with a single column
+    columns    // second row: one cell per content column
+  ];
 
-  // Replace the original element with the new table
-  element.replaceWith(table);
+  // Create and replace
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

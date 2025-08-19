@@ -1,36 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header: Must match the block name and variant exactly
+  // Block header: must match example exactly
   const headerRow = ['Cards (cards21)'];
 
-  // Defensive: Find the .card-body inside the element
-  let cardBody = element.querySelector('.card-body');
-  if (!cardBody) cardBody = element;
+  // Defensive: Collect all cards in this block (even if >1), but for provided HTML, there is only one
+  // The provided HTML has a single card nested within several divs
+  // Find the .card-body divs
+  const cardBodies = element.querySelectorAll('.card-body');
 
-  // Find the card image (first .cover-image or the first img)
-  let cardImg = cardBody.querySelector('img');
-  if (!cardImg) cardImg = cardBody.querySelector('img');
+  const rows = [];
+  cardBodies.forEach(cardBody => {
+    // Find image
+    const img = cardBody.querySelector('img');
 
-  // Find the heading (h4-heading or any heading)
-  let cardTitle = cardBody.querySelector('.h4-heading');
-  if (!cardTitle) cardTitle = cardBody.querySelector('h4, h3, h2, h1');
+    // Find heading or title (prefer .h4-heading, fallback to h1-h4)
+    let heading = cardBody.querySelector('.h4-heading') ||
+                  cardBody.querySelector('h1, h2, h3, h4');
 
-  // Compose the text cell: retain semantic meaning
-  const textCell = [];
-  if (cardTitle) {
-    // Use the actual heading element, not convert to <strong>
-    textCell.push(cardTitle);
-  }
-  // If there is additional descriptive text, include it (none in this case)
-  // Example only contains heading text, so nothing else needed.
+    // Find additional description after heading (if any)
+    // Description is: any text nodes or block elements after heading, but in this HTML, only heading present
+    let description = null;
+    if (heading) {
+      // Grab next sibling that contains text (if any)
+      let next = heading.nextSibling;
+      while (next) {
+        if (next.nodeType === Node.TEXT_NODE && next.textContent.trim()) {
+          description = document.createElement('div');
+          description.textContent = next.textContent.trim();
+          break;
+        } else if (next.nodeType === Node.ELEMENT_NODE && next.textContent.trim()) {
+          description = next;
+          break;
+        }
+        next = next.nextSibling;
+      }
+    }
 
-  // Compose the table
-  const cells = [
-    headerRow,
-    [cardImg, textCell]
-  ];
+    // Build text cell content: heading + description (if present)
+    const textCellContent = [];
+    if (heading) textCellContent.push(heading);
+    if (description) textCellContent.push(description);
 
-  // Create and replace
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+    // Add row: [image, textCellContent]
+    rows.push([img, textCellContent]);
+  });
+
+  const tableCells = [headerRow, ...rows];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(tableCells, document);
+
+  // Replace the original element with the table
   element.replaceWith(block);
 }

@@ -1,30 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row must match example
+  // Header row, exactly as required
   const headerRow = ['Accordion (accordion13)'];
 
-  // Each accordion item is a .divider direct child of the root element
-  const rows = [];
-  const dividerEls = element.querySelectorAll(':scope > .divider');
-  dividerEls.forEach(divider => {
-    // Expect a .grid-layout inside divider
-    const grid = divider.querySelector('.grid-layout');
-    if (!grid) return;
-    // Expect two children: title (first), content (second)
-    const titleEl = grid.children[0];
-    const contentEl = grid.children[1];
-    // Defensive: skip if either is missing
-    if (!titleEl || !contentEl) return;
-    // Reference the actual elements for semantic fidelity
-    rows.push([titleEl, contentEl]);
-  });
+  // Each direct child .divider represents an accordion item
+  const dividerEls = Array.from(element.querySelectorAll(':scope > .divider'));
 
-  // Compose table data: header first, then items
-  const cells = [headerRow, ...rows];
+  // Defensive check: sometimes the structure may have the first child as a .divider inside a container
+  // If no .divider found, try fallback to all .divider within element
+  let accordionDividers = dividerEls;
+  if (accordionDividers.length === 0) {
+    accordionDividers = Array.from(element.querySelectorAll('.divider'));
+  }
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  const rows = accordionDividers.map(divider => {
+    const grid = divider.querySelector('.w-layout-grid');
+    if (!grid) return null;
+    // Find children: typically [title, content], but order could vary
+    const children = Array.from(grid.children);
+    // Title: look for class 'h4-heading', fallback to first child
+    let titleEl = children.find(c => c.classList.contains('h4-heading')) || children[0];
+    // Content: look for class 'rich-text', fallback to second child
+    let contentEl = children.find(c => c.classList.contains('rich-text')) || children[1];
+    // Defensive: Only add row if both exist
+    if (!titleEl || !contentEl) return null;
+    return [titleEl, contentEl];
+  }).filter(Boolean);
 
-  // Replace the original element with the block
-  element.replaceWith(block);
+  // Compose table data
+  const tableData = [headerRow, ...rows];
+
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable(tableData, document);
+
+  // Replace the input element with the table
+  element.replaceWith(table);
 }

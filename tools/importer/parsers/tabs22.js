@@ -1,37 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block Name (header row)
+  // The header row: block name only, single column per spec
   const headerRow = ['Tabs'];
 
-  // Get tab labels from tab menu
-  const tabMenu = element.children[0];
-  const tabLinks = Array.from(tabMenu.children);
-  const tabLabels = tabLinks.map(link => {
-    // Prefer the label text inside child div, fallback to link text
-    const labelDiv = link.querySelector('div');
-    return labelDiv ? labelDiv.textContent.trim() : link.textContent.trim();
-  });
+  // Find the tab menu (labels) and tab content panels
+  const tabMenu = element.querySelector('.w-tab-menu');
+  const tabContent = element.querySelector('.w-tab-content');
 
-  // Get tab panes/content
-  const tabContent = element.children[1];
+  if (!tabMenu || !tabContent) {
+    // Fallback: just output the header row if structure not found
+    const block = WebImporter.DOMUtils.createTable([headerRow], document);
+    element.replaceWith(block);
+    return;
+  }
+
+  // Extract labels and content
+  const tabLinks = Array.from(tabMenu.children);
   const tabPanes = Array.from(tabContent.children);
 
-  // Defensive: Only create rows for pairs of label and pane
-  const rows = tabPanes.map((pane, idx) => {
-    const label = tabLabels[idx] || '';
-    // Find main grid div inside the pane, fallback to pane itself if missing
-    let contentDiv = pane.querySelector('div');
-    if (!contentDiv) contentDiv = pane;
-    // For edge cases, ensure something always present in cell
-    return [label, contentDiv];
+  // Each row after the header: [label, tab content]
+  const rows = tabLinks.map((tabLink, i) => {
+    // Tab label: use visible text (prefer div, fallback to link text)
+    let label = '';
+    const labelDiv = tabLink.querySelector('div');
+    if (labelDiv && labelDiv.textContent.trim()) {
+      label = labelDiv.textContent.trim();
+    } else {
+      label = tabLink.textContent.trim();
+    }
+
+    // Tab content: robustly grab the main block (usually a grid div)
+    let content;
+    const pane = tabPanes[i];
+    if (pane) {
+      const grid = pane.querySelector('.grid-layout');
+      content = grid ? grid : pane;
+    } else {
+      content = document.createElement('div');
+    }
+
+    // Each row must be an array of [label, content]
+    return [label, content];
   });
 
-  // Compose block table rows: header + tab rows
-  const cells = [headerRow, ...rows];
+  // Structure: header is a single-cell row, all subsequent rows have two cells
+  const tableRows = [headerRow, ...rows];
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace in document
+  const block = WebImporter.DOMUtils.createTable(tableRows, document);
   element.replaceWith(block);
 }

@@ -1,24 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the block
+  // Cards (cards17) block expects 2 columns: image + text. If no text, cell is empty.
   const headerRow = ['Cards (cards17)'];
-
-  // Each immediate child div is a card that contains a single img
-  const cardDivs = element.querySelectorAll(':scope > div');
-
-  // For each card div, extract the img
-  // This HTML contains only images, no text, so second cell is left blank (required by block schema)
-  const rows = Array.from(cardDivs).map(div => {
+  // Each card is a direct child div
+  const cardDivs = Array.from(element.querySelectorAll(':scope > div'));
+  // For each card div, extract image and any text node (if present)
+  const rows = cardDivs.map(div => {
+    // Find the main image
     const img = div.querySelector('img');
-    return [img, ''];
+    // Attempt to extract any additional text content inside the card (ignore empty/whitespace)
+    // For this HTML, there is NO text content, but preserve logic for possible variations
+    let textContent = '';
+    // If div has more than just the image, collect text nodes and block elements
+    const nodes = Array.from(div.childNodes).filter(n => n !== img);
+    if (nodes.length > 0) {
+      // Attempt to collect text and inline elements
+      const fragment = document.createDocumentFragment();
+      nodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+          fragment.appendChild(document.createTextNode(node.textContent));
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          fragment.appendChild(node);
+        }
+      });
+      textContent = fragment.childNodes.length ? fragment : '';
+    }
+    // Return 2 columns: [ image, text ]
+    return [img, textContent];
   });
 
-  // Assemble the cells for the block
   const cells = [headerRow, ...rows];
-
-  // Create the table block
   const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original grid element with the block table
   element.replaceWith(table);
 }

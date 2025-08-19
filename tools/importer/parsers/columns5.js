@@ -1,36 +1,43 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid that contains the two columns
-  const grid = element.querySelector('.grid-layout.grid-gap-xxl');
-  if (!grid) return;
-
-  // The content column is a div with heading, paragraph, and buttons
-  // The image column is an img element
-  let contentCol = null;
-  let imageCol = null;
-
-  // Get all direct children of the grid
-  const children = Array.from(grid.children);
-  for (const child of children) {
-    if (child.tagName === 'IMG') {
-      imageCol = child;
-    } else if (!contentCol && (child.tagName === 'DIV' || child.classList.contains('section'))) {
-      contentCol = child;
-    }
-  }
-  if (!contentCol || !imageCol) return;
-
-  // Create header row as a single cell (will span columns visually)
+  // Table header row exactly as required
   const headerRow = ['Columns (columns5)'];
-  const contentRow = [contentCol, imageCol];
-  const cells = [headerRow, contentRow];
 
-  // Create table and set colspan on the header cell
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  // Set colspan on the header cell
-  const headerCell = table.querySelector('th');
-  if (headerCell && contentRow.length > 1) {
-    headerCell.setAttribute('colspan', contentRow.length);
+  // Find the main grid containing the columns
+  const mainGrid = element.querySelector('.grid-layout.grid-gap-xxl');
+  let leftCol = null;
+  let rightCol = null;
+  if (mainGrid) {
+    // The first child is the content block, the second child is the image
+    const children = Array.from(mainGrid.children);
+    // Find left content: a div with h2
+    leftCol = children.find(child => child.querySelector && child.querySelector('h2')) || null;
+    // Find image: <img>
+    rightCol = children.find(child => child.tagName === 'IMG') || null;
   }
-  element.replaceWith(table);
+  // Defensive: if not found, fallback to first div and first img inside element
+  if (!leftCol) {
+    leftCol = element.querySelector('div h2') ? element.querySelector('div h2').closest('div') : null;
+  }
+  if (!rightCol) {
+    rightCol = element.querySelector('img');
+  }
+  // Ensure we always have a valid structure
+  // If either is missing, fill with empty string to preserve columns
+  const contentRow = [
+    leftCol || '',
+    rightCol || ''
+  ];
+
+  // Compose the cells array
+  const cells = [
+    headerRow,
+    contentRow
+  ];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace original
+  element.replaceWith(block);
 }

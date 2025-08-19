@@ -1,47 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The header row must match exactly, one column only
+  // Header row: matches exactly as in the example
   const headerRow = ['Columns (columns15)'];
 
-  // Find the grid layout for columns inside the container
+  // Find container with grid
   const container = element.querySelector('.container');
-  let columnsRow = [];
+  if (!container) return;
+  const grid = container.querySelector('.grid-layout');
+  if (!grid) return;
+  const gridChildren = Array.from(grid.children);
+  if (gridChildren.length < 2) return;
 
-  if (container) {
-    const grid = container.querySelector('.w-layout-grid');
-    if (grid) {
-      // Get all direct children of the grid (each column)
-      const gridChildren = Array.from(grid.children);
-      gridChildren.forEach((col) => {
-        // If column is an image, include it directly
-        if (col.tagName === 'IMG') {
-          columnsRow.push(col);
-        } else {
-          // For non-image columns, aggregate all visible content
-          // This ensures ALL text, headings, paragraphs, and buttons are included
-          const colContent = [];
-          Array.from(col.childNodes).forEach((node) => {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              // Only include visible elements
-              colContent.push(node);
-            } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-              // Wrap non-empty text nodes in a span to preserve text
-              const span = document.createElement('span');
-              span.textContent = node.textContent;
-              colContent.push(span);
-            }
-          });
-          // If the column has meaningful content, use that; otherwise, reference the column directly
-          columnsRow.push(colContent.length ? colContent : col);
-        }
-      });
+  // LEFT COLUMN: Reference all content nodes in left column
+  const leftCol = gridChildren[0];
+  let leftContent = [];
+  // Retain all child nodes that are not empty text
+  leftContent = Array.from(leftCol.childNodes).filter(n => {
+    if (n.nodeType === Node.TEXT_NODE) {
+      return n.textContent.trim().length > 0;
     }
-  }
+    return true;
+  });
+  // If no content, use the leftCol itself
+  if (!leftContent.length) leftContent = [leftCol];
 
-  // Only create the table if there is column content
-  if (columnsRow.length) {
-    const cells = [headerRow, columnsRow];
-    const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-    element.replaceWith(blockTable);
-  }
+  // RIGHT COLUMN: Reference all content nodes in right column
+  const rightCol = gridChildren[1];
+  let rightContent = [];
+  // Prefer to reference any images or substantial content
+  rightContent = Array.from(rightCol.childNodes).filter(n => {
+    if (n.nodeType === Node.TEXT_NODE) {
+      return n.textContent.trim().length > 0;
+    }
+    return true;
+  });
+  // If no content, use the rightCol itself
+  if (!rightContent.length) rightContent = [rightCol];
+
+  // Compose the table structure
+  const rows = [
+    headerRow,
+    [leftContent, rightContent]
+  ];
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace the original element
+  element.replaceWith(block);
 }

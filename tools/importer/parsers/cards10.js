@@ -1,41 +1,50 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header as specified in the example
+  // Header row matches example exactly
   const headerRow = ['Cards (cards10)'];
-  const rows = [];
-  // Each card is an <a> directly inside the grid container
-  const cards = Array.from(element.querySelectorAll(':scope > a'));
-  cards.forEach(card => {
-    // Image: always present, inside first child div
+  const cards = [];
+  // Direct card wrappers
+  const cardElements = element.querySelectorAll(':scope > a');
+  cardElements.forEach(card => {
+    // Image column (mandatory)
+    const imgWrapper = card.querySelector(':scope > div');
     let img = null;
-    const imgDiv = card.querySelector('.utility-aspect-3x2');
-    if (imgDiv) {
-      img = imgDiv.querySelector('img');
+    if (imgWrapper) {
+      img = imgWrapper.querySelector('img');
     }
-    // Text content: inside .utility-padding-all-1rem
-    const textDiv = card.querySelector('.utility-padding-all-1rem');
-    const textParts = [];
+    // Text column (mandatory)
+    // The info wrapper is always the second direct div
+    const infoDivs = card.querySelectorAll(':scope > div');
+    const textDiv = infoDivs[1];
+    const textCellElements = [];
     if (textDiv) {
-      // Optional tag
-      const tagDiv = textDiv.querySelector('.tag-group .tag');
-      if (tagDiv) {
-        textParts.push(tagDiv);
+      // Tag (optional)
+      const tagGroup = textDiv.querySelector('.tag-group');
+      if (tagGroup) {
+        // In example, only one tag per card, but support multiple
+        const tags = Array.from(tagGroup.querySelectorAll('.tag')).map(t => t);
+        textCellElements.push(...tags);
       }
-      // Heading (h3)
-      const heading = textDiv.querySelector('h3');
+      // Heading (optional)
+      const heading = textDiv.querySelector('h3, .h4-heading');
       if (heading) {
-        textParts.push(heading);
+        textCellElements.push(heading);
       }
-      // Description (p)
-      const para = textDiv.querySelector('p');
-      if (para) {
-        textParts.push(para);
+      // Description (optional)
+      const desc = textDiv.querySelector('p');
+      if (desc) {
+        textCellElements.push(desc);
       }
-      // No CTA found in source, but if present would be added here
+      // (No CTA in source HTML)
     }
-    rows.push([img, textParts]);
+    // Each card is a row: [image, info]
+    // image is the element, info is array of referenced elements
+    cards.push([img, textCellElements]);
   });
-  const cells = [headerRow, ...rows];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Compose table rows
+  const tableRows = [headerRow, ...cards];
+  // Create the block table
+  const table = WebImporter.DOMUtils.createTable(tableRows, document);
+  // Replace the original element
   element.replaceWith(table);
 }

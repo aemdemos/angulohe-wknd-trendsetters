@@ -1,36 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block header must exactly match the example: 'Cards (cards25)'
+  // Header as required
   const headerRow = ['Cards (cards25)'];
-  const rows = [headerRow];
+  const cells = [headerRow];
 
-  // Select all direct children representing cards
-  const children = Array.from(element.querySelectorAll(':scope > div'));
-
-  children.forEach((child) => {
-    // Find the first <img> in the card
-    const img = child.querySelector('img');
-    // Find the text area (utility-padding-all-2rem) if present
-    const textWrapper = child.querySelector('.utility-padding-all-2rem');
-    let textContent = '';
-    if (textWrapper) {
-      // Gather h3 and p elements if present, preserving their structure
-      const parts = [];
-      const h3 = textWrapper.querySelector('h3');
-      if (h3) parts.push(h3);
-      const p = textWrapper.querySelector('p');
-      if (p) parts.push(p);
-      // Only add if there's actual text
-      if (parts.length > 0) textContent = parts;
+  // Helper to extract heading and text cell (if both present)
+  function createTextCell(cardDiv) {
+    const contentContainer = cardDiv.querySelector('.utility-padding-all-2rem');
+    if (contentContainer) {
+      const arr = [];
+      const h3 = contentContainer.querySelector('h3');
+      if (h3) arr.push(h3);
+      const p = contentContainer.querySelector('p');
+      if (p) arr.push(p);
+      return arr.length ? arr : contentContainer;
     }
-    // Only include rows with both image and text content
-    if (img && textContent) {
-      rows.push([img, textContent]);
+    return null;
+  }
+
+  // Only include cards with BOTH image and text content
+  const cardNodes = Array.from(element.querySelectorAll(':scope > div'));
+  cardNodes.forEach(cardDiv => {
+    const img = cardDiv.querySelector('img');
+    const textCell = createTextCell(cardDiv);
+    // Only add if both present
+    if (img && textCell) {
+      cells.push([img, textCell]);
     }
   });
 
-  // Create block table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace element
+  // Replace with the block
+  const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

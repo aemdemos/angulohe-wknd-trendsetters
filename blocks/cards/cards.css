@@ -1,19 +1,20 @@
 /* stylelint-disable no-descending-specificity */
 .cards > ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 24px;
-  gap: 10px 15px;
+  gap: 24px 32px;
+  place-items: start stretch;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .cards > ul > li {
   border: none;
-
-  /* Removed background-color in favor of background shorthand */
-  background: var(--background-color); 
+  background: none;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -27,15 +28,15 @@
 .cards .cards-card-body {
   margin: 0;
   padding: 0;
-  font-size: 13px;
-  line-height: 1.36;
-  color: #1a1a1a;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #232323;
   font-weight: 400;
   width: 100%;
-  display: flex;
+  display: block;
   flex-direction: row;
   align-items: flex-start;
-  font-family: var(--body-font-family), Arial, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 .cards .cards-card-image {
@@ -50,24 +51,29 @@
 
 .cards > ul > li::before {
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-right: 12px;
-  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border-radius: 0;
   background-color: transparent;
   border: none;
   flex-shrink: 0;
-  vertical-align: text-top;
+  vertical-align: text-bottom;
   content: "";
-  margin-top: 0;
+  margin-top: 3px;
   background-repeat: no-repeat;
-  background-size: 18px 18px;
+  background-size: 16px 16px;
   background-position: left top;
 }
 
 .cards .cards-card-body p {
   margin: 0;
   padding: 0;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 @media (width <= 900px) {
@@ -304,8 +310,8 @@
 
 
 .cards {
-  padding-left: 14px;
-  padding-right: 14px;
+  padding-left: 0;
+  padding-right: 0;
   box-sizing: border-box;
 }
 
@@ -1254,7 +1260,7 @@
   margin: 6px 0;
   letter-spacing: 0.01em;
   line-height: 1.18;
-  overflow-wrap: break-word; /* Replaced deprecated 'word-break: break-word' */
+  overflow-wrap: break-word;
 }
 
 .cards.cards33 .cards-card-body > p:nth-child(4) {
@@ -1280,7 +1286,6 @@
   border-radius: 0;
 }
 
-/* Layout: two cards side by side and perfectly top-aligned */
 .cards.cards37 > ul {
   display: flex;
   flex-direction: row;
@@ -1293,14 +1298,12 @@
   min-height: 0;
 }
 
-/* Remove any vertical offset in li containers */
 .cards.cards37 > ul > li {
   margin: 0;
   padding: 0;
   align-self: flex-start;
 }
 
-/* Left card: make slightly less wide for better balance */
 .cards.cards37 > ul > li:first-child {
   background: #fff;
   border-radius: 28px;
@@ -1315,7 +1318,6 @@
   justify-content: flex-start;
 }
 
-/* Large image: flush with top and left/right edges */
 .cards.cards37 > ul > li:first-child .cards-card-image picture,
 .cards.cards37 > ul > li:first-child .cards-card-image img {
   width: 100%;
@@ -1327,7 +1329,6 @@
   padding: 0;
 }
 
-/* Card body: symmetric, spacious padding */
 .cards.cards37 > ul > li:first-child .cards-card-body {
   background: none;
   padding: 42px 44px 38px;
@@ -1337,7 +1338,6 @@
   gap: 24px;
 }
 
-/* Headline in left card */
 .cards.cards37 > ul > li:first-child h3 {
   font-family: var(--heading-font-family);
   font-size: 2.6rem;
@@ -1349,7 +1349,6 @@
   line-height: 1.05;
 }
 
-/* Paragraph in left card */
 .cards.cards37 > ul > li:first-child p {
   font-family: var(--body-font-family);
   font-size: 1.15rem;
@@ -1358,7 +1357,6 @@
   line-height: 1.54;
 }
 
-/* Button, always left-aligned, proper margin from text */
 .cards.cards37 > ul > li:first-child .cards-card-body p:last-child {
   display: inline-block;
   margin: 22px 0 0;
@@ -1381,7 +1379,6 @@
   color: #fff;
 }
 
-/* Right card: make wider and image much taller for visual balance */
 .cards.cards37 > ul > li:last-child {
   background: #fff;
   border-radius: 20px;
@@ -1398,13 +1395,11 @@
   margin: 0;
 }
 
-/* Remove any unwanted margin/padding above card content */
 .cards.cards37 > ul > li:last-child > * {
   margin-top: 0;
   padding-top: 0;
 }
 
-/* Increase right card image height for balance and flush top */
 .cards.cards37 > ul > li:last-child .cards-card-image {
   width: 100%;
   margin: 0;
@@ -1423,7 +1418,6 @@
   display: block;
 }
 
-/* Card body in right card */
 .cards.cards37 > ul > li:last-child .cards-card-body {
   background: none;
   padding: 32px 32px 36px;
@@ -1433,7 +1427,6 @@
   gap: 16px;
 }
 
-/* Headline in right card */
 .cards.cards37 > ul > li:last-child h3 {
   font-family: var(--heading-font-family);
   font-size: 1.34rem;
@@ -1444,7 +1437,6 @@
   line-height: 1.18;
 }
 
-/* Paragraph in right card */
 .cards.cards37 > ul > li:last-child p {
   font-family: var(--body-font-family);
   font-size: 1.02rem;
@@ -1453,7 +1445,6 @@
   line-height: 1.54;
 }
 
-/* Responsive adjustments */
 @media (width <= 900px) {
   .cards.cards37 > ul {
     flex-direction: column;
@@ -1510,3 +1501,29 @@
     padding: 10px 6px 8px;
   }
 }
+
+/* Responsive grid: 4 columns desktop, 2 tablet, 1 mobile */
+
+@media (width <= 900px) {
+  .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 16px;
+    max-width: 600px;
+  }
+}
+
+@media (width <= 600px) {
+  .cards > ul {
+    grid-template-columns: 1fr;
+    gap: 12px 0;
+    max-width: 100%;
+  }
+}
+
+/* Flex container for each card: align icon and text side by side, tweak baseline visually */
+
+/* Icon sizing, spacing, and improved vertical alignment */
+
+/* Text block: normal block flow */
+
+/* Remove extra margin/padding from p */

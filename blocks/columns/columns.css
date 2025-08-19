@@ -86,238 +86,6 @@
   text-decoration: none;
 }
 
-.columns.columns2 > div {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 64px;
-  background: #f9f9f7;
-  padding: 60px 36px 60px 56px;
-  box-sizing: border-box;
-}
-
-@media (width <= 1100px) {
-  .columns.columns2 > div {
-    padding-left: 20px;
-    padding-right: 20px;
-    gap: 36px;
-  }
-}
-
-@media (width <= 900px) {
-  .columns.columns2 > div {
-    flex-direction: column;
-    gap: 32px;
-    align-items: stretch;
-    padding: 0 8px;
-  }
-}
-
-.columns.columns2 > div > .columns-img-col:first-child {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  max-width: 520px;
-  min-width: 280px;
-  flex: 1 1 400px;
-  gap: 18px;
-  margin-top: 0;
-}
-
-@media (width <= 1100px) {
-  .columns.columns2 > div > .columns-img-col:first-child {
-    max-width: 100%;
-  }
-}
-
-.columns.columns2 > div > .columns-img-col:first-child picture,
-.columns.columns2 > div > .columns-img-col:first-child img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  border-radius: 20px;
-  object-fit: cover;
-  margin-bottom: 0;
-  box-shadow: 0 4px 20px rgb(36 38 38 / 8%);
-  background: none;
-}
-
-.columns.columns2 > div > .columns-img-col:first-child p {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: none;
-  box-shadow: none;
-  align-items: flex-start;
-}
-
-.columns.columns2 > div > .columns-img-col:first-child a {
-  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
-  font-weight: 700;
-  font-size: 2.05rem;
-  line-height: 1.13;
-  color: #191919;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-  text-align: left;
-  width: 100%;
-  max-width: 100%;
-}
-
-@media (width <= 900px) {
-  .columns.columns2 > div > .columns-img-col:first-child a {
-    font-size: 1.18rem;
-  }
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 40px;
-  max-width: 400px;
-  min-width: 240px;
-  flex: 1 1 340px;
-  background: none;
-  box-shadow: none;
-  padding: 0;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) p {
-  margin: 0;
-  padding: 32px 28px 28px;
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 6px 28px rgb(50 60 50 / 9%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) picture,
-.columns.columns2 > div > .columns-img-col:nth-child(2) img {
-  width: 100%;
-  margin: 0 0 16px;
-  aspect-ratio: 16/9;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: none;
-  background: none;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) a {
-  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
-  font-size: 1.09rem;
-  font-weight: 700;
-  color: #181818;
-  line-height: 1.22;
-  text-transform: none;
-  margin: 0;
-  padding: 0 0 3px;
-  background: none;
-  border: none;
-  box-shadow: none;
-  text-align: left;
-  max-width: 100%;
-  width: 100%;
-}
-
-.columns.columns2 > div > .columns-img-col:nth-child(2) a + a {
-  font-size: 0.97rem;
-  font-weight: 400;
-  color: #636363;
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 1.4;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 220px;
-  max-width: 320px;
-  flex: 1 1 270px;
-  margin: 0;
-  padding: 0;
-  background: none;
-  box-shadow: none;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) p {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) a {
-  display: block;
-  font-family: Montserrat, var(--body-font-family), Arial, sans-serif;
-  font-size: 1.08rem;
-  font-weight: 700;
-  color: #181818;
-  line-height: 1.52;
-  text-transform: none;
-  letter-spacing: 0;
-  border-bottom: 1px solid #e7e7e7;
-  padding: 22px 0;
-  margin-bottom: 0;
-  background: none;
-  box-shadow: none;
-  text-align: left;
-  overflow-wrap: break-word;
-  width: 100%;
-}
-
-.columns.columns2 > div > div:not(.columns-img-col) a:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-@media (width <= 1100px) {
-  .columns.columns2 > div {
-    gap: 32px;
-  }
-
-  .columns.columns2 > div > .columns-img-col:first-child,
-  .columns.columns2 > div > .columns-img-col:nth-child(2),
-  .columns.columns2 > div > div:not(.columns-img-col) {
-    max-width: 100%;
-  }
-}
-
-@media (width <= 700px) {
-  .columns.columns2 > div {
-    gap: 18px;
-    padding: 0 4vw;
-  }
-}
-
-.columns.columns2 > div > .columns-img-col,
-.columns.columns2 > div > div:not(.columns-img-col) {
-  margin: 0;
-  padding: 0;
-  background: none;
-  box-shadow: none;
-}
-
-.columns.columns2 p {
-  margin: 0;
-  background: none;
-  box-shadow: none;
-}
-
 
 .columns.columns3 {
   display: flex;
@@ -2722,7 +2490,6 @@
   padding: 4.5rem 0;
 }
 
-/* Main row: align items at the top for natural heading-to-image alignment, tighter gap */
 .columns.columns1 > div {
   display: flex;
   justify-content: center;
@@ -2738,8 +2505,6 @@
   max-width: 1140px;
   margin: 0 auto;
   box-sizing: border-box;
-
-  /* Allow for a negative margin-top for the text column to nudge it upwards */
 }
 
 @media (width <= 900px) {
@@ -2778,7 +2543,6 @@
   }
 }
 
-/* Text column: nudge up, control max width and wrapping, more vertical air between elements */
 .columns.columns1 > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
@@ -2801,7 +2565,6 @@
   }
 }
 
-/* Heading styles: more geometric, larger, more open, wrap nicely */
 .columns.columns1 > div > div:not(.columns-img-col) > h1 {
   font-family: Orbitron, 'Montserrat Alternates', Arial, sans-serif;
   font-size: 3.6rem;
@@ -2825,7 +2588,6 @@
   }
 }
 
-/* Description: lighter, slightly larger, more margin below for button airiness */
 .columns.columns1 > div > div:not(.columns-img-col) > p:not(.button-container) {
   color: #bcbcbc;
   font-size: 1.23rem;
@@ -2845,7 +2607,6 @@
   }
 }
 
-/* Button container: more margin above, visual separation, and large gap for "double-button" feel */
 .columns.columns1 .button-container {
   display: flex;
   flex-direction: row;
@@ -2888,4 +2649,221 @@
   color: #fff;
   border-color: #111;
   text-decoration: none;
+}
+
+
+.columns.columns2 > div {
+  display: grid;
+  grid-template-columns: 1.18fr 1fr;
+  gap: 56px;
+  align-items: flex-start;
+  padding: 56px 32px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+@media (width <= 900px) {
+  .columns.columns2 > div {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 0 12px;
+  }
+}
+
+/* --- LEFT COLUMN CARD-STACK FIX --- */
+.columns.columns2 > div > .columns-img-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 600px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.columns.columns2 > div > .columns-img-col > p {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main image (first link/image) */
+.columns.columns2 > div > .columns-img-col > p > a:first-child picture img {
+  border-radius: 22px;
+  box-shadow: 0 2px 16px rgb(40 40 40 / 10%);
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+/* Headline as a block element following main image */
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(3) {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 2.1rem;
+  line-height: 1.13;
+  color: #191919;
+  letter-spacing: 0.02em;
+  margin: 28px 0 40px;
+  max-width: 96%;
+  text-align: left;
+  background: none;
+  border: none;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(3):any-link {
+  color: #191919;
+  text-decoration: none;
+}
+
+/* --- "CARD" GROUPINGS FOR FEATURE CARDS --- */
+
+/* Group image+text via flex: wrap each image+text pair in a visual card */
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(4),
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(6) {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgb(40 40 40 / 9%);
+  padding: 0;
+  margin-bottom: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Card Images (take full width, rounded top) */
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(4) picture img,
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(6) picture img {
+  width: 100%;
+  border-radius: 18px 18px 0 0;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+/* Card text (the next link after the image card anchor) */
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(5),
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(7) {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: 1.09rem;
+  font-weight: 500;
+  color: #181818;
+  line-height: 1.38;
+  padding: 18px 22px 16px;
+  margin: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+
+  /* visually part of the card above (matches card background) */
+  background-color: #fff;
+  border-radius: 0 0 18px 18px;
+  border-top: 1px solid #f2f2f2;
+  box-shadow: none;
+  position: relative;
+  top: -4px; /* tucks up to the card img */
+}
+
+/* Remove link color for card text */
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(5):any-link,
+.columns.columns2 > div > .columns-img-col > p > a:nth-child(7):any-link {
+  color: #181818;
+  text-decoration: none;
+}
+
+/* Responsive card adjustments */
+@media (width <= 900px) {
+  .columns.columns2 > div > .columns-img-col > p > a:nth-child(3) {
+    font-size: 1.12rem;
+  }
+
+  .columns.columns2 > div > .columns-img-col > p > a:nth-child(5),
+  .columns.columns2 > div > .columns-img-col > p > a:nth-child(7) {
+    font-size: 0.98rem;
+    padding: 12px 10px 8px;
+  }
+
+  .columns.columns2 > div > .columns-img-col > p > a:nth-child(4),
+  .columns.columns2 > div > .columns-img-col > p > a:nth-child(6) {
+    margin-bottom: 16px;
+  }
+}
+
+/* --- RIGHT COLUMN --- */
+.columns.columns2 > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 240px;
+  max-width: 420px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.columns.columns2 > div > div:not(.columns-img-col) p {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns2 > div > div:not(.columns-img-col) a {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.13rem;
+  color: #232323;
+  letter-spacing: 0.03em;
+  line-height: 1.22;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 16px 0 8px;
+  margin: 0;
+  background: none;
+  text-align: left;
+  width: 100%;
+  overflow-wrap: break-word;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.columns.columns2 > div > div:not(.columns-img-col) a:any-link {
+  color: #232323;
+  text-decoration: none;
+}
+
+.columns.columns2 > div > div:not(.columns-img-col) a:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (width <= 700px) {
+  .columns.columns2 > div {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 4vw;
+  }
+
+  .columns.columns2 > div > .columns-img-col,
+  .columns.columns2 > div > div:not(.columns-img-col) {
+    max-width: 100%;
+  }
+}
+
+.columns.columns2 > div,
+.columns.columns2 > div > .columns-img-col,
+.columns.columns2 > div > .columns-img-col > p,
+.columns.columns2 > div > div:not(.columns-img-col),
+.columns.columns2 > div > div:not(.columns-img-col) p {
+  align-items: flex-start;
 }

@@ -89,102 +89,6 @@
 }
 
 
-.cards.cards17 {
-  background: #fff;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 1200px;
-  box-sizing: border-box;
-}
-
-.cards.cards17 > ul {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-  place-items: start center;
-}
-
-.cards.cards17 > ul > li {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: stretch;
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  box-shadow: none;
-  aspect-ratio: 1 / 1;
-  min-width: 0;
-  min-height: 0;
-}
-
-.cards.cards17 .cards-card-image {
-  flex: 1 1 auto;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: stretch;
-  background: #fff;
-  overflow: hidden;
-  border-radius: 18px;
-}
-
-.cards.cards17 .cards-card-image picture,
-.cards.cards17 .cards-card-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.cards.cards17 .cards-card-image img {
-  object-fit: cover;
-  border-radius: 18px;
-  background: #f0f0f0;
-}
-
-.cards.cards17 .cards-card-body {
-  display: none;
-}
-
-.cards.cards17 > ul > li::before {
-  display: none;
-}
-
-@media (width <= 900px) {
-  .cards.cards17 > ul {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    max-width: 600px;
-  }
-
-  .cards.cards17 > ul > li,
-  .cards.cards17 .cards-card-image img {
-    border-radius: 12px;
-  }
-}
-
-@media (width <= 600px) {
-  .cards.cards17 > ul {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    max-width: 100%;
-  }
-
-  .cards.cards17 > ul > li,
-  .cards.cards17 .cards-card-image img {
-    border-radius: 8px;
-  }
-}
-
-
 .cards {
   padding-left: 0;
   padding-right: 0;
@@ -1400,7 +1304,6 @@
   display: none;
 }
 
-/* Use Grid for card layout */
 .cards.cards10 > ul {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1430,13 +1333,12 @@
   }
 }
 
-/* All cards must be the same height regardless of image presence */
 .cards.cards10 > ul > li {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  min-height: 410px; /* Ensures even cards if image missing */
+  min-height: 410px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 1px 4px rgb(40 48 68 / 8%);
@@ -1445,7 +1347,6 @@
   transition: box-shadow 0.15s;
 }
 
-/* Make sure .cards-card-image always takes space, even if image is missing */
 .cards.cards10 .cards-card-image {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -1461,7 +1362,6 @@
   overflow: hidden;
 }
 
-/* Ensure images fill the image area */
 .cards.cards10 .cards-card-image img {
   width: 100%;
   height: 100%;
@@ -1474,7 +1374,6 @@
   left: 0;
 }
 
-/* Card body spacing and alignment */
 .cards.cards10 .cards-card-body {
   background: #fff;
   padding: 20px 20px 22px;
@@ -1485,7 +1384,6 @@
   box-sizing: border-box;
 }
 
-/* Tag pill */
 .cards.cards10 .cards-card-body p:first-child {
   display: inline-block;
   text-transform: uppercase;
@@ -1523,4 +1421,98 @@
   display: block;
   -webkit-line-clamp: unset;
   -webkit-box-orient: initial;
+}
+
+
+.cards.cards17 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards.cards17 > ul > li::before {
+  display: none;
+}
+
+.cards.cards17 > ul > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.cards.cards17 .cards-card-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cards.cards17 .cards-card-image picture,
+.cards.cards17 .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: block;
+  border-radius: 16px;
+}
+
+.cards.cards17 .cards-card-image img {
+  object-fit: cover;
+  background: #f8f8f8;
+}
+
+.cards.cards17 .cards-card-body {
+  display: none;
+}
+
+@media (width <= 900px) {
+  .cards.cards17 > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 600px;
+  }
+
+  .cards.cards17 > ul > li,
+  .cards.cards17 .cards-card-image img,
+  .cards.cards17 .cards-card-image {
+    border-radius: 10px;
+  }
+}
+
+@media (width <= 600px) {
+  .cards.cards17 > ul {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .cards.cards17 > ul > li,
+  .cards.cards17 .cards-card-image img,
+  .cards.cards17 .cards-card-image {
+    border-radius: 6px;
+  }
 }

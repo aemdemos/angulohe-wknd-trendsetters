@@ -9,43 +9,134 @@
           "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults-casual-sport",
           "urlHash": "1a14744466075b2d00884f27fb69e2633b6fcb84",
           "uuid": "1a147444-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/",
           "urlHash": "1b9ba84f36ee3a519917302a79dfd970725bae31",
           "uuid": "1b9ba84f-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
           "urlHash": "1cfeb2756419a8f56a89a355f5557c3321845adb",
           "uuid": "1cfeb275-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/faq",
           "urlHash": "429d6f000c5a6e38a121160bf56d01b17365cffe",
           "uuid": "429d6f00-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-insights",
           "urlHash": "67430c465ff7767e6ae98a0cffa44cd32754a351",
           "uuid": "67430c46-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
           "urlHash": "971148fccf483ccd07f6ef722bc01c7fb46f61d5",
           "uuid": "971148fc-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
           "urlHash": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959",
           "uuid": "9b4d89f8-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
@@ -57,13 +148,39 @@
           "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults",
           "urlHash": "d2dd722de7842a6232ce56b1307d383ff72c9358",
           "uuid": "d2dd722d-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
           "urlHash": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf",
           "uuid": "f5bdda37-00-6e70765a003047818ea5700b557b8d01b43078df",
-          "xpath": "/html[1]/body[1]/div[1]"
+          "xpath": "/html[1]/body[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
@@ -75,21 +192,11 @@
               "element_id": "html__body__div",
               "differences": [
                 {
-                  "change_type": "deletion",
+                  "change_type": "equal",
                   "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
                 }
               ],
-              "dissimilarity_score": 1.0
-            },
-            {
-              "element_id": "html__body__div",
-              "differences": [
-                {
-                  "change_type": "deletion",
-                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
-                }
-              ],
-              "dissimilarity_score": 1.0
+              "dissimilarity_score": 0.0
             }
           ],
           "similarity_score": 0.0
@@ -109,66 +216,6 @@
           "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults-casual-sport",
           "urlHash": "1a14744466075b2d00884f27fb69e2633b6fcb84",
           "uuid": "1a147444-06-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/",
-          "urlHash": "1b9ba84f36ee3a519917302a79dfd970725bae31",
-          "uuid": "1b9ba84f-12-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
-          "urlHash": "1cfeb2756419a8f56a89a355f5557c3321845adb",
-          "uuid": "1cfeb275-08-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/faq",
-          "urlHash": "429d6f000c5a6e38a121160bf56d01b17365cffe",
-          "uuid": "429d6f00-05-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/fashion-insights",
-          "urlHash": "67430c465ff7767e6ae98a0cffa44cd32754a351",
-          "uuid": "67430c46-07-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
-          "urlHash": "971148fccf483ccd07f6ef722bc01c7fb46f61d5",
-          "uuid": "971148fc-09-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
-          "urlHash": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959",
-          "uuid": "9b4d89f8-08-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
-          "urlHash": "be00f351b0490d8b536bf724216d6530c30d5684",
-          "uuid": "be00f351-07-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults",
-          "urlHash": "d2dd722de7842a6232ce56b1307d383ff72c9358",
-          "uuid": "d2dd722d-12-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
-          "urlHash": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf",
-          "uuid": "f5bdda37-10-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
-          "urlHash": "f5e200536a2c91b06effaf661df0675e13f262b6",
-          "uuid": "f5e20053-09-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
           "differences": [
             {
@@ -180,7 +227,174 @@
                 }
               ],
               "dissimilarity_score": -0.0
-            },
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/",
+          "urlHash": "1b9ba84f36ee3a519917302a79dfd970725bae31",
+          "uuid": "1b9ba84f-12-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
+          "urlHash": "1cfeb2756419a8f56a89a355f5557c3321845adb",
+          "uuid": "1cfeb275-08-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/faq",
+          "urlHash": "429d6f000c5a6e38a121160bf56d01b17365cffe",
+          "uuid": "429d6f00-05-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-insights",
+          "urlHash": "67430c465ff7767e6ae98a0cffa44cd32754a351",
+          "uuid": "67430c46-07-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
+          "urlHash": "971148fccf483ccd07f6ef722bc01c7fb46f61d5",
+          "uuid": "971148fc-09-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
+          "urlHash": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959",
+          "uuid": "9b4d89f8-08-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
+          "urlHash": "be00f351b0490d8b536bf724216d6530c30d5684",
+          "uuid": "be00f351-07-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]"
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults",
+          "urlHash": "d2dd722de7842a6232ce56b1307d383ff72c9358",
+          "uuid": "d2dd722d-12-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
+          "urlHash": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf",
+          "uuid": "f5bdda37-10-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
+          "urlHash": "f5e200536a2c91b06effaf661df0675e13f262b6",
+          "uuid": "f5e20053-09-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "differences": [
             {
               "element_id": "html__body__footer",
               "differences": [
@@ -352,49 +566,140 @@
           "urlHash": "1a14744466075b2d00884f27fb69e2633b6fcb84",
           "uuid": "1a147444-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/",
           "urlHash": "1b9ba84f36ee3a519917302a79dfd970725bae31",
           "uuid": "1b9ba84f-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
           "urlHash": "1cfeb2756419a8f56a89a355f5557c3321845adb",
           "uuid": "1cfeb275-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/faq",
           "urlHash": "429d6f000c5a6e38a121160bf56d01b17365cffe",
           "uuid": "429d6f00-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-insights",
           "urlHash": "67430c465ff7767e6ae98a0cffa44cd32754a351",
           "uuid": "67430c46-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
           "urlHash": "971148fccf483ccd07f6ef722bc01c7fb46f61d5",
           "uuid": "971148fc-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
           "urlHash": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959",
           "uuid": "9b4d89f8-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
@@ -408,14 +713,40 @@
           "urlHash": "d2dd722de7842a6232ce56b1307d383ff72c9358",
           "uuid": "d2dd722d-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
           "urlHash": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf",
           "uuid": "f5bdda37-00-6e70765a003047818ea5700b557b8d01b43078df",
           "xpath": "/html[1]/body[1]/div[1]",
-          "section": "section-1"
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
@@ -428,21 +759,11 @@
               "element_id": "html__body__div",
               "differences": [
                 {
-                  "change_type": "deletion",
+                  "change_type": "equal",
                   "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
                 }
               ],
-              "dissimilarity_score": 1.0
-            },
-            {
-              "element_id": "html__body__div",
-              "differences": [
-                {
-                  "change_type": "deletion",
-                  "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe"
-                }
-              ],
-              "dissimilarity_score": 1.0
+              "dissimilarity_score": 0.0
             }
           ],
           "similarity_score": 0.0
@@ -461,49 +782,140 @@
           "urlHash": "1a14744466075b2d00884f27fb69e2633b6fcb84",
           "uuid": "1a147444-06-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/",
           "urlHash": "1b9ba84f36ee3a519917302a79dfd970725bae31",
           "uuid": "1b9ba84f-12-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
           "urlHash": "1cfeb2756419a8f56a89a355f5557c3321845adb",
           "uuid": "1cfeb275-08-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/faq",
           "urlHash": "429d6f000c5a6e38a121160bf56d01b17365cffe",
           "uuid": "429d6f00-05-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/fashion-insights",
           "urlHash": "67430c465ff7767e6ae98a0cffa44cd32754a351",
           "uuid": "67430c46-07-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
           "urlHash": "971148fccf483ccd07f6ef722bc01c7fb46f61d5",
           "uuid": "971148fc-09-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
           "urlHash": "9b4d89f80efba6f8dbcb1e3da8ea8ffa8771a959",
           "uuid": "9b4d89f8-08-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-style",
@@ -517,19 +929,25 @@
           "urlHash": "d2dd722de7842a6232ce56b1307d383ff72c9358",
           "uuid": "d2dd722d-12-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__footer",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
         },
         {
           "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
           "urlHash": "f5bdda3762c99b21ef3c8f0ca75cb53a00b4e8bf",
           "uuid": "f5bdda37-10-a507e040135207256fc0c4fd07f12510b5a9e729",
-          "xpath": "/html[1]/body[1]/footer[1]",
-          "section": "section-2"
-        },
-        {
-          "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
-          "urlHash": "f5e200536a2c91b06effaf661df0675e13f262b6",
-          "uuid": "f5e20053-09-a507e040135207256fc0c4fd07f12510b5a9e729",
           "xpath": "/html[1]/body[1]/footer[1]",
           "section": "section-2",
           "differences": [
@@ -542,7 +960,17 @@
                 }
               ],
               "dissimilarity_score": -0.0
-            },
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
+          "urlHash": "f5e200536a2c91b06effaf661df0675e13f262b6",
+          "uuid": "f5e20053-09-a507e040135207256fc0c4fd07f12510b5a9e729",
+          "xpath": "/html[1]/body[1]/footer[1]",
+          "section": "section-2",
+          "differences": [
             {
               "element_id": "html__body__footer",
               "differences": [
@@ -1370,6 +1798,96 @@
     }
   ],
   "pages": [
+    {
+      "url": "https://www.wknd-trendsetters.site/",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Trendsetters, game changers, night owls From courtside cool to beachy vibes, discover the freshest looks and real stories. Get inspired by bold styles for every adventure\u2014day or night. See more Lookbook Trends made for your lifestyle Fresh drops for every mood\u2014tennis whites, beach brights, party fits. Your next look starts here. Game on! Sporty vibes meet street style. Sneakers, sets, and all the cool you need. Chill never looked this good. Easy layers, bold extras\u2014fun, effortless, always you. Ready to shine? Statement looks and playful details for nights you\u2019ll never forget. Remix your style. Layer, clash, repeat\u2014make every outfit your own. Hot new labels. Discover the brands everyone\u2019s buzzing about\u2014before they go big. Real people, real style. See how trendsetters own the scene, one outfit at a time. Season\u2019s essentials. Stay ahead with our top picks\u2014what\u2019s trending right now. Browse Join Hot right now Style that never sleeps Get inspired by real looks, real stories, and the freshest trends in youth fashion. See how today\u2019s style stars own every moment. Browse Chill 3 min read Courtside cool, city strolls Alex mixes tennis classics with street flair\u2014serving up a look that\u2019s game, set, match for any scene. Read Sunny 4 min read Wave-ready, wow-worthy Taylor keeps it breezy in bold colors and shades\u2014proof that beach days are made for standout style. Read Night 2 min read Glow up after hours Jordan turns up the party in neon layers and kicks\u2014because the best nights start with a killer fit. Read Active 5 min read Play hard, dress harder Morgan fuses sporty edge with fresh brands\u2014making every match a style moment to remember. Read Trends Sporty Nightlife Fresh fits, bold moves Game on, style up Party looks, all night Style Qs, real quick answers Fresh tips for your everyday look. Sneakers for night\u2014yes or no? Rock bold kicks with a sleek dress or sharp pants. Add standout accessories and you\u2019re set for any party. What\u2019s hot for beach days? Go bright, breezy, and bold. Sporty suits, bucket hats, and oversized sunnies bring the fun. Mixing sporty with casual\u2014can I? Totally! Try a tennis skirt with a graphic tee or toss a hoodie over swimwear for instant cool. How do basics get a glow-up? Layer textures, add color pops, or stack on chunky jewelry. Even a cap can flip your vibe. Join the style revolution Get trend alerts, style inspo, and exclusive tips. Fresh looks, fun vibes\u2014straight to your inbox. Don\u2019t miss out! Sign up Connect Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0000000000000002
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/blog/fashion-blog-post",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves, all you Dive into the latest trends\u2014casual, sporty, and always fun. See how real style shines at the beach, on the court, and after dark. Read now See trends Fresh fits, bold moves, all you Step into the scene\u2014where street style meets sport, and every day is a runway. From tennis courts to late-night parties, we spotlight the coolest trends and the stories behind them. Get inspired, get noticed, and make every outfit an adventure. Read more See trends Trends Fresh fits, bold moves See how style meets the street. From tennis courts to city nights, discover what\u2019s trending now. Sport Game, set, match style Serve up looks on and off the court. Sporty vibes, effortless cool. Beach Sunkissed & styled out Catch waves and compliments. Beach days, bright fits, endless fun. Party after dark Nightlife looks that turn heads. Shine bright, dance all night. Weekend escapes Pack light, dress right. Adventure-ready outfits for every getaway. Chill city strolls Urban walks, casual talks. Laid-back layers for every step. Coffee run cool Espresso yourself. Comfy, cute, and always on trend. Creative collabs Meet the makers behind the brands. Fresh drops, unique stories. Style Q&A Your fashion questions, answered. Tips, tricks, and inspo from the pros. Fresh looks, bold moves Step into the scene\u2014outfits that pop, moments that move. From courtside cool to beachside vibes, get inspired by real style in action. Scroll, swoon, and steal the look. See more Fresh looks, bold moves, all you Read more Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0000000000000002
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/blog/fashion-trends-young-culture",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves, all you Dive into the latest trends, stories, and style inspo for every adventure\u2014on and off the court. Read more See trends Taylor Brooks Casual Vibes Sporty Looks Party Ready Trends made for living bold From tennis courts to city streets, we\u2019re spotting the freshest looks on the coolest crowds. Dive into the latest styles that make every day feel like a runway. Whether you\u2019re beach-bound or headed out for a night of fun, these outfits are all about comfort, confidence, and a splash of attitude. We\u2019re here for the bold and the playful. Get inspired by real stories and real people rocking new brands in their element. Your next favorite look is just a scroll away\u2014let\u2019s make every moment a style moment. Fresh fits, bold stories All Trends Casual Sporty Tennis whites, city nights Alex serves up style on the court Beach days, bold ways Taylor rocks neon at sunset Party looks that pop Morgan lights up the dance floor Street style, all smiles Jordan keeps it cool downtown Chill vibes, fresh kicks Riley\u2019s sneaker game is strong Layer up, stand out Casey mixes prints for fall Denim dreams Skylar\u2019s go-to for every day Sporty chic, always unique Peyton\u2019s look is all about comfort Retro remix Drew brings back the classics Color splash Quinn\u2019s outfit is pure fun Night out, lights on Harper\u2019s sequins steal the show Easy layers, big energy Jamie\u2019s look is effortless cool Fresh brands, fearless moves Avery\u2019s style is all action Weekend wanderer Reese explores in style Bold basics Dakota keeps it simple, sharp Poolside cool Emerson\u2019s shades are on point Game, set, match Finley\u2019s tennis look wins Glow up after dark Sage\u2019s party fit shines bright Fresh faces, fresh fits Rowan\u2019s look is all smiles Everyday icons Blake\u2019s style is always trending Style in every snapshot Fresh looks, bold moves, real moments. Tennis court cool Game, set, match\u2014serve up sporty style with every swing. Effortless, energetic, and always on trend. Beach day vibes Sun, sand, and statement shades. Catch the latest swimwear and carefree energy in every shot. Night out energy Lights, music, and unforgettable outfits. Party looks that turn heads and keep the fun going all night. Style that speaks volumes \u201cI love how every trend here feels fresh, fun, and totally wearable. From tennis courts to late-night parties, these looks always keep me inspired and ready to try something new.\u201d Taylor Brooks Fashion Enthusiast Trends that turn heads Fresh looks, bold moves, good vibes. Join in Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 0.9999999999999996
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/blog/latest-trends-young-casual-fashion",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves trendsetters only style in motion From courtside to beachside, we\u2019re serving up the latest looks for every adventure. Night outs, chill days, and everything in between\u2014discover how real people wear what\u2019s next. Read more Fresh looks, bold moves Step into the world of street style, party vibes, and sporty flair. Discover how today\u2019s trendsetters mix comfort with cool\u2014on the court, at the beach, or out all night. Get inspired by real stories, real outfits, and real fun. Read more See trends Fresh finds & style inspo Trends for every vibe June 12 \u2022 Sporty Tennis whites, all day Alex serves up summer style on the court\u2014think crisp polos, bold sneakers, and a winning attitude. June 10 \u2022 Beach Sunkissed & effortless Taylor rocks breezy linen and bucket hats for a chill day by the waves. Sun, sand, and standout looks. June 8 \u2022 Nightlife Glow up after dark Jordan lights up the night in neon accents and statement jackets. Party energy, all night long. June 5 \u2022 Street City strolls, cool kicks Morgan keeps it casual with oversized tees and chunky sneakers\u2014urban adventures never looked so good. June 2 \u2022 Festival Festival fits, major hits Riley mixes bold prints and layered jewelry for a look that\u2019s ready to dance from day to night. May 30 \u2022 Skate Rolling in style Casey shreds in graphic tees and relaxed cargos\u2014skatepark style with a twist of attitude. May 28 \u2022 Chill Laid-back, always on trend Jamie lounges in soft knits and retro shades\u2014proof that comfort and cool go hand in hand. May 25 \u2022 Active Move, groove, repeat Drew hits the track in color-blocked sets and fresh trainers\u2014sporty looks for every pace. Fresh looks, bold moments Scroll through the latest street style, party vibes, and sporty chic. Get inspired by real people, real trends. Tennis court cool Ace your style game with crisp whites, retro sneakers, and a pop of neon. Serve up looks on and off the court. Beach day energy Sunkissed skin, breezy fits, and playful prints. Catch the wave of summer\u2019s hottest trends. Night out sparkle Glitter, bold colors, and statement pieces. Turn heads and own the dance floor all night long. by Taylor Brooks Trends that turn heads Stay ahead of the style game. Discover fresh looks, bold brands, and the stories behind the coolest outfits for every adventure\u2014beach days, tennis matches, and unforgettable nights out. Love what you see? Join our crew for exclusive updates, style inspo, and the latest buzz in young fashion. Subscribe Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0000000000000004
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/faq",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Got questions? We\u2019ve got answers. Fashion FAQs, answered fast Curious about trends, tips, or our vibe? Find all the style scoop and community know-how right here. How do I spot the latest trends? We keep it fresh! Check our weekly trend roundups and street style snaps for what\u2019s hot right now. Can I share my own outfit pics? Absolutely! Tag us on socials or use our upload form to get featured in our next style story. Where do you find your style inspo? From city streets to beach parties, we\u2019re always on the lookout for bold looks and cool creators. How can I join your community? Sign up for our newsletter or jump into the comments\u2014everyone\u2019s welcome to join the fun! Let\u2019s connect Questions? Slide into our inbox Didn\u2019t find your answer? Reach out and we\u2019ll get back with the latest scoop. Email us hello@fashionblog.com Call us +1 (555) 123-9876 Visit us 101 Trend Ave, SF, CA Got a question? We\u2019ve got style. Curious about trends, tips, or how to rock your look? Check out our FAQs for all the answers on casual, sporty, and party-ready fashion. We break down the latest styles, share outfit inspo, and help you stay fresh for every occasion\u2014tennis courts, beach days, or late-night adventures. Dive in and discover how to make every day a runway. Join now Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0000000000000016
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/fashion-insights",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe WKND Trendsetters Blog Fresh looks, bold moves Latest Articles Casual Cool May 12 Tennis style, redefined Beach Vibes May 10 Sunkissed and effortless Night Out May 8 Party fits that pop Sport Mode May 5 Game on, style up Style in every snapshot Fresh looks, bold vibes, endless inspo Fresh fits, bold moves, all day From tennis courts to neon nights, discover the latest trends, style inspo, and stories from the coolest scenes. Dive into a world where fashion meets fun\u2014your next look starts here. Read more Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/fashion-trends-of-the-season",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves Trends for every vibe. From tennis whites to neon nights, we\u2019re serving up the coolest outfits and the real stories behind them. Get inspired, get noticed, and make every day a runway. Read more See trends Trend alert Fresh fits, bold moves Dive into the latest street style, sporty looks, and party-ready outfits. Discover how young trendsetters are rocking new brands while living their best lives\u2014on the court, at the beach, or out all night. Read more Style in every snapshot Trendy looks, real moments Style in every snapshot Fresh looks, bold vibes, endless inspo Trends that turn heads Fresh looks, bold moves, endless inspo. Join now Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 0.9999999999999939
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves Style that never sleeps Tennis looks, game strong Beach vibes, sun-kissed style Party nights, trend on Dive into the latest streetwear, sport-inspired looks, and party-ready outfits. See how real people rock new brands while living their best lives\u2014on the court, at the beach, or out all night. Get inspired, get noticed. Read more See trends Trending now Fresh fits, bold moves Young style, real stories Follow on Facebook Connect on LinkedIn Read on Medium Chat on X Dive into the latest looks, street style inspo, and stories from the coolest scenes. From tennis courts to neon-lit nights, see how new brands are making waves in everyday adventures. Get ready for a style ride that\u2019s anything but ordinary. Fresh finds & style inspo Trends for every vibe Casual May 12 Tennis looks that serve Sporty May 10 Streetwear on the move Beach May 8 Sunkissed & styled Party May 5 Night out, bold fits Style in every snapshot Trendy looks, real moments Fresh fits, bold moves Read more Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 1.0000000000000004
+    },
+    {
+      "url": "https://www.wknd-trendsetters.site/fashion-trends-young-adults-casual-sport",
+      "differences": [
+        {
+          "change_type": "equal",
+          "text": "Trends Casual Streetwear Everyday looks, always fresh. Sporty Move easy, look sharp. Party Turn heads after dark. Now Trending Tennis Serve up cool style. Beach Chill fits, sun vibes. Festival Dance, play, repeat. Inspo Style Files Real looks, real people. Blog Watch Fresh brands, hot takes. How To Trend tips, made easy. Fresh fits, bold moves See how trendsetters own every moment. Discover About Blog Support Contact FAQ Subscribe Fresh fits, bold moves, all you From tennis courts to neon nights, we\u2019re serving up the latest trends and stories from the coolest scenes. Dive into the world where style meets adventure\u2014because fashion should be as fun as you are. Read more Trend alert Fresh fits, bold moves Dive into the latest street style, sporty looks, and party-ready outfits. See how young trendsetters rock new brands from courtside to the dance floor. Taylor Brooks June 7, 2024 \u2022 4 min read Read more Fresh finds & style inspo Trends for every vibe Casual Tennis looks that serve Ace your day with sporty style\u2014see how Jamie rocks bold sneakers and a vintage tee on the court. Beach Sunkissed & effortless Taylor chills seaside in breezy linen and bucket hats\u2014get the scoop on this summer\u2019s must-haves. Nightlife Party after dark Morgan lights up the night in neon and metallics\u2014discover the best fits for your next night out. Street City strolls, cool fits Jordan mixes oversized hoodies with chunky kicks\u2014urban style made easy for every adventure. Sport Move in style Casey\u2019s athleisure edit: track pants, crop tops, and attitude\u2014perfect for on-the-go days. Festival Vibes for days Skylar\u2019s festival picks: fringe, bold prints, and all the energy\u2014see what\u2019s trending this season. Chill Laid-back, always cool Riley keeps it comfy in joggers and slides\u2014find out how to master the art of relaxed style. Retro Throwback energy Avery brings back \u201890s flair with crop tops and baggy jeans\u2014nostalgia never looked so fresh. Fashion Blog Facebook Instagram X LinkedIn YouTube Trends Style Looks Events Brands Tips Inspire Stories People Culture Vibes Fun Explore Travel Beach Night Sport Chill"
+        }
+      ],
+      "similarity_score": 0.999999999999999
+    },
     {
       "url": "https://www.wknd-trendsetters.site/latest-trends-young-fashion",
       "differences": [

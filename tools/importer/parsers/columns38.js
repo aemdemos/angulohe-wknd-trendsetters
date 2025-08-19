@@ -1,34 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block name header, exactly as in the example
+  // Correct header: single column, exactly as specified
   const headerRow = ['Columns (columns38)'];
 
-  // Get all top-level columns (direct children of the grid)
-  const columnDivs = element.querySelectorAll(':scope > div');
+  // Extract columns (each child div is a column)
+  const columns = Array.from(element.querySelectorAll(':scope > div'));
 
-  // For each column, include ALL content (text, images, buttons, lists, etc.)
-  const columnsRow = Array.from(columnDivs).map((col) => {
-    // If the column has multiple children, include all as an array (preserving node order)
-    // If only one child, just include it
-    // If there is raw text (not wrapped in a child element), include it too
-    const cellContent = [];
-    // Add any text node (not empty or whitespace only)
-    Array.from(col.childNodes).forEach(node => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        cellContent.push(node);
-      } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-        // Wrap text node in a span to keep it in the cell
-        const span = document.createElement('span');
-        span.textContent = node.textContent;
-        cellContent.push(span);
-      }
-    });
-    // If only one item, return it directly; else return array
-    return cellContent.length === 1 ? cellContent[0] : cellContent;
-  });
+  // Edge case: If columns are empty, do nothing
+  if (columns.length === 0) return;
 
-  // Compose the table: one header row, one content row
-  const cells = [headerRow, columnsRow];
+  // Single row with multiple columns, matching the example
+  const contentRow = columns;
+
+  // Cells array: header is single column, then content row with one cell per column
+  const cells = [headerRow, contentRow];
+
+  // Create block table
   const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Fix the header row: merge header cell across all columns
+  if (columns.length > 1) {
+    const tr = block.querySelector('tr');
+    const th = tr.querySelector('th');
+    th.setAttribute('colspan', columns.length);
+    // Remove any extra header cells if present
+    while (th.nextSibling) {
+      tr.removeChild(th.nextSibling);
+    }
+  }
+  // Replace with the new block
   element.replaceWith(block);
 }

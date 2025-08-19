@@ -1,27 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header should exactly match example
+  // Header row exactly as in the example
   const headerRow = ['Cards'];
-  // Get all direct children representing card wrappers
-  const cardDivs = element.querySelectorAll(':scope > div');
-  
-  const rows = [headerRow];
-  cardDivs.forEach(cardDiv => {
-    // Each card: grab the relevant text node (keep p as is for semantic meaning)
-    // It's always a <p> inside each cardDiv
+
+  // Get all direct card elements
+  const cardDivs = Array.from(element.querySelectorAll(':scope > div'));
+  const cardRows = cardDivs.map((cardDiv) => {
+    // Each card's description is in a <p>
     const p = cardDiv.querySelector('p');
-    // Defensive: only add row if content exists
-    if (p && p.textContent.trim()) {
-      rows.push([p]);
+    // Always reference the existing <p> node, not cloning or extracting text
+    // Fallback: if no <p> found, use all text as a <span>
+    let cellContent;
+    if (p) {
+      cellContent = p;
+    } else {
+      const span = document.createElement('span');
+      span.textContent = cardDiv.textContent.trim();
+      cellContent = span;
     }
+    return [cellContent];
   });
 
-  // Only create the table if there are card rows
-  if (rows.length > 1) {
-    const table = WebImporter.DOMUtils.createTable(rows, document);
-    element.replaceWith(table);
-  } else {
-    // If no cards are found, remove the element
-    element.remove();
-  }
+  // Build the table as per example (1 column, first header row)
+  const cells = [headerRow, ...cardRows];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace the source element with the new block table
+  element.replaceWith(table);
 }

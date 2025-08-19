@@ -1,8 +1,8 @@
 /* stylelint-disable no-descending-specificity */
 .tabs .tabs-list {
   display: flex;
-  gap: 64px;
-  max-width: 100%;
+  gap: 80px;
+  max-width: 860px;
   font-size: var(--body-font-size-xs);
   overflow-x: auto;
   flex-direction: row;
@@ -11,9 +11,12 @@
   background: transparent;
   border: none;
   padding: 0;
-  margin: 0 0 12px;
+  margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  padding-top: 32px;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 @media (width >= 600px) {
@@ -74,9 +77,13 @@
 
 .tabs {
   background: #000;
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 0;
+  padding-bottom: 64px;
   box-sizing: border-box;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tabs .tabs-list,
@@ -93,11 +100,11 @@
   outline: none;
   border-radius: 0;
   box-shadow: none;
-  color: #8a8a8a;
+  color: #999;
   font-family: Montserrat, Arial, sans-serif;
   font-size: 1.13rem;
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.13em;
   padding: 0;
   margin: 0;
   min-width: 56px;
@@ -110,11 +117,12 @@
   cursor: pointer;
   transition: color 0.2s;
   background-color: transparent;
+  text-transform: uppercase;
 }
 
 .tabs .tabs-list .tabs-tab p {
   margin: 0;
-  padding: 0 0 6px;
+  padding: 0 0 8px;
   font-size: inherit;
   font-family: inherit;
   color: inherit;
@@ -123,15 +131,16 @@
   position: relative;
   display: inline-block;
   border-bottom: none;
+  text-transform: inherit;
 }
 
 .tabs .tabs-list .tabs-tab[aria-selected="true"] {
   color: #fff;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .tabs .tabs-list .tabs-tab[aria-selected="true"] p {
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
   border-radius: 1px;
   width: auto;
   min-width: 1.5em;
@@ -159,11 +168,11 @@
 }
 
 .tabs .tabs-panel[aria-hidden="false"] {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .tabs .tabs-panel > div {
@@ -171,22 +180,26 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 980px;
+  max-width: 800px;
   margin: 0 auto;
-  gap: 24px;
-  padding: 0;
+  gap: 48px;
+  padding: 0 12px;
 }
 
 .tabs .tabs-panel h3 {
   color: #fff;
   font-family: Montserrat, Arial, sans-serif;
-  font-size: 2.75rem;
-  font-weight: 400;
-  letter-spacing: 0.13em;
+  font-size: 2.7rem;
+  font-weight: 800;
+  letter-spacing: 0.23em;
   text-align: center;
   line-height: 1.08;
   margin: 0 0 18px;
   text-transform: uppercase;
+  margin-top: 56px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  max-width: 720px;
 }
 
 @media (width <= 900px) {
@@ -311,5 +324,96 @@
   .tabs .tabs-panel h3 {
     font-size: 1.35rem;
     letter-spacing: 0.06em;
+  }
+}
+
+/* Tabs navigation bar */
+
+/* Tab styling */
+
+/* Active tab */
+
+/* Tab text */
+
+/* Active tab underline */
+
+/* Visible panel layout */
+
+/* Main content stack for headline and image */
+
+/* Headline styling */
+
+/* Image container */
+.tabs .tabs-panel picture {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 28px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Image itself */
+.tabs .tabs-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  object-fit: cover;
+  margin: 0 auto;
+  background: #000;
+}
+
+/* Responsive adjustments for headline and image */
+@media (width <= 900px) {
+  .tabs .tabs-list {
+    gap: 38px;
+    max-width: 96vw;
+    padding-top: 20px;
+  }
+
+  .tabs .tabs-panel > div {
+    max-width: 98vw;
+    padding: 0 2vw;
+    gap: 32px;
+  }
+
+  .tabs .tabs-panel picture,
+  .tabs .tabs-panel img {
+    max-width: 96vw;
+    border-radius: 18px;
+  }
+
+  .tabs .tabs-panel h3 {
+    font-size: 1.55rem;
+    letter-spacing: 0.12em;
+    margin-top: 30px;
+    max-width: 96vw;
+  }
+}
+
+@media (width <= 600px) {
+  .tabs .tabs-list {
+    gap: 16px;
+    padding-top: 10px;
+  }
+
+  .tabs .tabs-panel > div {
+    max-width: 99vw;
+    padding: 0 1vw;
+    gap: 20px;
+  }
+
+  .tabs .tabs-panel picture,
+  .tabs .tabs-panel img {
+    max-width: 99vw;
+    border-radius: 10px;
+  }
+
+  .tabs .tabs-panel h3 {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    margin-top: 14px;
+    max-width: 98vw;
   }
 }

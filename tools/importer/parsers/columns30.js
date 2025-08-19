@@ -1,31 +1,22 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Get the grid container (the columns wrapper)
+  // Find the grid container that holds our columns
   const grid = element.querySelector('.grid-layout');
   if (!grid) return;
+  // Get all direct children of the grid, which are the content blocks for each column
+  const gridChildren = Array.from(grid.children);
 
-  // 2. Get all direct column children from grid
-  const columns = Array.from(grid.children);
-  // Defensive: If columns are missing, bail out
-  if (columns.length < 4) return;
-
-  // For this layout, columns[0]: left text, columns[1]: tags, columns[2]: heading, columns[3]: rich text
-  // Compose the third column by grouping heading and rich text together
-  const col3 = document.createElement('div');
-  col3.appendChild(columns[2]);
-  col3.appendChild(columns[3]);
-
-  // 3. Table header row: single cell, matches the example exactly
+  // Compose the header row EXACTLY as required: single cell
   const headerRow = ['Columns (columns30)'];
-  // 4. Content row: three columns
-  const contentRow = [columns[0], columns[1], col3];
 
-  // 5. Create the table block
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow,
-  ], document);
+  // Compose the content row: a single array with all columns as cells
+  const contentRow = gridChildren;
 
-  // 6. Replace the original element with the table
-  element.replaceWith(table);
+  // Create the cells array
+  const cells = [headerRow, contentRow];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace the source element with the new block table
+  element.replaceWith(block);
 }

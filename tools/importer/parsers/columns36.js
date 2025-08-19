@@ -1,33 +1,41 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Ensure we are referencing the correct grid block
-  const grid = element.querySelector('.grid-layout');
+  // Find the grid-layout that holds the two main columns
+  const container = element.querySelector('.container');
+  if (!container) return;
+  const grid = container.querySelector('.grid-layout');
   if (!grid) return;
-  // Get the main two columns
-  const gridChildren = Array.from(grid.children);
-  if (gridChildren.length < 2) return;
-  const left = gridChildren[0]; // text content
-  const right = gridChildren[1]; // image column
+  const columns = Array.from(grid.children);
+  if (columns.length < 2) return;
 
-  // For the right column, find the grid containing the images
-  let imagesBlock = right.querySelector('.grid-layout');
-  let images = [];
-  if (imagesBlock) {
-    images = Array.from(imagesBlock.querySelectorAll('img'));
-  } else {
-    images = Array.from(right.querySelectorAll('img'));
+  // Left column: heading, subheading, buttons
+  const leftCol = columns[0];
+  // Right column: image grid
+  const rightCol = columns[1];
+
+  // LEFT COLUMN: group all content nodes (heading, subheading, buttons)
+  const leftContent = [];
+  for (let child of leftCol.childNodes) {
+    if (child.nodeType === 1 || (child.nodeType === 3 && child.textContent.trim() !== '')) {
+      leftContent.push(child);
+    }
   }
-  
-  // Compose the columns row: [left column, right column]
-  // The left column should preserve all its content: h1, p, buttons
-  // The right column should be all images, as an array
-  const headerRow = ['Columns (columns36)'];
-  const contentRow = [left, images];
 
-  // Build and replace
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow
-  ], document);
+  // RIGHT COLUMN: find all images in grid (may be inside an extra grid-layout)
+  let rightContent = [];
+  const imageGrid = rightCol.querySelector('.grid-layout');
+  if (imageGrid) {
+    rightContent = Array.from(imageGrid.querySelectorAll('img'));
+  } else {
+    rightContent = Array.from(rightCol.querySelectorAll('img'));
+  }
+
+  // Build and add the block table
+  const cells = [
+    ['Columns (columns36)'],
+    [leftContent, rightContent]
+  ];
+
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

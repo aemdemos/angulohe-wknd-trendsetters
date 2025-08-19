@@ -1,22 +1,28 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the columns container (the grid of columns)
-  const grid = element.querySelector('.w-layout-grid.grid-layout');
-  if (!grid) return;
+  // Ensure the block header exactly matches the requirement
+  const headerRow = ['Columns (columns9)'];
 
-  // Get all direct children that are columns (the vertical flex and the <ul>s)
+  // Find the grid container with columns as direct children
+  let grid = element.querySelector('.grid-layout');
+  if (!grid) {
+    grid = element.querySelector('[class*=grid-layout]'); // fallback for class variations
+  }
+  if (!grid) return; // Graceful exit for missing grid
+
+  // Each direct child div or ul in grid-layout is a column
+  // Some columns are divs, some are ul; select all direct children
   const columns = Array.from(grid.children);
-  if (columns.length === 0) return;
+  // Filter out any completely empty columns
+  const contentRow = columns.filter(col => col && (col.textContent.trim() || col.querySelector('svg')));
 
-  // Build the table data
-  // 1. Header row: exactly one column with the block name
-  const rows = [['Columns (columns9)']];
-  // 2. Content rows: each subsequent row is a single set of columns. For this case, just one content row.
-  rows.push(columns);
+  // Reference existing elements (don't clone)
+  // Each cell in the contentRow should be the column container
+  const cells = [headerRow, contentRow];
 
-  // Create the table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Replace the original element with the block table
+  // Replace the original element
   element.replaceWith(block);
 }

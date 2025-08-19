@@ -1,32 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block name header, exactly matching the example
+  // Find the immediate .container > .w-layout-grid (the grid with columns)
+  const container = element.querySelector('.container');
+  if (!container) return;
+  const grid = container.querySelector('.w-layout-grid');
+  if (!grid) return;
+
+  // Get direct grid children (columns)
+  const columns = Array.from(grid.children);
+  // We expect two columns: left (text) and right (image)
+  if (columns.length < 2) return;
+
+  // Prepare the header row
   const headerRow = ['Columns (columns27)'];
 
-  // Find the grid block inside the section
-  const grid = element.querySelector('.grid-layout');
-  let columns = [];
+  // Second row: left column content, right column image
+  // Per guidance, reference the entire block for each cell
+  const contentRow = [columns[0], columns[1]];
 
-  if (grid) {
-    // Get all direct children of the grid
-    const gridChildren = Array.from(grid.children);
-    // For this HTML, first column is the text content div, second is the image
-    if (gridChildren.length >= 2) {
-      // Column 1: entire left content block
-      columns.push(gridChildren[0]);
-      // Column 2: entire right image block (the <img> itself)
-      columns.push(gridChildren[1]);
-    } else {
-      // Unlikely fallback, but be robust: all children as columns
-      columns = gridChildren;
-    }
-  } else {
-    // Fallback: all direct children of element as columns
-    columns = Array.from(element.children);
-  }
+  // Create table block
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
 
-  // Build table: first row is header, second is the columns
-  const table = WebImporter.DOMUtils.createTable([headerRow, columns], document);
-  // Replace the element with the new block table
+  // Replace the original element with the new table
   element.replaceWith(table);
 }

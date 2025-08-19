@@ -1,36 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header as per spec
+  // Create the header row as in the example
   const headerRow = ['Accordion (accordion34)'];
+  const rows = [headerRow];
 
-  // Find all immediate accordion items
-  const accordionItems = Array.from(element.querySelectorAll(':scope > .accordion'));
-  const rows = accordionItems.map(accItem => {
-    // Title: select the label/title element
-    const titleEl = accItem.querySelector('.paragraph-lg');
-    // Content: select the main content wrapper inside the accordion
-    let contentCell = null;
-    const contentNav = accItem.querySelector('.accordion-content');
-    if (contentNav) {
-      // Find a single div.utility-padding-all-1rem inside nav (which wraps the actual content)
-      const paddingDiv = contentNav.querySelector(':scope > .utility-padding-all-1rem');
-      if (paddingDiv) {
-        contentCell = paddingDiv;
-      } else {
-        // fallback to the whole nav if missing expected wrapper
-        contentCell = contentNav;
+  // Find all direct accordion children
+  const accordionEls = Array.from(element.querySelectorAll(':scope > .accordion'));
+
+  accordionEls.forEach((accordion) => {
+    // Title: find .w-dropdown-toggle > .paragraph-lg
+    let titleEl = null;
+    const toggle = accordion.querySelector('.w-dropdown-toggle');
+    if (toggle) {
+      titleEl = toggle.querySelector('.paragraph-lg');
+      if (!titleEl) {
+        // fallback: use first text node or div in toggle
+        const fallback = Array.from(toggle.childNodes).find(node => node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE);
+        if (fallback) {
+          titleEl = fallback;
+        }
       }
     }
-    // Extra fallback: if contentCell is still null, use an empty div
-    if (!contentCell) {
-      contentCell = document.createElement('div');
+
+    // Content: find .accordion-content (nav) > .utility-padding-all-1rem > .rich-text
+    let contentEl = null;
+    const nav = accordion.querySelector('.accordion-content');
+    if (nav) {
+      const padDiv = nav.querySelector('.utility-padding-all-1rem');
+      if (padDiv) {
+        contentEl = padDiv.querySelector('.rich-text') || padDiv;
+      } else {
+        // fallback to nav itself
+        contentEl = nav;
+      }
     }
-    return [titleEl, contentCell];
+
+    if (titleEl && contentEl) {
+      rows.push([titleEl, contentEl]);
+    }
   });
 
-  // Build the table block
-  const cells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace the original element
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

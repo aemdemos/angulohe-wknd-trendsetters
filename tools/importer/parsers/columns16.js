@@ -1,46 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table Header
+  // Header row, exactly matching the example
   const headerRow = ['Columns (columns16)'];
 
-  // Find the grid layout containing the columns
-  const grid = element.querySelector('.w-layout-grid');
+  // Find the grid containing all columns
+  const grid = element.querySelector('.w-layout-grid.grid-layout');
   if (!grid) return;
 
-  // Each grid child is a column: extract all direct children of grid
-  const columns = Array.from(grid.children);
-
-  // For each column, get ALL its visible content (not just images)
-  const columnCells = columns.map(col => {
-    // Get all direct children of the column's innermost wrapper
-    // If the column contains only one wrapper, use it
-    let innermost = col;
-    // Traverse down if the column has only one child, and that child is a div
-    while (
-      innermost.children.length === 1 && 
-      innermost.firstElementChild && 
-      innermost.firstElementChild.tagName === 'DIV'
-    ) {
-      innermost = innermost.firstElementChild;
-    }
-    // Collect all children of innermost as content for that column
-    const cellContent = Array.from(innermost.childNodes).filter(node => {
-      // Ignore empty text nodes
-      if (node.nodeType === Node.TEXT_NODE) return node.textContent.trim().length > 0;
-      // Accept all element nodes
-      if (node.nodeType === Node.ELEMENT_NODE) return true;
-      return false;
+  // For each column, collect all relevant immediate content to be robust for various layouts
+  const columnDivs = Array.from(grid.children);
+  const columnsContent = columnDivs.map(col => {
+    // For each column, collect all direct children (usually aspect wrappers)
+    // For each direct child, if it's a wrapper, unwrap its children
+    let cellContent = [];
+    Array.from(col.children).forEach(child => {
+      // If child contains content, get ALL its child nodes (images, text, links, lists)
+      if (child.children.length > 0) {
+        cellContent.push(...Array.from(child.children));
+      } else {
+        cellContent.push(child);
+      }
     });
-    // If no content, insert empty text node
-    return cellContent.length ? cellContent : document.createTextNode('');
+    // Fallback: If nothing was found, just use the column itself
+    if (cellContent.length === 0) cellContent.push(col);
+    return cellContent;
   });
 
-  // Build table
-  const cells = [
-    headerRow,
-    columnCells
-  ];
+  const tableArray = [headerRow, columnsContent];
 
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  const block = WebImporter.DOMUtils.createTable(tableArray, document);
   element.replaceWith(block);
 }

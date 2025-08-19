@@ -1,81 +1,31 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block name header row
+  // 1. Header row: must match example exactly
   const headerRow = ['Hero (hero12)'];
 
-  // 1st content row: Background Image (optional)
-  // Find the top-level image (background)
-  // The section > div.grid-layout > div.utility-position-relative > img
+  // 2. Background image row (top-level background image)
+  // The background image is the first image inside the first grid column
   let bgImg = null;
-  const grid = element.querySelector(':scope > div.grid-layout');
-  if (grid) {
-    const bgHolder = grid.querySelector(':scope > div.utility-position-relative');
-    if (bgHolder) {
-      bgImg = bgHolder.querySelector('img');
-    }
+  const grid = element.querySelector('.w-layout-grid');
+  if (grid && grid.children.length > 0) {
+    const bgDiv = grid.children[0];
+    bgImg = bgDiv.querySelector('img.cover-image');
   }
 
-  // 2nd content row: Title, Subheading, CTA, etc.
-  // Find the main content container
-  let contentCell = [];
-  const contentDiv = grid ? grid.querySelector(':scope > .container') : null;
-  if (contentDiv) {
-    const card = contentDiv.querySelector('.card');
-    if (card) {
-      const cardBody = card.querySelector('.card-body');
-      if (cardBody) {
-        const cardGrid = cardBody.querySelector('.grid-layout');
-        if (cardGrid) {
-          // Get all direct children of this grid
-          const gridChildren = Array.from(cardGrid.children);
-          // The image (side image)
-          const gridImg = cardGrid.querySelector('img');
-          if (gridImg) {
-            contentCell.push(gridImg);
-          }
-          // The text block
-          const textBlock = gridChildren.find(e => e.querySelector('h2'));
-          if (textBlock) {
-            // Gather heading
-            const h2 = textBlock.querySelector('h2');
-            if (h2) contentCell.push(h2);
-            // Gather all features (icon + text)
-            const featuresDiv = textBlock.querySelector('.flex-vertical');
-            if (featuresDiv) {
-              // Each row: flex-horizontal (icon, text)
-              const rows = featuresDiv.querySelectorAll(':scope > .flex-horizontal');
-              rows.forEach((row) => {
-                const icon = row.querySelector('.icon-small');
-                const text = row.querySelector('p');
-                if (icon || text) {
-                  const frag = document.createDocumentFragment();
-                  if (icon) frag.appendChild(icon);
-                  if (text) frag.appendChild(text);
-                  contentCell.push(frag);
-                }
-                // add divider after each except last
-                // but in original, divider is a line
-              });
-            }
-            // Button
-            const buttonGroup = textBlock.querySelector('.button-group');
-            if (buttonGroup) {
-              const button = buttonGroup.querySelector('a');
-              if (button) contentCell.push(button);
-            }
-          }
-        }
-      }
-    }
+  // 3. Content row: headline, subheading, CTA, etc. (all within the .card block)
+  let contentBlock = null;
+  if (grid && grid.children.length > 1) {
+    const cardContainer = grid.children[1];
+    contentBlock = cardContainer.querySelector('.card');
   }
-  // Compose rows (handle nulls gracefully)
-  const rows = [
+
+  // Compose rows; always output 3 rows (header, bg image, content), with nulls filtered
+  const cells = [
     headerRow,
-    [bgImg || ''],
-    [contentCell.length === 1 ? contentCell[0] : contentCell]
+    [bgImg ? bgImg : ''],
+    [contentBlock ? contentBlock : '']
   ];
 
-  // Create and replace block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
+  const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

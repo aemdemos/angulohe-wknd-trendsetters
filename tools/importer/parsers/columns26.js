@@ -1,57 +1,62 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Get the main container
+  // Defensive: make sure .container and main grid exist
   const container = element.querySelector('.container');
   if (!container) return;
-  const grid = container.querySelector('.w-layout-grid.grid-layout');
-  if (!grid) return;
+  // Find main grid with columns (expecting w-layout-grid)
+  const mainGrid = container.querySelector('.w-layout-grid.grid-layout');
+  if (!mainGrid) return;
+  // Get direct children of the column grid
+  const gridChildren = Array.from(mainGrid.children);
+  // There should be three children: heading, quote, and inner grid for divider/author/logo
+  if (gridChildren.length < 3) return;
 
-  // Find the inner grid that represents the columns area
-  let innerGrid = null;
-  Array.from(grid.children).forEach(child => {
-    if (child.classList.contains('w-layout-grid') && child !== grid) {
-      innerGrid = child;
-    }
+  // Column 1: heading and quote
+  const heading = gridChildren[0]; // <p class="h2-heading">
+  const quote = gridChildren[1];   // <p class="paragraph-lg">
+
+  // Column 2: inner grid containing divider, author, and logo/svg
+  const innerGrid = gridChildren[2]; // id="w-node-..." class="w-layout-grid ..."
+  // Grab innerGrid's direct children: divider, flex-horizontal (author), logo/svg
+  const innerGridChildren = Array.from(innerGrid.children);
+  // Defensive for layout variations
+
+  // Find divider, authorBar, and logo
+  // Usually: [divider, authorBar, logo] but order may vary
+  let divider = null, authorBar = null, logoSvg = null;
+  innerGridChildren.forEach(child => {
+    if (child.classList.contains('divider')) divider = child;
+    else if (child.classList.contains('flex-horizontal')) authorBar = child;
+    else if (child.tagName.toLowerCase() === 'div' && child.querySelector('svg')) logoSvg = child.querySelector('svg');
+    else if (child.tagName.toLowerCase() === 'div' && child.querySelector('svg,svg *')) logoSvg = child.querySelector('svg');
+    else if (child.tagName.toLowerCase() === 'div' && child.querySelector('img')) authorBar = child;
+    else if (child.tagName.toLowerCase() === 'svg') logoSvg = child;
   });
-  if (!innerGrid) return;
+  // If logoSvg is still null, try to get svg directly from last child
+  if (!logoSvg && innerGridChildren.length > 0 && innerGridChildren[innerGridChildren.length-1].querySelector) {
+    logoSvg = innerGridChildren[innerGridChildren.length-1].querySelector('svg');
+  }
 
-  // Gather header elements (top <p>s)
-  const headerEls = [];
-  Array.from(grid.children).forEach(child => {
-    if (child.tagName.toLowerCase() === 'p') {
-      headerEls.push(child);
-    }
-  });
+  // Compose left and right columns
+  // Left: heading, quote, divider, authorBar (with avatar and author info)
+  // Right: logoSvg (or leave empty if not present)
+  const leftColumnContent = [];
+  if (heading) leftColumnContent.push(heading);
+  if (quote) leftColumnContent.push(quote);
+  if (divider) leftColumnContent.push(divider);
+  if (authorBar) leftColumnContent.push(authorBar);
 
-  // Compose left and right column content from inner grid
-  let leftCol = document.createElement('div');
-  let rightCol = document.createElement('div');
-  Array.from(innerGrid.children).forEach(child => {
-    if (
-      child.classList.contains('divider') ||
-      child.classList.contains('flex-horizontal')
-    ) {
-      leftCol.appendChild(child);
-    } else if (child.classList.contains('utility-display-inline-block')) {
-      rightCol.appendChild(child);
-    }
-  });
+  // Right column: logoSvg (if present)
+  const rightColumnContent = [];
+  if (logoSvg) rightColumnContent.push(logoSvg);
 
-  // Compose left cell: heading, quote, divider, avatar, author name
-  const leftColContent = document.createElement('div');
-  headerEls.forEach(el => leftColContent.appendChild(el));
-  Array.from(leftCol.children).forEach(el => leftColContent.appendChild(el));
+  // Table header row as specified
+  const headerRow = ['Columns (columns26)'];
+  // Columns row: exactly two columns as in the example
+  const columnsRow = [leftColumnContent, rightColumnContent];
 
-  // Compose right cell: logo/svg
-  const rightColContent = document.createElement('div');
-  Array.from(rightCol.children).forEach(el => rightColContent.appendChild(el));
-
-  // Correct table structure: header is a single column, then content row with two columns
-  const cells = [
-    ['Columns (columns26)'], // header row: one column only
-    [leftColContent, rightColContent], // content row: two columns
-  ];
-
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Create table
+  const table = WebImporter.DOMUtils.createTable([headerRow, columnsRow], document);
+  // Replace element in DOM
   element.replaceWith(table);
 }

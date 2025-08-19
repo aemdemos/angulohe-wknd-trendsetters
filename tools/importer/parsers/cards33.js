@@ -1,35 +1,25 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table: header first row, then one row per card (2 columns: image, content)
   const headerRow = ['Cards (cards33)'];
-  const rows = [headerRow];
-
-  // Get all top-level cards
-  const cards = element.querySelectorAll(':scope > a');
-  cards.forEach(card => {
-    // Image cell: first img inside card (should always exist)
+  // Select all direct <a> children (each card)
+  const cardNodes = Array.from(element.querySelectorAll(':scope > a'));
+  // Each card becomes one row with 2 cells: [image, text content]
+  const rows = cardNodes.map(card => {
+    // Find image (first img in the card)
     const img = card.querySelector('img');
-    // Text cell: find the main content div (ignore the nested grid's image)
-    // Structure: a > div (grid) > [img, div (content)]
-    let contentCell = null;
-    const gridDiv = card.querySelector('div');
-    if (gridDiv) {
-      // Find all children of gridDiv that are divs (not img)
-      const possibleContentDivs = Array.from(gridDiv.children).filter(child => child.tagName === 'DIV');
-      if (possibleContentDivs.length > 0) {
-        contentCell = possibleContentDivs[0];
-      } else {
-        // fallback: if not found, use gridDiv (should not happen in provided html)
-        contentCell = gridDiv;
-      }
-    } else {
-      // fallback: use card itself
-      contentCell = card;
+    // Find the grid inside the card (should contain text content)
+    const grid = card.querySelector('.w-layout-grid');
+    // Grab the text content div (the div after img)
+    let textContainer = null;
+    if (grid) {
+      const children = Array.from(grid.children);
+      textContainer = children.find(el => el !== img && el.tagName === 'DIV');
     }
-    rows.push([img, contentCell]);
+    // Fallback if not found
+    if (!textContainer) textContainer = card;
+    return [img, textContainer];
   });
-
-  // Create and replace
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  const cells = [headerRow, ...rows];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

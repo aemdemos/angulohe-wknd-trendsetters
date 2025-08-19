@@ -1,39 +1,41 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the grid container
-  const grid = element.querySelector('.w-layout-grid');
-  if (!grid) return;
-
-  // Get direct children of the grid as columns
-  const columns = Array.from(grid.children);
-  if (!columns.length) return;
-
-  // Create header row: exactly one cell, with header text
+  // Table header row
   const headerRow = ['Columns (columns35)'];
 
-  // For each "column", collect all its direct children as a group (to preserve grouping)
-  const contentRow = columns.map(col => {
-    // If only one child, use it as is; if multiple, group into a fragment
-    const colChildren = Array.from(col.childNodes).filter(node => {
-      // Skip empty text nodes
-      return !(node.nodeType === Node.TEXT_NODE && !node.textContent.trim());
-    });
-    if (colChildren.length === 1) {
-      return colChildren[0];
-    } else {
-      // Group multiple children into a div (preserves structure)
-      const wrapper = document.createElement('div');
-      colChildren.forEach(child => wrapper.appendChild(child));
-      return wrapper;
-    }
+  // Find the grid layout (assume rows may be present for generality)
+  const grid = element.querySelector('.grid-layout');
+  if (!grid) return;
+
+  // In a grid, there may be direct columns, or there may be row wrappers with columns inside
+  // We'll try to cover both cases for future-proofing
+  let rows = [];
+
+  // If all immediate children are columns (most common), make a single row
+  const directColumns = Array.from(grid.children);
+  // Check if children are likely columns (not row wrappers)
+  const likelyAllColumns = directColumns.every(child => {
+    // Heuristic: look for things that are not wrappers (i.e., not all children are just <div>s containing other divs)
+    return !child.matches('.row, .row-wrapper, .columns-row');
   });
 
-  // Create the table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    contentRow
-  ], document);
+  if (likelyAllColumns) {
+    // Only one row, all columns side by side
+    rows.push(directColumns.map(col => col));
+  } else {
+    // There are row wrappers, each containing columns
+    directColumns.forEach(rowWrapper => {
+      // For each row, get all direct children that are columns
+      const columns = Array.from(rowWrapper.children).filter(el => el.nodeType === 1);
+      rows.push(columns);
+    });
+  }
 
-  // Replace the original element
-  element.replaceWith(table);
+  // Compose the full cells array: header row, then each content row
+  const cells = [headerRow, ...rows];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace the original section with the block table
+  element.replaceWith(block);
 }
